@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#0d9488">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Ygeia-App — Πλήρης Οδηγός Υγείας</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --p:#0d9488;--p-dark:#0f766e;--p-light:#5eead4;
+  --d:#dc2626;--d-light:#fca5a5;
+  --w:#d97706;--s:#16a34a;
+  --pu:#7c3aed;--pi:#ec4899;--or:#f97316;
+  --bg:#f0fdfa;--card:#ffffff;--text:#0f172a;--text-soft:#475569;
+  --border:#e2e8f0;--shadow:rgba(15,23,42,.08);--shadow-lg:rgba(15,23,42,.15);
+  --radius:14px;--radius-sm:10px;
+  --font-base:clamp(14px,1vw + 12px,17px);
+}
+
+body.dark{
+  --bg:#0f172a;--card:#1e293b;--text:#f1f5f9;--text-soft:#cbd5e1;
+  --border:#334155;--shadow:rgba(0,0,0,.4);--shadow-lg:rgba(0,0,0,.6);
+}
+
+html{font-size:100%;-webkit-text-size-adjust:100%}
+html,body{min-height:100%;background:var(--bg);color:var(--text);transition:background .3s,color .3s;overflow-x:hidden;padding:8px;max-width:1600px;margin:0 auto;font-size:var(--font-base)}
+body{overflow-y:auto}
+
+/* === TOPBAR === */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:10px;flex-wrap:wrap}
+h1{font-size:clamp(.95rem,2.5vw,1.2rem);color:var(--text);text-align:center;display:flex;align-items:center;gap:6px;font-weight:700;flex-wrap:wrap;justify-content:center}
+h1 .logo{background:linear-gradient(135deg,var(--p),var(--pu));color:white;padding:6px 10px;border-radius:10px;font-size:1rem}
+.top-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+
+.btn-lang,.btn-icon{background:var(--card);color:var(--text);padding:8px 12px;font-size:.82rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-weight:600;transition:.2s;min-height:40px;display:flex;align-items:center;gap:4px}
+.btn-lang:hover,.btn-icon:hover{border-color:var(--p);color:var(--p);transform:translateY(-1px)}
+.btn-lang.sel{background:linear-gradient(135deg,var(--p),var(--p-dark));color:white;border-color:transparent;box-shadow:0 3px 8px rgba(13,148,136,.35)}
+.btn-icon{font-size:1.15rem;padding:8px 12px}
+
+/* === WARNING === */
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:5px solid #f59e0b;padding:10px 14px;border-radius:12px;margin-bottom:8px;font-size:.82rem;color:#78350f;box-shadow:0 2px 6px rgba(245,158,11,.15);line-height:1.5}
+body.dark .warn{background:linear-gradient(135deg,#422006,#713f12);color:#fde68a}
+.warn.dang{background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#ef4444;color:#7f1d1d}
+body.dark .warn.dang{background:linear-gradient(135deg,#450a0a,#7f1d1d);color:#fecaca}
+
+/* === TABS === */
+.tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;justify-content:center}
+.tab{padding:9px 14px;border:1.5px solid var(--border);border-radius:11px;background:var(--card);color:var(--text-soft);cursor:pointer;font-weight:600;font-size:.82rem;transition:.2s;min-height:42px;display:flex;align-items:center;gap:5px}
+.tab:hover{border-color:var(--p);color:var(--p);transform:translateY(-1px)}
+.tab.active{background:linear-gradient(135deg,var(--p),var(--p-dark));color:white;border-color:transparent;box-shadow:0 3px 10px rgba(13,148,136,.35)}
+
+/* === AREA BUTTONS === */
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;justify-content:center}
+.btn{padding:8px 12px;border:none;border-radius:11px;cursor:pointer;font-weight:600;transition:all .2s ease;white-space:nowrap;font-size:.8rem;line-height:1.2;box-shadow:0 1px 3px var(--shadow);min-height:40px;display:inline-flex;align-items:center;gap:4px}
+.btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 4px 10px var(--shadow-lg)}
+.btn:active{transform:translateY(0) scale(.97)}
+.btn.sel{outline:3px solid var(--p);outline-offset:1px;box-shadow:0 0 0 4px rgba(13,148,136,.2),0 4px 12px var(--shadow-lg);transform:scale(1.04)}
+
+.btn-h{background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b}
+.btn-nk{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#831843}
+.btn-cv{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e3a8a}
+.btn-rs{background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#065f46}
+.btn-ga{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#78350f}
+.btn-he{background:linear-gradient(135deg,#fef9c3,#fef08a);color:#713f12}
+.btn-ur{background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#5b21b6}
+.btn-ms{background:linear-gradient(135deg,#ffedd5,#fed7aa);color:#9a3412}
+.btn-sk{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d}
+.btn-eye{background:linear-gradient(135deg,#cffafe,#a5f3fc);color:#155e75}
+.btn-ent{background:linear-gradient(135deg,#f3f4f6,#e5e7eb);color:#374151}
+.btn-gyn{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d}
+.btn-psy{background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#6b21a8}
+.btn-gen{background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#065f46}
+body.dark .btn-h{background:linear-gradient(135deg,#450a0a,#7f1d1d);color:#fecaca}
+body.dark .btn-nk{background:linear-gradient(135deg,#500724,#831843);color:#fbcfe8}
+body.dark .btn-cv{background:linear-gradient(135deg,#172554,#1e3a8a);color:#bfdbfe}
+body.dark .btn-rs{background:linear-gradient(135deg,#052e16,#065f46);color:#a7f3d0}
+body.dark .btn-ga{background:linear-gradient(135deg,#451a03,#78350f);color:#fde68a}
+body.dark .btn-he{background:linear-gradient(135deg,#422006,#713f12);color:#fef08a}
+body.dark .btn-ur{background:linear-gradient(135deg,#2e1065,#5b21b6);color:#ddd6fe}
+body.dark .btn-ms{background:linear-gradient(135deg,#431407,#9a3412);color:#fed7aa}
+body.dark .btn-sk{background:linear-gradient(135deg,#500724,#9d174d);color:#fbcfe8}
+body.dark .btn-eye{background:linear-gradient(135deg,#083344,#155e75);color:#a5f3fc}
+body.dark .btn-ent{background:linear-gradient(135deg,#1f2937,#374151);color:#e5e7eb}
+body.dark .btn-gyn{background:linear-gradient(135deg,#500724,#9d174d);color:#fbcfe8}
+body.dark .btn-psy{background:linear-gradient(135deg,#3b0764,#6b21a8);color:#ddd6fe}
+body.dark .btn-gen{background:linear-gradient(135deg,#052e16,#065f46);color:#a7f3d0}
+
+/* === GRID === */
+.grid{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:10px}
+.panel{background:var(--card);border-radius:var(--radius);padding:12px;box-shadow:0 3px 10px var(--shadow);overflow:auto;border:1px solid var(--border);transition:background .3s;max-height:calc(100vh - 200px)}
+.panel h2{font-size:.92rem;margin-bottom:8px;color:var(--text);border-bottom:2px solid var(--p);padding-bottom:6px;font-weight:700;display:flex;align-items:center;gap:6px;position:sticky;top:0;background:var(--card);z-index:2;padding-top:2px}
+
+/* === SYMPTOMS === */
+#symCont{display:flex;flex-direction:column;gap:6px}
+.symlab{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px;transition:all .2s ease;font-size:.83rem}
+.symlab:hover{border-color:var(--p-light);box-shadow:0 2px 6px var(--shadow)}
+.symlab.act{background:linear-gradient(135deg,rgba(13,148,136,.08),rgba(94,234,212,.15));border-color:var(--p);box-shadow:0 2px 8px rgba(13,148,136,.2)}
+.symlab label{display:flex;align-items:center;gap:10px;cursor:pointer;padding:5px 0;min-height:32px}
+.symlab input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--border);border-radius:6px;cursor:pointer;position:relative;transition:.15s;flex-shrink:0;background:var(--card)}
+.symlab input[type="checkbox"]:hover{border-color:var(--p)}
+.symlab input[type="checkbox"]:checked{background:linear-gradient(135deg,var(--p),var(--p-dark));border-color:var(--p)}
+.symlab input[type="checkbox"]:checked::after{content:'✓';position:absolute;color:white;font-size:14px;font-weight:bold;top:50%;left:50%;transform:translate(-50%,-50%)}
+.symlab .sym-title{font-weight:700;color:var(--p-dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px;display:block}
+body.dark .symlab .sym-title{color:var(--p-light)}
+
+/* === BUTTONS ROW === */
+.btm-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn-action{flex:1;min-width:130px;padding:12px;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:.88rem;transition:all .2s;box-shadow:0 3px 8px var(--shadow);min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-check{background:linear-gradient(135deg,var(--p),var(--p-dark));color:white}
+.btn-check:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(13,148,136,.4)}
+.btn-clear{background:var(--bg);color:var(--text-soft);border:1.5px solid var(--border)}
+.btn-clear:hover{border-color:var(--d);color:var(--d)}
+
+/* === RESULTS === */
+.res{margin-top:6px;line-height:1.55;font-size:.85rem}
+.res-card{padding:14px;border-radius:12px;margin-bottom:12px;border-left:5px solid;background:var(--card);box-shadow:0 2px 8px var(--shadow);animation:fadeIn .3s ease;transition:transform .2s}
+.res-card:hover{transform:translateX(3px);box-shadow:0 4px 12px var(--shadow-lg)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.res-dang{background:linear-gradient(135deg,rgba(254,226,226,.5),rgba(254,202,202,.3));border-color:#ef4444;animation:fadeIn .3s ease,pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 2px 8px var(--shadow)}50%{box-shadow:0 2px 20px rgba(239,68,68,.4)}}
+.res-warn{background:linear-gradient(135deg,rgba(254,243,199,.5),rgba(253,230,138,.3));border-color:#f59e0b}
+.res-info{background:linear-gradient(135deg,rgba(219,234,254,.5),rgba(191,219,254,.3));border-color:#3b82f6}
+.res-succ{background:linear-gradient(135deg,rgba(220,252,231,.5),rgba(167,243,208,.3));border-color:#22c55e}
+body.dark .res-dang{background:linear-gradient(135deg,rgba(127,29,29,.3),rgba(69,10,10,.2))}
+body.dark .res-warn{background:linear-gradient(135deg,rgba(120,53,15,.3),rgba(66,32,6,.2))}
+body.dark .res-info{background:linear-gradient(135deg,rgba(30,58,138,.3),rgba(23,37,84,.2))}
+body.dark .res-succ{background:linear-gradient(135deg,rgba(6,95,70,.3),rgba(5,46,22,.2))}
+.res-card h3{font-size:1rem;color:var(--text);margin-bottom:6px;font-weight:700}
+.res-section{margin:10px 0;padding:9px 11px;background:rgba(255,255,255,.5);border-radius:8px;border-left:3px solid var(--border)}
+body.dark .res-section{background:rgba(0,0,0,.2)}
+.res-section strong{color:var(--text);font-size:.8rem;display:block;margin-bottom:4px}
+.res-section a{color:var(--p);text-decoration:none;font-weight:600;border-bottom:1px dotted var(--p)}
+.res-section a:hover{color:var(--p-dark);border-bottom-style:solid}
+
+.tag{display:inline-block;padding:3px 9px;border-radius:12px;font-size:.7rem;font-weight:700;margin:2px 4px 2px 0;letter-spacing:.2px}
+.tag-emer{background:linear-gradient(135deg,#ef4444,#dc2626);color:white;animation:pulse-tag 1.5s infinite}
+@keyframes pulse-tag{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+.tag-risk{background:linear-gradient(135deg,#f59e0b,#d97706);color:white}
+.tag-caution{background:linear-gradient(135deg,#eab308,#ca8a04);color:white}
+.tag-norm{background:linear-gradient(135deg,#22c55e,#16a34a);color:white}
+.tag-percent{background:var(--bg);color:var(--text-soft);border:1px solid var(--border)}
+
+.el{display:inline}
+.en{display:none}
+.lang-en .el{display:none}
+.lang-en .en{display:inline}
+
+.note-bar{margin-top:12px;padding:10px 14px;background:linear-gradient(135deg,rgba(13,148,136,.08),rgba(94,234,212,.1));border-radius:10px;font-weight:500;border-left:4px solid var(--p);font-size:.8rem;color:var(--text-soft)}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg);border-radius:5px}
+::-webkit-scrollbar-thumb{background:linear-gradient(135deg,var(--p),var(--p-dark));border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--p-dark)}
+
+/* === PANELS (Natural language, Photo) === */
+.nl-panel,.photo-panel{padding:14px;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 3px 10px var(--shadow);margin-bottom:10px}
+.nl-panel textarea,.photo-panel textarea{width:100%;min-height:130px;padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--bg);color:var(--text);font-size:.92rem;font-family:inherit;resize:vertical;transition:border .2s;line-height:1.5}
+.nl-panel textarea:focus,.photo-panel textarea:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 4px rgba(13,148,136,.15)}
+.quick-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{padding:6px 12px;background:var(--bg);border:1.5px solid var(--border);border-radius:20px;cursor:pointer;font-size:.78rem;transition:.2s;color:var(--text-soft);font-weight:500}
+.chip:hover{border-color:var(--p);color:var(--p);transform:translateY(-1px)}
+.chip:active{background:var(--p);color:white}
+
+.upload-zone{border:3px dashed var(--border);border-radius:16px;padding:30px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg);margin:10px 0}
+.upload-zone:hover{border-color:var(--p);background:linear-gradient(135deg,rgba(13,148,136,.05),rgba(94,234,212,.08))}
+.upload-zone.dragover{border-color:var(--p);background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(94,234,212,.15));transform:scale(1.01)}
+.upload-zone .icon{font-size:2.5rem;margin-bottom:8px;display:block}
+.upload-zone p{font-size:.88rem;color:var(--text-soft);line-height:1.5}
+.upload-zone input{display:none}
+
+.photo-preview{max-width:100%;max-height:340px;border-radius:12px;box-shadow:0 4px 12px var(--shadow-lg);margin:10px auto;display:block}
+.analysis-result{padding:14px;border-radius:12px;margin-top:10px;border-left:4px solid var(--p);background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(94,234,212,.1));font-size:.85rem;line-height:1.6}
+.analysis-result h4{color:var(--p-dark);margin-bottom:8px;font-size:.95rem}
+body.dark .analysis-result h4{color:var(--p-light)}
+
+/* === SOURCES === */
+.sources-box{padding:14px;background:var(--card);border-radius:var(--radius);margin-top:10px;box-shadow:0 3px 10px var(--shadow);font-size:.82rem;border:1px solid var(--border);color:var(--text)}
+.sources-box h3{margin-bottom:10px;color:var(--text);font-size:.95rem}
+.sources-box table{width:100%;border-collapse:collapse;font-size:.8rem;display:block;overflow-x:auto;white-space:nowrap}
+@media(min-width:600px){.sources-box table{display:table;white-space:normal}}
+.sources-box th{padding:8px;text-align:left;background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(94,234,212,.1));color:var(--text);font-weight:700}
+.sources-box td{padding:8px;border-bottom:1px solid var(--border);color:var(--text-soft)}
+.sources-box tr:hover{background:rgba(13,148,136,.05)}
+.sources-box a{color:var(--p);text-decoration:none;font-weight:600}
+.sources-box a:hover{text-decoration:underline}
+.sources-box .limit-note{margin-top:10px;padding:10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--w);font-size:.78rem}
+
+/* === FOOTER === */
+footer{text-align:center;padding:16px 8px;font-size:.75rem;color:var(--text-soft);border-top:1px solid var(--border);margin-top:16px}
+
+/* === RESPONSIVE — MOBILE FIRST ADJUSTMENTS === */
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .panel{max-height:none}
+}
+
+@media(max-width:768px){
+  html,body{padding:6px}
+  h1{font-size:.95rem}
+  .topbar{flex-direction:column;gap:8px}
+  .btn{font-size:.75rem;padding:8px 10px}
+  .tab{font-size:.78rem;padding:8px 11px}
+  .panel{padding:10px;border-radius:12px}
+  .panel h2{font-size:.85rem}
+  .res-card{padding:12px}
+  .res-card h3{font-size:.93rem}
+  .res-section{font-size:.8rem;padding:8px 10px}
+  .upload-zone{padding:24px 16px}
+  .upload-zone .icon{font-size:2rem}
+}
+
+@media(max-width:420px){
+  html,body{padding:4px}
+  h1{font-size:.88rem;gap:4px}
+  h1 .logo{padding:5px 8px;font-size:.9rem}
+  .btn-lang,.btn-icon{padding:7px 10px;font-size:.75rem}
+  .btn{font-size:.72rem;padding:7px 9px;border-radius:9px}
+  .tab{font-size:.74rem;padding:7px 9px}
+  .btm-row{flex-direction:column}
+  .btn-action{width:100%}
+}
+
+/* Landscape phones */
+@media(max-height:500px) and (orientation:landscape){
+  .panel{max-height:70vh}
+}
+
+/* Large desktops */
+@media(min-width:1400px){
+  :root{--font-base:15px}
+  .grid{grid-template-columns:400px 1fr}
+}
+
+/* Print */
+@media print{
+  .topbar,.tabs,.row,.btm-row,.upload-zone,.quick-chips,footer{display:none!important}
+  body{background:white;color:black}
+  .panel{box-shadow:none;border:1px solid #ccc;max-height:none}
+}
+</style>
+</head>
+<body class="lang-el">
+
+<div class="topbar">
+<h1><span class="logo">🏥</span> Ygeia-App <span class="el">Πλήρης Οδηγός Υγείας</span><span class="en">Complete Health Guide</span></h1>
+<div class="top-actions">
+<button class="btn-lang sel" id="btn-el" onclick="setLang('el')">🇬🇷 <span class="el">Ελληνικά</span><span class="en">Greek</span></button>
+<button class="btn-lang" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+<button class="btn-icon" id="btn-theme" onclick="toggleTheme()" title="Dark/Light Mode">🌙</button>
+<button class="btn-icon" id="btn-help" onclick="toggleHelp()" title="Help">❓</button>
+</div>
+</div>
+
+<div class="warn dang" id="helpBox" style="display:none">
+<strong>💡 <span class="el">Πώς να χρησιμοποιήσεις την εφαρμογή:</span><span class="en">How to use the app:</span></strong>
+<ul style="margin:8px 0 0 20px;line-height:1.7">
+<li class="el"><strong>💬 Φυσική γλώσσα</strong> — Γράψε πώς νιώθεις, πού πονάς, τι συμπτώματα έχεις. Το σύστημα θα βρει πιθανές καταστάσεις.</li>
+<li class="en"><strong>💬 Natural language</strong> — Type how you feel, where it hurts, your symptoms. The system will find possible conditions.</li>
+<li class="el"><strong>📷 Φωτογραφία</strong> — Ανέβασε φωτογραφία δέρματος/ματιού/τραύματος για βασική ανάλυση.</li>
+<li class="en"><strong>📷 Photo</strong> — Upload a photo of skin/eye/wound for basic analysis.</li>
+<li class="el"><strong>✅ Συμπτώματα</strong> — Κλασική επιλογή συμπτωμάτων ανά περιοχή.</li>
+<li class="en"><strong>✅ Symptoms</strong> — Classic symptom selection by area.</li>
+<li class="el"><strong>🌗 Θέμα</strong> — Εναλλαγή σκούρου/φωτεινού.</li>
+<li class="en"><strong>🌗 Theme</strong> — Toggle dark/light.</li>
+</ul>
+</div>
+
+<div class="warn dang">
+<strong class="el">⚠️ ΠΟΛΥ ΣΗΜΑΝΤΙΚΟ:</strong>
+<strong class="en">⚠️ VERY IMPORTANT:</strong>
+<span class="el"> Αυτό είναι βοηθητικό εργαλείο — ΔΕΝ αποτελεί ιατρική διάγνωση. Ο γιατρός έχει πάντα τον τελικό λόγο.</span>
+<span class="en"> This is a reference tool — NOT a medical diagnosis. The doctor always has the final word.</span>
+</div>
+
+<div class="tabs">
+<button class="tab active" data-tab="nl" onclick="switchTab('nl')">💬 <span class="el">Περιγράψτε</span><span class="en">Describe</span></button>
+<button class="tab" data-tab="photo" onclick="switchTab('photo')">📷 <span class="el">Φωτογραφία</span><span class="en">Photo</span></button>
+<button class="tab" data-tab="symptoms" onclick="switchTab('symptoms')">✅ <span class="el">Συμπτώματα</span><span class="en">Symptoms</span></button>
+</div>
+
+<!-- TAB 1: NATURAL LANGUAGE -->
+<div id="tab-nl" class="tab-content">
+<div class="nl-panel">
+<h2 style="margin-bottom:10px;color:var(--text);font-size:1rem">💬 <span class="el">Περιγράψτε πώς νιώθετε</span><span class="en">Describe how you feel</span></h2>
+<textarea id="nlInput" placeholder="π.χ. Πονάει το κεφάλι μου από χθες, έχω ναυτία και ευαισθησία στο φως..."></textarea>
+<div class="quick-chips">
+<span class="chip" onclick="addChip('Πονάει το κεφάλι μου')">🤕 <span class="el">Πονοκέφαλος</span><span class="en">Headache</span></span>
+<span class="chip" onclick="addChip('Έχω πυρετό')">🌡️ <span class="el">Πυρετός</span><span class="en">Fever</span></span>
+<span class="chip" onclick="addChip('Πονάει η κοιλιά μου')">🤢 <span class="el">Κοιλόπονος</span><span class="en">Stomach pain</span></span>
+<span class="chip" onclick="addChip('Βήχω')">😷 <span class="el">Βήχας</span><span class="en">Cough</span></span>
+<span class="chip" onclick="addChip('Δυσκολεύομαι να αναπνεύσω')">🫁 <span class="el">Δύσπνοια</span><span class="en">Breathlessness</span></span>
+<span class="chip" onclick="addChip('Νιώθω ζάλη')">💫 <span class="el">Ζάλη</span><span class="en">Dizziness</span></span>
+<span class="chip" onclick="addChip('Πονάει ο λαιμός μου')">🗣️ <span class="el">Πονόλαιμος</span><span class="en">Sore throat</span></span>
+<span class="chip" onclick="addChip('Έχω εξάνθημα')">🩹 <span class="el">Εξάνθημα</span><span class="en">Rash</span></span>
+</div>
+<div class="btm-row">
+<button class="btn-action btn-check" onclick="analyzeNatural()">🔍 <span class="el">Ανάλυση</span><span class="en">Analyze</span></button>
+<button class="btn-action btn-clear" onclick="clearNL()">🗑️ <span class="el">Καθαρισμός</span><span class="en">Clear</span></button>
+</div>
+</div>
+<div id="nlResults" class="res"></div>
+</div>
+
+<!-- TAB 2: PHOTO -->
+<div id="tab-photo" class="tab-content" style="display:none">
+<div class="photo-panel">
+<h2 style="margin-bottom:10px;color:var(--text);font-size:1rem">📷 <span class="el">Ανάλυση Φωτογραφίας</span><span class="en">Photo Analysis</span></h2>
+<p style="font-size:.82rem;color:var(--text-soft);margin-bottom:10px;line-height:1.5">
+<span class="el">⚠️ Ανεβάστε φωτογραφία <strong>δέρματος, ματιού ή τραύματος</strong>. Το σύστημα κάνει βασική ανάλυση (χρώμα, φωτεινότητα, ασυμμετρία) και δίνει κατευθυντήριες οδηγίες. <strong>ΔΕΝ αντικαθιστά γιατρό.</strong></span>
+<span class="en">⚠️ Upload a photo of <strong>skin, eye or wound</strong>. System does basic analysis (color, brightness, asymmetry) and gives guidance. <strong>Does NOT replace a doctor.</strong></span>
+</p>
+<div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()">
+<span class="icon">📸</span>
+<p><strong class="el">Πατήστε ή σύρετε φωτογραφία εδώ</strong><strong class="en">Tap or drag photo here</strong></p>
+<p style="font-size:.78rem;margin-top:5px"><span class="el">JPG, PNG, WEBP — έως 10MB</span><span class="en">JPG, PNG, WEBP — up to 10MB</span></p>
+<input type="file" id="photoInput" accept="image/*" onchange="handlePhoto(event)">
+</div>
+<div id="photoPreviewCont"></div>
+<div class="btm-row">
+<button class="btn-action btn-check" onclick="analyzePhoto()">🔬 <span class="el">Ανάλυση</span><span class="en">Analyze</span></button>
+<button class="btn-action btn-clear" onclick="clearPhoto()">🗑️ <span class="el">Καθαρισμός</span><span class="en">Clear</span></button>
+</div>
+</div>
+<div id="photoResults" class="res"></div>
+</div>
+
+<!-- TAB 3: SYMPTOMS -->
+<div id="tab-symptoms" class="tab-content" style="display:none">
+<div class="row">
+<button class="btn btn-h sel" data-area="head" onclick="selectArea(this)">🧠 <span class="el">Κεφαλή</span><span class="en">Head</span></button>
+<button class="btn btn-nk" data-area="neck" onclick="selectArea(this)">🗣️ <span class="el">Λαιμός/ΩΡΛ</span><span class="en">Neck/ENT</span></button>
+<button class="btn btn-cv" data-area="cardio" onclick="selectArea(this)">❤️ <span class="el">Καρδιά/Αίμα</span><span class="en">Heart/Blood</span></button>
+<button class="btn btn-rs" data-area="resp" onclick="selectArea(this)">🫁 <span class="el">Αναπνευστικό</span><span class="en">Respiratory</span></button>
+<button class="btn btn-ga" data-area="gastro" onclick="selectArea(this)">🫃 <span class="el">Πεπτικό</span><span class="en">Digestive</span></button>
+<button class="btn btn-he" data-area="hepat" onclick="selectArea(this)">🟡 <span class="el">Ήπαρ/Χολή</span><span class="en">Liver/Gall</span></button>
+<button class="btn btn-ur" data-area="urine" onclick="selectArea(this)">🫘 <span class="el">Ούρα/Νεφρά</span><span class="en">Urinary/Kidneys</span></button>
+<button class="btn btn-gyn" data-area="gyn" onclick="selectArea(this)">♀️ <span class="el">Γυναίκα</span><span class="en">Female</span></button>
+<button class="btn btn-gyn" data-area="male" onclick="selectArea(this)">♂️ <span class="el">Άνδρας</span><span class="en">Male</span></button>
+<button class="btn btn-ms" data-area="musc" onclick="selectArea(this)">🦴 <span class="el">Οστά/Μυς</span><span class="en">Bones/Muscles</span></button>
+<button class="btn btn-sk" data-area="skin" onclick="selectArea(this)">🩹 <span class="el">Δέρμα</span><span class="en">Skin</span></button>
+<button class="btn btn-eye" data-area="eye" onclick="selectArea(this)">👁️ <span class="el">Μάτια</span><span class="en">Eyes</span></button>
+<button class="btn btn-psy" data-area="psy" onclick="selectArea(this)">💭 <span class="el">Νους/Συμπεριφορά</span><span class="en">Mental/Behavior</span></button>
+<button class="btn btn-ent" data-area="child" onclick="selectArea(this)">👶 <span class="el">Παιδί</span><span class="en">Child</span></button>
+<button class="btn btn-gen" data-area="gen" onclick="selectArea(this)">📋 <span class="el">Γενικά</span><span class="en">General</span></button>
+</div>
+
+<div class="grid">
+<div class="panel">
+<h2>✅ <span class="el">Επιλέξτε Συμπτώματα</span><span class="en">Select Symptoms</span></h2>
+<div id="symCont"></div>
+<div class="btm-row">
+<button class="btn-action btn-check" onclick="checkNow()">🔍 <span class="el">Έλεγχος</span><span class="en">Check</span></button>
+<button class="btn-action btn-clear" onclick="clearAll()">🗑️ <span class="el">Καθαρισμός</span><span class="en">Clear</span></button>
+</div>
+</div>
+
+<div class="panel">
+<h2>📋 <span class="el">Αποτελέσματα</span><span class="en">Results</span></h2>
+<div id="resCont" class="res">
+<p style="color:var(--text-soft);text-align:center;padding:25px">
+<span class="el">Επιλέξτε περιοχή και συμπτώματα</span>
+<span class="en">Select area and symptoms</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="sources-box">
+<h3>📚 <span class="el">Επίσημες Πηγές για Περισσότερη Έρευνα</span><span class="en">Official Sources for Further Research</span></h3>
+<p style="margin-bottom:10px;color:var(--text-soft)">
+<span class="el">Κάντε κλικ σε οποιαδήποτε πηγή για να ανοίξετε την επίσημη ιστοσελίδα:</span>
+<span class="en">Click any source to open the official website:</span>
+</p>
+<table>
+<tr><th>Πηγή</th><th>Φορέας</th><th>Σύνδεσμος</th></tr>
+<tr><td>🏛️ WHO / ΠΟΥ</td><td>Παγκόσμιος Οργανισμός Υγείας</td><td><a href="https://www.who.int/health-topics" target="_blank" rel="noopener">who.int</a></td></tr>
+<tr><td>🏥 Mayo Clinic</td><td>Κορυφαίο Ιατρικό Κέντρο ΗΠΑ</td><td><a href="https://www.mayoclinic.org/diseases-conditions" target="_blank" rel="noopener">mayoclinic.org</a></td></tr>
+<tr><td>🏛️ NHS</td><td>Εθνικό Σύστημα Υγείας ΗΒ</td><td><a href="https://www.nhs.uk/conditions/" target="_blank" rel="noopener">nhs.uk</a></td></tr>
+<tr><td>📚 Cochrane Library</td><td>Διεθνές Ερευνητικό Δίκτυο</td><td><a href="https://www.cochranelibrary.com/" target="_blank" rel="noopener">cochranelibrary.com</a></td></tr>
+<tr><td>📖 MedlinePlus</td><td>Εθνική Βιβλιοθήκη Ιατρικής ΗΠΑ</td><td><a href="https://medlineplus.gov/" target="_blank" rel="noopener">medlineplus.gov</a></td></tr>
+<tr><td>🔬 UpToDate</td><td>Επικαιροποιημένες Κλινικές Οδηγίες</td><td><a href="https://www.uptodate.com/contents/" target="_blank" rel="noopener">uptodate.com</a></td></tr>
+<tr><td>🇪🇺 ECDC</td><td>Ευρωπαϊκό Κέντρο Ελέγχου Νόσων</td><td><a href="https://www.ecdc.europa.eu/" target="_blank" rel="noopener">ecdc.europa.eu</a></td></tr>
+<tr><td>🇬🇷 ΕΟΔΥ</td><td>Εθνικός Οργανισμός Δημόσιας Υγείας</td><td><a href="https://eody.gov.gr/" target="_blank" rel="noopener">eody.gov.gr</a></td></tr>
+<tr><td>💊 ΕΟΦ</td><td>Εθνικός Οργανισμός Φαρμάκων</td><td><a href="https://www.eof.gr/" target="_blank" rel="noopener">eof.gr</a></td></tr>
+</table>
+<p class="limit-note">
+<strong class="el">⚠️ Περιορισμός:</strong> Η εφαρμογή είναι εκπαιδευτικού/ενημερωτικού χαρακτήρα. Δεν διαθέτει απευθείας σύνδεση με τα ζωντανά συστήματα των παραπάνω φορέων. Τα αποτελέσματα προέρχονται από το ενσωματωμένο σύνολο δεδομένων.
+<br>
+<strong class="en">⚠️ Limitation:</strong> This app is for educational purposes. It does not connect directly to the live systems of these organizations. Results come from the embedded dataset.
+</p>
+</div>
+
+<footer>
+<span class="el">Φτιαγμένο με ❤️ για εκπαιδευτική χρήση — ΔΕΝ υποκαθιστά ιατρική διάγνωση</span>
+<span class="en">Made with ❤️ for educational use — NOT a substitute for medical diagnosis</span>
+</footer>
+
+<script>
+/* =========================================================
+   YGEIA-APP v3.0 — Core Logic
+   ========================================================= */
+let lang = 'el';
+let selectedArea = 'head';
+let selSyms = new Set();
+let currentPhoto = null;
+
+/* === THEME === */
+function toggleTheme(){
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('ygeia-theme', isDark ? 'dark' : 'light');
+  document.getElementById('btn-theme').textContent = isDark ? '☀️' : '🌙';
+}
+(function initTheme(){
+  const saved = localStorage.getItem('ygeia-theme');
+  if(saved === 'dark'){
+    document.body.classList.add('dark');
+    document.getElementById('btn-theme').textContent = '☀️';
+  }
+})();
+
+/* === HELP === */
+function toggleHelp(){
+  const box = document.getElementById('helpBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+/* === TABS === */
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.style.display='none');
+  document.getElementById('tab-'+name).style.display='block';
+}
+
+/* === LANGUAGE === */
+function setLang(l){
+  lang=l;
+  const isDark = document.body.classList.contains('dark');
+  document.body.className = isDark ? (l==='el'?'lang-el dark':'lang-en dark') : (l==='el'?'lang-el':'lang-en');
+  document.getElementById('btn-el').classList.toggle('sel',l==='el');
+  document.getElementById('btn-en').classList.toggle('sel',l==='en');
+  updatePlaceholders();
+  clearAll();
+  clearNL();
+  clearPhoto();
+}
+function updatePlaceholders(){
+  const ta = document.getElementById('nlInput');
+  if(ta){
+    ta.placeholder = lang==='el'
+      ? 'π.χ. Πονάει το κεφάλι μου από χθες, έχω ναυτία και ευαισθησία στο φως...'
+      : 'e.g. My head hurts since yesterday, I have nausea and light sensitivity...';
+  }
+}
+
+/* === DATA === */
+const DB = {head: [
+  {id:'migraine',el:{n:'Ημικρανία',s:['Έντονος πόνος στη μία πλευρά','Ναυτία','Ευαισθησία στο φως','Ευαισθησία στον ήχο','Προειδοποιητικά στίγματα'],aid:'• Ξαπλώστε σε σκοτεινό, ήσυχο χώρο\n• Κλείστε τα μάτια, χαλαρώστε\n• Πίνετε νερό',med:['Παρακεταμόλη','Ιβουπροφαίνη','Συμπλέγματα για ημικρανία'],note:'Αν αυξάνεται σε συχνότητα → Νευρολόγος'},en:{n:'Migraine',s:['Severe one-sided pain','Nausea','Light sensitivity','Sound sensitivity','Visual aura'],aid:'• Rest in dark quiet room\n• Close eyes, relax\n• Stay hydrated',med:['Paracetamol','Ibuprofen','Migraine relief combinations'],note:'If increasing in frequency → Neurologist'},sev:'caution'},
+  {id:'tension',el:{n:'Πονοκέφαλος Τάσης',s:['Πόνος και στις δύο πλευρές','Σφίξιμο σαν ταινία','Πόνος αυχένα','Κόπωση'],aid:'• Βαθιές αναπνοές\n• Χαλάρωση αυχένα με ήπιες κινήσεις\n• Πίνετε νερό',med:['Παρακεταμόλη','Ιβουπροφαίνη','Μαλακτικές αλοιφές στον αυχένα'],note:'Αν επιμένει πάνω από 7 μέρες → γιατρός'},en:{n:'Tension Headache',s:['Pain on both sides','Tight band sensation','Neck pain','Fatigue'],aid:'• Deep breathing\n• Gentle neck stretching\n• Drink water',med:['Paracetamol','Ibuprofen','Neck rub gels'],note:'If over 7 days → see doctor'},sev:'norm'},
+  {id:'cluster',el:{n:'Συδαδικός Πονοκέφαλος',s:['Έντονος πόνος γύρω από το ένα μάτι','Δακρύρροια','Κόκκινο μάτι','Συχνά την ίδια ώρα'],aid:'• Καθαρός αέρας, ήρεμη αναπνοή\n• Μην καπνίζετε\n• Καταγράψτε ώρες για γιατρό',med:['Παρακεταμόλη συνήθως ανεπαρκής — συνταγή συχνά αναγκαία'],note:'Απαιτεί Νευρολόγο — οξυγονοθεραπεία ή ειδικά φάρμακα'},en:{n:'Cluster Headache',s:['Severe pain around one eye','Eye watering','Red eye','Same time pattern'],aid:'• Fresh air, steady breathing\n• Avoid smoking\n• Log times for doctor',med:['Paracetamol often insufficient — prescription needed'],note:'See Neurologist — oxygen or specific meds required'},sev:'risk'},
+  {id:'sinusitis',el:{n:'Παραρρινοκολπίτιδα',s:['Πόνος στο μέτωπο/παρειές','Εντείνεται με κλίση προς τα κάτω','Πυώδης έκκριση μύτης','Μειωμένη όσφρηση'],aid:'• Εισπνοή ατμού\n• Ξέπλυμα ρινός με αλατόνερο\n• Ανύψωση κεφαλιού στον ύπνο',med:['Παρακεταμόλη για πόνο','Αποσυμφορητικά ρινικά','Αντιβιοτικά μόνο με συνταγή'],note:'Αν πάνω από 10 μέρες ή πυρετός → γιατρός'},en:{n:'Sinusitis',s:['Forehead/cheek pain','Worse bending forward','Thick nasal discharge','Reduced sense of smell'],aid:'• Steam inhalation\n• Saline nasal rinses\n• Sleep with head elevated',med:['Paracetamol for pain','Nasal decongestants','Antibiotics prescription only'],note:'Over 10 days or fever → see doctor'},sev:'caution'},
+  {id:'stroke',el:{n:'Εγκεφαλικό — ΕΠΕΙΓΟΝ',s:['Αδυναμία προσώπου/χεριού','Αλλαγή ομιλίας','Απώλεια όρασης','Απότομη ζάλη','Έντονος ασυνήθιστος πονοκέφαλος'],aid:'• ΚΑΛΕΣΤΕ 112 ΑΜΕΣΑ\n• Μην δίνετε τίποτα από το στόμα\n• Καταγράψτε ώρα έναρξης',med:['Κανένα — ΜΗΝ χορηγήσετε'],note:'🔴 Κάθε λεπτό μετράει — νοσοκομείο ΜΟΝΟ'},en:{n:'Stroke — EMERGENCY',s:['Face/arm weakness','Speech difficulty','Vision loss','Sudden dizziness','Sudden severe headache'],aid:'• CALL 112 NOW\n• Nothing by mouth\n• Note time of onset',med:['None — Do NOT give anything'],note:'🔴 Time-critical — Hospital only'},sev:'emer'},
+  {id:'concussion',el:{n:'Εγκεφαλικός Κλονισμός',s:['Μετά από κτύπημα στο κεφάλι','Ζάλη','Θολούρα/σύγχυση','Αμνησία γεγονότων','Αργή ή θολή ομιλία','Ευαισθησία σε φως/ήχο'],aid:'• Απολύτη ανάπαυση — όχι οθόνες, όχι διάβασμα\n• Εξέταση από γιατρό οπωσδήποτε\n• Καθόλου αλκοόλ, οδήγηση, αθλοπαιδιές',med:['Παρακεταμόλη — ΑΠΟΦΥΓΗ ασπιρίνης και ιβουπροφαίνης'],note:'Αν επιδεινώνεται οτιδήποτε → νοσοκομείο αμέσως'},en:{n:'Concussion',s:['After head injury','Dizziness','Confusion/disorientation','Memory loss of events','Slurred/slow speech','Light/sound sensitivity'],aid:'• Complete rest — no screens, no reading\n• Medical assessment essential\n• No alcohol, driving, sports',med:['Paracetamol — AVOID aspirin and ibuprofen'],note:'Any worsening → hospital immediately'},sev:'risk'},
+  {id:'dental',el:{n:'Οδονταλγία',s:['Πόνος σε δόντι/σαγόνι','Εντείνεται με κρύο/ζεστό/γλυκό','Πρήξιμο ούλου'],aid:'• Κρύο επίθεμα έξωθεν στη παρειά\n• Μασήστε από την υγιή μεριά\n• Καθαρισμός ανάμεσα στα δόντια με οδοντικό νήμα',med:['Παρακεταμόλη','Ιβουπροφαίνη'],note:'Οδοντίατρος — χρειάζεται θεραπεία της αιτίας, όχι μόνο ανακούφιση'},en:{n:'Toothache',s:['Tooth/jaw pain','Worse with hot/cold/sweet','Gum swelling'],aid:'• Cold compress on cheek outside\n• Chew on unaffected side\n• Floss gently around the tooth',med:['Paracetamol','Ibuprofen'],note:'Dentist needed — treat cause, not just pain'},sev:'caution'},
+  {id:'shingles',el:{n:'Ερπης Ζωστήρας',s:['Πόνος/καύσος λίγες μέρες πριν το εξάνθημα','Φυσαλίδες σε ζώνη στη μία πλευρά σώματος','Έντονος νευροπαθητικός πόνος'],aid:'• Καλύψτε τις περιοχές με καθαρό ύφασμα\n• Μην αγγίζετε ή σκάζετε τις φυσαλίδες\n• Απομόνωση από εγκύους και μωρά',med:['Παρακεταμόλη/Ιβουπροφαίνη','Κρεμά καλαμίνης για καταπράυνση','Αντιϊκά φάρμακα με συνταγή — όσο νωρίτερα τόσο καλύτερα'],note:'Αρχή αγωγής εντός 72 ωρών είναι κρίσιμη για μείωση μεθελκτικού πόνου'},en:{n:'Shingles',s:['Pain/burning days before rash appears','Blister band on one side of body','Severe nerve pain'],aid:'• Keep covered with clean cloth\n• Do not touch or pop blisters\n• Avoid pregnant people and babies',med:['Paracetamol/Ibuprofen','Calamine lotion for relief','Antivirals on prescription — earlier is better'],note:'Starting treatment within 72h is critical to reduce long-term pain'},sev:'caution'}
+ ],
+
+ neck: [
+  {id:'sorethroat',el:{n:'Πονόλαιμος',s:['Πόνος κατά την κατάποση','Ερυθρότητα λαιμού','Ήπιος πυρετός'],aid:'• Ζεστό νερό με μέλι και λεμόνι\n• Γαργάρες με αλατόνερο (μισό κουταλάκι σε ποτήρι νερό)\n• Πολλά υγρά σε θερμοκρασία δωματίου',med:['Παρακεταμόλη για πόνο/πυρετό','Παστίλιες ή σπρέι για τον λαιμό'],note:'Πάνω από 3 μέρες ή πυρετός >38.5°C → γιατρός'},en:{n:'Sore Throat',s:['Pain when swallowing','Red throat','Mild fever'],aid:'• Warm water with honey and lemon\n• Salt water gargles (½ tsp in glass water)\n• Drink plenty of room-temperature fluids',med:['Paracetamol for pain/fever','Throat lozenges or spray'],note:'Over 3 days or fever >38.5°C → see doctor'},sev:'norm'},
+  {id:'strep',el:{n:'Στρεπτοκοκκικός Πονόλαιμος',s:['Έντονος πόνος χωρίς βήχα','Λευκές πυώδεις κηλίδες στις αμυγδαλές','Πρησμένοι και ευπαθείς αδένες στον λαιμό','Πυρετός >38°C'],aid:'• Ανάπαυση\n• Μαλακή, ευκόλως καταπιεσμένη τροφή\n• Απομόνωση τις πρώτες 24 ώρες από την έναρξη αντιβίωσης',med:['Παρακεταμόλη — αντιβίωση ΜΟΝΟ με συνταγή'],note:'Καλλιέργεια επιχρίσματος λαιμού επιβεβαιώνει — γιατρός αναγκαίος'},en:{n:'Strep Throat',s:['Severe pain without cough','White spots on tonsils','Swollen tender neck glands','Fever >38°C'],aid:'• Rest\n• Soft easy-to-swallow food\n• Isolate first 24h after starting antibiotics',med:['Paracetamol — antibiotics by prescription only'],note:'Throat swab confirms — see doctor'},sev:'caution'},
+  {id:'tonsillitis',el:{n:'Αμυγδαλίτιδα',s:['Πρησμένες και ερυθρές αμυγδαλές','Δυσκολία ή πόνος κατά την κατάποση','Πυρετός','Κακοσμία στόματος'],aid:'• Κρύα ή δροσερά υγρά και μαλακά παγωτά ανακουφίζουν\n• Ύπνος με ανυψωμένο το κεφάλι\n• Αποφυγή πικάντικων/ζεστών τροφών',med:['Παρακεταμόλη/Ιβουπροφαίνη για πόνο/πυρετό','Αντιβιοτικά με συνταγή ανάλογα την αιτία'],note:'Επίμονη ή συχνά επανερχόμενη → παραπομπή σε ΩΡΛ για έλεγχο αφαίρεσης'},en:{n:'Tonsillitis',s:['Swollen red tonsils','Pain/difficulty swallowing','Fever','Bad breath'],aid:'• Cool fluids and ice lollies soothe pain\n• Sleep head elevated\n• Avoid spicy/hot foods',med:['Paracetamol/Ibuprofen for pain/fever','Antibiotics prescription depending on cause'],note:'Persistent or recurrent → ENT referral for tonsillectomy evaluation'},sev:'caution'},
+  {id:'laryngitis',el:{n:'Λαρυγγίτιδα',s:['Απώλεια ή βραχνάδα φωνής','Ξηρός βήχας','Αίσθημα κνησμού/καύσου στον λαιμό'],aid:'• Απολύτη ησυχία φωνής — ΜΗΝ μιλάτε με ένταση ή ψιθυριστά\n• Εισπνοή ατμού 2-3 φορές την ημέρα\n• Καθόλου καπνό και αλκοόλ',med:['Παρακεταμόλη αν υπάρχει πόνος','Μέλι για καταπράυνση ερεθισμού'],note:'Πάνω από 2 εβδομάδες χωρίς βελτίωση → ΩΡΛ'},en:{n:'Laryngitis',s:['Loss of voice or hoarseness','Dry cough','Tickling/burning in throat'],aid:'• Voice rest — do NOT shout or whisper\n• Steam inhalation 2-3× daily\n• No smoking or alcohol',med:['Paracetamol if painful','Honey soothes irritation'],note:'No improvement after 2 weeks → ENT specialist'},sev:'norm'},
+  {id:'thyroid',el:{n:'Διαταραχή Θυρεοειδούς',s:['Διόγκωση στον λαιμό (βρογχοκήλη)','Ανεξήγητη αύξηση ή απώλεια βάρους','Συνεχής κόπωση','Αλλαγή διάθεσης/ύπνου','Τριχόπτωση/ευθραυστότητα νυχιών'],aid:'• Καταγράψτε όλα τα συμπτώματα και τη διάταξή τους\n• Ισορροπημένη διατροφή με επαρκές ιώδιο\n• Μην ξεκινάτε φάρμακα μόνοι σας',med:['Κανένα χωρίς συνταγή — χρειάζεται εξέταση αίματος TSH, T4, αντισώματα'],note:'Ενδοκρινολόγος — η δοσολογία ρυθμίζεται με ακρίβεια μέσω επανεξετάσεων'},en:{n:'Thyroid Disorder',s:['Neck swelling (goiter)','Unexplained weight gain/loss','Persistent fatigue','Mood/sleep changes','Hair/nail brittleness'],aid:'• Log all symptoms and timeline\n• Balanced diet with adequate iodine\n• Do not self-medicate',med:['No OTC treatment — blood tests TSH, T4, antibodies required'],note:'Endocrinologist — dose adjusted carefully with follow-up tests'},sev:'caution'},
+  {id:'swellengland',el:{n:'Πρησμένοι Λεμφαδένες',s:['Ευπαθείς σβώλοι στον λαιμό/μασχάλη/βουβώνα','Συνήθως μετά από λοίμωξη'],aid:'• Παρακολούθηση μεγέθους και σκληρότητας\n• Ζεστές επιθέσεις αν είναι ευπαθείς\n• Συνήθως υποχωρούν σε 1-2 εβδομάδες',med:['Παρακεταμόλη/Ιβουπροφαίνη για πόνο'],note:'Αν σκληροί, μεγαλώνουν ή επιμένουν πάνω από 2 εβδομάδες → γιατρός'},en:{n:'Swollen Lymph Nodes',s:['Tender lumps in neck/armpit/groin','Usually follow infection'],aid:'• Monitor size and firmness\n• Warm compresses if tender\n• Resolve in 1-2 weeks typically',med:['Paracetamol/Ibuprofen for pain'],note:'Hard, growing, or persistent >2 weeks → see doctor'},sev:'caution'},
+  {id:'earache',el:{n:'Πόνος Αυτιού',s:['Πόνος αυτιού που εντείνεται με κατάποση/ξάπλωμα','Μειωμένη ακοή','Έκκριμα από το αυτί'],aid:'• Κρύο επίθεμα έξωθεν — ποτέ μέσα\n• Μην βάζετε δάχτυλα/μπατονέτες/λάδια μέσα\n• Ανύψωση κεφαλιού στον ύπνο',med:['Παρακεταμόλη/Ιβουπροφαίνη'],note:'Αν πυρετός ή επίμονος πόνος → ΩΡΛ. Σταγόνες μόνο κατόπιν σύστασης'},en:{n:'Earache',s:['Pain worse swallowing/lying down','Reduced hearing','Discharge from ear'],aid:'• Cold compress outside only — never inside\n• No fingers/cotton buds/oils inside\n• Sleep head elevated',med:['Paracetamol/Ibuprofen'],note:'Fever or persistent → ENT. Ear drops only on doctor advice'},sev:'caution'}
+ ],
+
+ cardio: [
+  {id:'heartattack',el:{n:'Έμφραγμα — ΕΠΕΙΓΟΝ',s:['Πόνος/βάρος/σφίξιμο στο στήθος άνω μέρους','Ανταπόδοση σε αριστερό χέρι/ώμο/σαγόνι/πλάτη','Δύσπνοια','Κρύος ιδρώτας','Ναυτία/αναγωγή'],aid:'• ΚΑΛΕΣΤΕ 112 ΑΜΕΣΑ\n• Καθίστε ή ξαπλώστε άνετα\n• Νιτρογλυκερίνη αν σας έχει συνταγογραφηθεί',med:['Μην παίρνετε ασπιρίνη χωρίς εντολή γιατρού'],note:'🔴 Κάθε λεπτό μετράει — νοσοκομείο μόνο'},en:{n:'Heart Attack — EMERGENCY',s:['Chest pain/pressure/tightness upper center','Radiates to left arm/shoulder/jaw/back','Shortness of breath','Cold sweat','Nausea/indigestion'],aid:'• CALL 112 NOW\n• Sit or lie comfortably\n• Use nitroglycerin if prescribed',med:['Do NOT take aspirin unless advised by doctor'],note:'🔴 Time-critical — Hospital only'},sev:'emer'},
+  {id:'angina',el:{n:'Στηθάγχη',s:['Πόνος στο στήθος με σωματική προσπάθεια','Υποχωρεί εντός 5 λεπτών με ανάπαυση','Αίσθημα σφιξίματος'],aid:'• Σταματήστε αμέσως κάθε δραστηριότητα\n• Αναπαυτείτε μέχρι υποχώρησης\n• Επισκεφτείτε γιατρό για έλεγχο',med:['Νιτρογλυκερίνη ΜΟΝΟ με συνταγή'],note:'Καρδιολόγος — έλεγχος στεφανιαίων αγγείων αναγκαίος'},en:{n:'Angina',s:['Chest pain on exertion/exercise','Relieves within 5 minutes at rest','Squeezing sensation'],aid:'• Stop all activity immediately\n• Rest until fully resolved\n• See doctor for assessment',med:['Nitroglycerin prescription only'],note:'Cardiologist — coronary evaluation needed'},sev:'risk'},
+  {id:'hypertension',el:{n:'Υπέρταση',s:['Πονοκέφαλος στον αυχένα πρωί','Ζάλη','Βουή στα αυτιά','Συχνά ΔΕΝ έχει συμπτώματα'],aid:'• Μέτρηση πίεσης σε ήρεμη κατάσταση\n• Μειώστε αλάτι, καφέ, αλκοόλ, στρες\n• Βαθιές αργές αναπνοές',med:['Κανένα χωρίς συνταγή — συνεχής αγωγή απαιτεί παρακολούθηση'],note:'Τακτικός έλεγχος — η "σιωπηλή" νόσος δεν γίνεται να εντοπιστεί μόνο από συμπτώματα'},en:{n:'High Blood Pressure',s:['Morning back-of-head headache','Dizziness','Ringing in ears','Often NO symptoms at all'],aid:'• Measure BP when calm\n• Reduce salt, coffee, alcohol, stress\n• Slow deep breathing',med:['No OTC treatment — maintenance therapy needs monitoring'],note:'Regular checks essential — "silent" condition cannot be self-diagnosed'},sev:'risk'},
+  {id:'arrhythmia',el:{n:'Αρρυθμία',s:['Αίσθημα χτυποκάρδου ή "παράλειψης" χτυπήματος','Ακανόνιστος σφυγμός','Ζάλη/αστάθεια','Δύσπνοια σε προσπάθεια'],aid:'• Καταγράψτε σφυγμό και διάρκεια\n• Αποφυγή καφεΐνης, ενεργειακών ποτών, αλκοόλ, καπνού\n• Ήρεμη σταθερή αναπνοή',med:['Κανένα χωρίς συνταγή'],note:'Καρδιολόγος — ΗΚΓ, μελέτη 24ώρου (Χόλτερ) ίσως χρειαστεί'},en:{n:'Arrhythmia',s:['Palpitations or skipped beats','Irregular pulse','Dizziness/unsteadiness','Breathlessness on exertion'],aid:'• Note pulse rate and duration\n• Cut caffeine, energy drinks, alcohol, tobacco\n• Steady calm breathing',med:['No OTC treatment'],note:'Cardiologist — ECG, possibly 24h Holter monitor'},sev:'caution'},
+  {id:'anemia',el:{n:'Αναιμία',s:['Επίμονη κόπωση και αδυναμία','Χλωμό δέρμα/βλεννογόνοι','Δύσπνοια με μικρή προσπάθεια','Ζάλη','Τριχόπτωση/εύθραυστα νύχια'],aid:'• Διατροφή πλούσια σε σίδηρο — κρέας, συκώτι, όσπρια, σπανάκι\n• Συνδυάστε με βιταμίνη C (πορτοκάλι, πιπέρι) για καλύτερη απορρόφηση\n• Αποφύγετε τσάι/καφέ κατά το γεύμα',med:['Συμπληρώματα σιδήρου χωρίς συνταγή — ΜΟΝΟ αν επιβεβαιωθεί έλλειψη με εξέταση αίματος'],note:'Αιτία πρέπει να βρεθεί — απώλεια αίματος, έλλειψη, ή άλλη πάθηση'},en:{n:'Anemia',s:['Persistent fatigue and weakness','Pale skin/lips/conjunctiva','Breathlessness on mild exertion','Dizziness','Brittle hair/nails'],aid:'• Iron-rich diet — red meat, liver, pulses, spinach\n• Combine with vitamin C (citrus, peppers) to boost absorption\n• Avoid tea/coffee with meals',med:['Iron supplements OTC — ONLY after confirmed deficiency via blood test'],note:'Root cause must be found — blood loss, malabsorption, or underlying condition'},sev:'caution'},
+  {id:'highchol',el:{n:'Υψηλή Χοληστερόλη',s:['Συνήθως ΧΩΡΙΣ συμπτώματα'],aid:'• Μειώστε κορεσμένα λιπαρά και τηγανητά\n• Αυξήστε ψάρι, ελαιόλαδο, βρώμη, όσπρια, φυτικές ίνες\n• Τακτική φυσική άσκηση',med:['Ορισμένα συμπληρώματα φυτοστερολών/φυτικών ινών χωρίς συνταγή βοηθητικά μόνο'],note:'Εξέταση αίματος — γιατρός αποφασίζει για στατίνες αν χρειάζεται'},en:{n:'High Cholesterol',s:['Usually NO symptoms'],aid:'• Reduce saturated fats and fried foods\n• Increase fish, olive oil, oats, legumes, soluble fiber\n• Regular physical activity',med:['Plant sterol/fiber supplements OTC — supportive only'],note:'Blood test — doctor decides on statin therapy if needed'},sev:'caution'},
+  {id:'phlebitis',el:{n:'Επιφανειακή Θρομβοφλεβίτιδα',s:['Ερυθρότητα και θερμότητα κατά μήκος φλέβας','Πόνος κατά την αφή','Σκληρή, ευπαθής δέσμη κάτω από το δέρμα'],aid:'• Ανύψωση του άκρου πάνω από επίπεδο καρδιάς\n• Ελαστική επίδεση/κάλτσα συμπίεσης\n• ΜΗΝ κάνετε μασάζ — κίνδυνος μετακίνησης θρόμβου',med:['Παρακεταμόλη/Ιβουπροφαίνη για πόνο και φλεγμονή'],note:'Αν εμφανιστεί πρήξιμο ή δύσπνοια → ΕΠΕΙΓΟΝ — πιθανή εν τω βάθει θρόμβωση'},en:{n:'Superficial Thrombophlebitis',s:['Redness and warmth along a vein','Tenderness to touch','Hard tender cord under skin'],aid:'• Elevate limb above heart level\n• Compression bandage/stockings\n• NO massage — risk of clot dislodgement',med:['Paracetamol/Ibuprofen for pain and inflammation'],note:'Swelling or breathlessness → EMERGENCY — possible DVT'},sev:'risk'},
+  {id:'dvt',el:{n:'Εν Τω Βάθει Θρόμβωση',s:['Πρήξιμο συνήθως στο ένα σκέλος','Θερμότητα/ερυθρότητα στην περιοχή','Πόνος στη γάμβο που εντείνεται με έκταση του ποδιού'],aid:'• Αποφύγετε μετακίνηση του άκρου\n• ΚΑΛΕΣΤΕ ΓΙΑΤΡΟ ΑΜΕΣΑ\n• Μην χορηγήσετε τίποτα μόνοι σας',med:['Κανένα — μπορεί να συγκαλύψει σύμπτωμα'],note:'🔴 Κίνδυνος πνευμονικής εμβολής — νοσοκομείο'},en:{n:'Deep Vein Thrombosis',s:['Swelling usually in one leg','Warmth/redness over area','Calf pain worse when foot pulled up'],aid:'• Minimise movement of limb\n• CALL DOCTOR NOW\n• Do not self-medicate',med:['None — may mask symptom'],note:'🔴 Risk of pulmonary embolism — Hospital'},sev:'emer'}
+ ],
+
+ resp: [
+  {id:'cold',el:{n:'Κρυολόγημα',s:['Συμφόρηση μύτης','Καταρροή','Ήπιος βήχας','Πονοκέφαλος','Χωρίς πυρετό ή πολύ ήπιος'],aid:'• Ανάπαυση\n• Πολλά υγρά — νερό, τσάι, σούπες\n• Υγραντήρας ή δοχείο με νερό στο δωμάτιο',med:['Παρακεταμόλη για πόνο/πυρετό','Αποσυμφορητικά ρινικά σπρέι/σταγόνες — όχι πάνω από 5 μέρες','Σιρόπι βήχα'],note:'Βελτίωση 5-7 μέρες. Αν επιδεινωθεί ή διαρκέσει περισσότερο → γιατρός'},en:{n:'Common Cold',s:['Nasal congestion','Runny nose','Mild cough','Headache','No or very mild fever'],aid:'• Rest\n• Plenty of fluids — water, tea, soups\n• Humidifier or water bowl in room',med:['Paracetamol for pain/fever','Nasal decongestant sprays — max 5 days use','Cough syrup'],note:'Improvement 5-7 days. Worsening or longer → see doctor'},sev:'norm'},
+  {id:'flu',el:{n:'Γρίπη',s:['Απότομη έναρξη μέσα σε ώρες','Υψηλός πυρετός','Μυαλγίες σε όλο το σώμα','Έντονη κόπωση/αδυναμία','Ξηρός βήχας'],aid:'• Ανάπαυση στο κρεβάτι\n• Πολλά υγρά για πρόληψη αφυδάτωσης\n• Απομόνωση από άλλους',med:['Παρακεταμόλη — ΑΠΟΦΥΓΗ ασπιρίνης σε παιδιά και νέους κάτω των 18 ετών','Αντιγριπικά σκευάσματα για συμπτώματα'],note:'Ετήσιος εμβολιασμός προστατεύει. Διάρκεια 7-14 μέρες'},en:{n:'Influenza',s:['Sudden onset within hours','High fever','Generalized body aches','Severe fatigue/weakness','Dry cough'],aid:'• Bed rest\n• Plenty of fluids to prevent dehydration\n• Isolate from others',med:['Paracetamol — AVOID aspirin in children and under 18s','Combination flu remedies for symptom relief'],note:'Annual vaccination recommended. Recovery 7-14 days'},sev:'caution'},
+  {id:'covid',el:{n:'COVID-19',s:['Πυρετός','Βήχας συνήθως ξηρός','Απώλεια ή αλλαγή γεύσης/όσφρησης','Κόπωση','Πονόλαιμος','Μυαλγίες'],aid:'• Απομόνωση σύμφωνα με τοπικές οδηγίες\n• Ενυδάτωση και ανάπαυση\n• Παρακολούθηση αναπνοής και κορεσμού οξυγόνου',med:['Παρακεταμόλη για πυρετό/πόνο','Συμπτωματική αγωγή'],note:'Αν δύσπνοια ή κορεσμός οξυγόνου <94% → νοσοκομείο'},en:{n:'COVID-19',s:['Fever','Cough usually dry','Loss or change in taste/smell','Fatigue','Sore throat','Body aches'],aid:'• Isolate per local guidelines\n• Hydrate and rest\n• Monitor breathing and oxygen saturation',med:['Paracetamol for fever/pain','Symptomatic care'],note:'Breathlessness or O2 sat <94% → Hospital'},sev:'risk'},
+  {id:'bronchitis',el:{n:'Βρογχίτιδα',s:['Παραγωγικός βήχας με φλέματα (διαυγή ή κιτρινωπά)','Σφίξιμο στο στήθος','Ήπιος πυρετός'],aid:'• Ενυδάτωση — αραιώνει τα φλέματα και ευκολύνει την αποβολή\n• Εισπνοή ατμού\n• Αποφυγή καπνού και ερεθιστικών',med:['Παρακεταμόλη για πόνο/πυρετό','Αποχρεμπτικά για ευκολότερη εκκένωση φλεμάτων'],note:'Συνήθως ιογενής — αντιβιοτικά μόνο αν αποδειχθεί βακτηριακή. Πάνω από 3 εβδομάδες → γιατρός'},en:{n:'Bronchitis',s:['Productive cough with clear/yellowish phlegm','Chest tightness','Mild fever'],aid:'• Hydration thins mucus and eases clearance\n• Steam inhalation\n• Avoid smoke and irritants',med:['Paracetamol for pain/fever','Expectorants help clear phlegm'],note:'Usually viral — antibiotics only if bacterial. >3 weeks → see doctor'},sev:'caution'},
+  {id:'pneumonia',el:{n:'Πνευμονία',s:['Υψηλός πυρετός >38.5°C','Πόνος στο στήθος κατά την αναπνοή/βήχα','Βήχας με πυώδη ή αιματηρά φλέματα','Δύσπνοια ακόμα και σε ανάπαυση','Ρίγη'],aid:'• Ανάπαυση\n• ΚΑΛΕΣΤΕ ΓΙΑΤΡΟ — ακτινογραφία θώρακος αναγκαία\n• Ενυδάτωση',med:['Παρακεταμόλη μειώνει πυρετό — ΔΕΝ θεραπεύει την λοίμωξη'],note:'🔴 Απαιτεί αντιβίωση με συνταγή — μην αμελείτε'},en:{n:'Pneumonia',s:['High fever >38.5°C','Chest pain breathing/coughing','Cough with thick/bloody phlegm','Shortness of breath even at rest','Chills'],aid:'• Rest\n• SEE DOCTOR — chest X-ray essential\n• Hydrate',med:['Paracetamol lowers fever — does NOT cure infection'],note:'🔴 Prescription antibiotics required — do not delay'},sev:'risk'},
+  {id:'asthma',el:{n:'Άσθμα',s:['Δύσπνοια με συρίγμο','Σφίξιμο στο στήθος','Βήχας ιδιαίτερα τη νύχτα/νωρίς πρωί'],aid:'• Καθιστή θέση, ήρεμη και αργή αναπνοή\n• Χρήση συσκευής διάσωσης (σαλβουταμόλη) αν συνταγογραφήθηκε\n• Αποφυγή γνωστών ερεθιστικών',med:['Δεν υπάρχει θεραπεία χωρίς συνταγή — συντήρηση απαιτεί ιατρική παρακολούθηση'],note:'Αν δεν βελτιώνεται με τη συσκευή διάσωσης → ΕΠΕΙΓΟΝ'},en:{n:'Asthma',s:['Wheezing breathlessness','Chest tightness','Cough especially at night/early morning'],aid:'• Sit upright, breathe slowly and calmly\n• Use rescue inhaler (salbutamol) if prescribed\n• Avoid known triggers',med:['No maintenance treatment without prescription — requires medical monitoring'],note:'No improvement with reliever → EMERGENCY'},sev:'risk'},
+  {id:'pleurisy',el:{n:'Πλευρίτιδα',s:['Οξύς πόνος στο στήθος που εντείνεται με την εισπνοή/βήχα','Επιφανειακή, γρήγορη αναπνοή για αποφυγή πόνου'],aid:'• Ρηχή αναπνοή μειώνει τον πόνο αλλά δεν είναι θεραπεία — αναφέρετε στον γιατρό\n• Ανάπαυση',med:['Παρακεταμόλη/Ιβουπροφαίνη για ανακούφιση από τον πόνο'],note:'Η υποκείμενη αιτία πρέπει να εντοπιστεί — γιατρός αναγκαίος'},en:{n:'Pleurisy',s:['Sharp chest pain worsens breathing in/coughing','Shallow rapid breathing to avoid pain'],aid:'• Shallow breathing eases pain temporarily — seek medical cause\n• Rest',med:['Paracetamol/Ibuprofen for pain relief'],note:'Underlying cause must be diagnosed — see doctor'},sev:'risk'},
+  {id:'hayfever',el:{n:'Αλλεργική Ρινίτιδα',s:['Επαναλαμβανόμενο φτέρνισμα','Καταρροή ή συμφόρηση','Φαγούρα μύτης/ματιών/ουρανίσκου','Επιδείνωση ανάλογα εποχή'],aid:'• Κλείνετε παράθυρα σε περιόδους υψηλής γύρης\n• Πλένετε πρόσωπο και μαλλιά μετά από έξοδο\n• Αποφυγή εξόδου τις πρωινές ώρες',med:['Αντιισταμινικά (σετιριζίνη, λοραταδίνη) χωρίς συνταγή','Ρινικά σπρέι χωρίς στεροειδή'],note:'Επίμονη → ανοσοθεραπεία με παραπομπή σε αλλεργιολόγο'},en:{n:'Hay Fever / Allergic Rhinitis',s:['Repeated sneezing','Runny or blocked nose','Itchy nose/palate/eyes','Seasonal pattern'],aid:'• Keep windows closed during high pollen\n• Wash face and hair after being outdoors\n• Avoid early morning outdoor exposure',med:['Antihistamines (cetirizine, loratadine) OTC','Non-steroidal nasal sprays'],note:'Persistent → immunotherapy via allergist referral'},sev:'norm'},
+  {id:'pe',el:{n:'Πνευμονική Εμβολή — ΕΠΕΙΓΟΝ',s:['Απότομη δύσπνοια χωρίς προφανή αιτία','Οξύς πόνος στο στήθος που εντείνεται με αναπνοή','Ταχυκαρδία/ακανόνιστος σφυγμός','Βήχας με αίμα'],aid:'• ΚΑΛΕΣΤΕ 112 ΑΜΕΣΑ\n• Καθίστε, αποφύγετε προσπάθεια',med:['Κανένα'],note:'🔴 Θρόμβος από πόδια προς πνεύμονες — νοσοκομείο ΜΟΝΟ'},en:{n:'Pulmonary Embolism — EMERGENCY',s:['Sudden unexplained breathlessness','Sharp chest pain worse breathing in','Rapid/irregular pulse','Coughing up blood'],aid:'• CALL 112 NOW\n• Sit, avoid exertion',med:['None'],note:'🔴 Blood clot from legs to lungs — Hospital only'},sev:'emer'}
+ ],
+
+  gastro: [
+  {id:'gastritis',el:{n:'Γαστρίτιδα',s:['Κάψιμο στο άνω μέρος της κοιλιάς','Οξινότητα/αναγωγή','Πόνος που εντείνεται ή υποχωρεί μετά το φαγητό','Φούσκωμα'],aid:'• Αποφυγή πικάντικων, λιπαρών, καφέ, αλκοόλ, καπνού\n• Μικρά και συχνά γεύματα\n• Μην ξαπλώνετε για 2-3 ώρες μετά το φαγητό',med:['Αντιόξινα (αλγινικά, ανθρακικό ασβέστιο) — άμεση ανακούφιση','Αναστολείς Η2 (φαμοτιδίνη) — χωρίς συνταγή βραχυχρόνια','Αντλίες πρωτονίων (ομεπραζόλη) — βραχυχρόνια χωρίς συνταγή'],note:'Πάνω από 2 εβδομάδες ή αίμα/μαύρα κόπρανα → ενδοσκόπηση από γαστρεντερολόγο'},en:{n:'Gastritis',s:['Burning upper abdomen','Acid reflux','Pain better/worse after eating','Bloating'],aid:'• Avoid spicy, fatty foods, coffee, alcohol, smoking\n• Eat smaller, more frequent meals\n• Stay upright 2-3h after eating',med:['Antacids (alginate, calcium carbonate) — immediate relief','H2 blockers (famotidine) — short-term OTC','Proton pump inhibitors (omeprazole) — short-term OTC'],note:'>2 weeks or blood/black stools → gastroscopy by gastroenterologist'},sev:'caution',sources:['ΠΟΥ / WHO','Mayo Clinic','NHS']},
+  {id:'reflux',el:{n:'Γαστροοισοφαγική Παλινδρόμηση (ΓΟΠ)',s:['Καύση πίσω από το στέρνο','Όξινη γεύση στο στόμα ιδιαίτερα το βράδυ/πρωί','Βήχας που επιμένει χωρίς φλέματα'],aid:'• Ανύψωση του κεφαλιού του κρεβατιού κατά 15-20cm\n• Δείπνο τουλάχιστον 3 ώρες πριν τον ύπνο\n• Χαλαρά ρούχα — αποφυγή στενής ζώνης',med:['Αντιόξινα για άμεση ανακούφιση','Αναστολείς Η2','Αντλίες πρωτονίων για 4-8 εβδομάδες'],note:'Πάνω από 8 εβδομάδες ή δυσκολία κατάποσης → ενδοσκόπηση'},en:{n:'GERD / Acid Reflux',s:['Burning behind breastbone','Sour taste especially at night/morning','Persistent dry cough'],aid:'• Raise bed head 15-20cm\n• Dinner at least 3h before bed\n• Loose clothing — no tight belts',med:['Antacids for quick relief','H2 blockers','PPIs for 4-8 weeks'],note:'>8 weeks or difficulty swallowing → endoscopy'},sev:'caution',sources:['NHS','MedlinePlus','UpToDate']},
+  {id:'ulcer',el:{n:'Ελκος Στομάχου/Δωδεκαδακτύλου',s:['Πόνος άνω κοιλιάς — υποχωρεί με φαγητό (δωδεκαδάκτυλο) ή εντείνεται (στομάχι)','Ανεξήγητη απώλεια βάρους','Αίμα σε εμετό ή μαύρα κόπρανα'],aid:'• ΔΙΑΚΟΠΤΕ ασπιρίνη, ιβουπροφαίνη, ναπροξένη — επιδεινώνουν\n• Τακτικά, ήπια γεύματα\n• Καταγράψτε όλα για τον γιατρό',med:['Αντιόξινα προσωρινή ανακούφιση μόνο — ΔΕΝ θεραπεύουν το έλκος'],note:'🔴 Αιτία συνήθως Ελικοβακτηρίδιο του πυλωρού — εξέταση αναπνοής/κοπράνων και αγωγή από γιατρό'},en:{n:'Stomach/Duodenal Ulcer',s:['Upper abdominal pain — better eating (duodenal) / worse eating (stomach)','Unexplained weight loss','Blood in vomit or black stools'],aid:'• STOP aspirin, ibuprofen, naproxen — worsen condition\n• Regular gentle meals\n• Document everything for doctor',med:['Antacids give temporary relief only — do NOT cure ulcer'],note:'🔴 Usually H. pylori — breath/stool test + treatment prescribed'},sev:'risk',sources:['WHO','Mayo Clinic','Cochrane Library']},
+  {id:'gastroent',el:{n:'Γαστρεντερίτιδα',s:['Κοιλόπονος/κράμπες','Διάρροια','Έμετος','Ήπιος πυρετός'],aid:'• Ενυδάτωση με διαλύματα επανυδάτωσης\n• Νηστεία στερεών μέχρι υποχώρηση εμέτου\n• Σταδιακή επιστροφή σε ρύζι, ψωμί, πατάτα, μπανάνα',med:['Δισκοσμικόλη για διάρροια — ΑΠΑΓΟΡΕΥΕΤΑΙ αν υπάρχει αίμα ή πυρετός','Παρακεταμόλη — αποφυγή ιβουπροφαίνης'],note:'Σημάδια αφυδάτωσης ή >3 μέρες → γιατρός'},en:{n:'Gastroenteritis',s:['Abdominal cramps','Diarrhea','Vomiting','Mild fever'],aid:'• Oral rehydration solutions\n• No solids until vomiting stops\n• Gradual return: rice, bread, potato, banana',med:['Loperamide for diarrhea — FORBIDDEN if blood or fever present','Paracetamol — avoid ibuprofen'],note:'Dehydration signs or >3 days → see doctor'},sev:'caution',sources:['NHS','WHO','MedlinePlus']},
+  {id:'foodpoison',el:{n:'Τροφική Δηλητηρίαση',s:['Απότομη έναρξη ωρών μετά γεύμα — έμετος, διάρροια, πόνος','Μερικές φορές πυρετός'],aid:'• Ενυδάτωση — προτεραιότητα αριθμός 1\n• Μη τρώτε στερεά μέχρι να ηρεμήσει το στομάχι\n• Καταγράψτε τι φάγατε για τον γιατρό',med:['Δισκοσμικόλη ΜΟΝΟ αν δεν υπάρχει πυρετός/αίμα και δεν είναι σοβαρή'],note:'Συνήθως 1-3 μέρες. Επιμένει ή σοβαρά συμπτώματα → δείγμα κοπράνων'},en:{n:'Food Poisoning',s:['Sudden onset hours after meal — vomiting, diarrhea, pain','Sometimes fever'],aid:'• Hydration — priority #1\n• No solids until settled\n• Log what you ate for doctor',med:['Anti-diarrheals ONLY if NO fever/blood and mild symptoms'],note:'Usually 1-3 days. Persistent or severe → stool sample'},sev:'caution',sources:['CDC','NHS','Mayo Clinic']},
+  {id:'appendicitis',el:{n:'Σκωληκοειδίτιδα — ΚΙΝΔΥΝΟΣ',s:['Πόνος αρχικά γύρω από τον αφαλό → μετακινείται δεξιά κάτω κοιλιά','Ευαισθησία στο άγγιγμα και ιδιαίτερα κατά την απομάκρυνση του χεριού','Πυρετός','Ναυτία/έμετος'],aid:'• ΜΗΝ τρώτε/πίνετε — πιθανή χειρουργική επέμβαση\n• ΜΗΝ καθαρτικά/αναλγητικά — συγκαλύπτουν συμπτώματα\n• ΜΗΝ ζεστές επιθέσεις — αυξάνουν φλεγμονή\n• Πηγαίνετε αμέσως',med:['Κανένα — καθυστέρηση αυξάνει κίνδυνο διάρρηξης'],note:'🔴 Χειρουργική συνήθως αναγκαία — κάθε ώρα μετράει'},en:{n:'Appendicitis — RISK',s:['Pain starts around navel → moves lower right','Tender to touch — worse when hand released','Fever','Nausea/vomiting'],aid:'• Do NOT eat/drink — likely surgery\n• NO laxatives/painkillers — mask symptoms\n• NO heat packs — increase inflammation\n• Go NOW',med:['None — delay increases rupture risk'],note:'🔴 Usually requires surgery — every hour counts'},sev:'emer',sources:['WHO','Mayo Clinic','NHS']},
+  {id:'IBS',el:{n:'Ευερέθιστο Έντερο',s:['Εναλλαγή διάρροιας και δυσκοιλιότητας','Πόνος που υποχωρεί με κένωση','Φούσκωμα/αίσθημα διάτασης'],aid:'• Καταγραφή τροφών που το προκαλούν (γαλακτοκομικά, σιτάρι, οσπρια, καφές)\n• Τακτικά γεύματα, αργή μάσηση\n• Διαχείριση άγχους — συχνά επιδεινώνει',med:['Αντισπασμωδικά χωρίς συνταγή σε ορισμένες χώρες για πόνο','Διαιτοφυΐες για το φούσκωμα'],note:'Χρειάζεται διάγνωση — αποκλεισμός άλλων παθήσεων πρώτα από γαστρεντερολόγο'},en:{n:'Irritable Bowel Syndrome',s:['Alternating diarrhea and constipation','Pain relieved by passing stool','Bloating/distension'],aid:'• Identify trigger foods (dairy, wheat, legumes, coffee)\n• Regular meals, chew slowly\n• Stress management — often worsens condition',med:['Antispasmodics OTC in some countries for pain','Probiotics for bloating'],note:'Diagnosis of exclusion — see gastroenterologist to rule out other conditions'},sev:'caution',sources:['NHS','UpToDate','Cochrane Library']}
+ ],
+
+ hepat: [
+  {id:'gallstones',el:{n:'Χολόλιθοι',s:['Πόνος δεξιά άνω κοιλιά που ανταποδίδει στον δεξιό ώμο/πλάτη','Εμφάνιση 1-3 ώρες μετά λιπαρό/βαρύ γεύμα','Ναυτία/αναγωγή'],aid:'• Αποφυγή λιπαρών, τηγανητών, βουτύρου, τυριών με πολλά λιπαρά\n• Ελαφριά, συχνά γεύματα\n• Καταγραφή για τον γιατρό',med:['Παρακεταμόλη για πόνο — ΑΠΟΦΥΓΗ ιβουπροφαίνης αν υπάρχει δυσλειτουργία ήπατος'],note:'Υπερηχογράφημα επιβεβαιώνει. Επίμονη ή επαναλαμβανόμενη → χειρουργική αφαίρεση χολής'},en:{n:'Gallstones',s:['Right upper abdominal pain radiates to right shoulder/back','Occurs 1-3h after fatty/heavy meal','Nausea/reflux'],aid:'• Avoid fatty, fried foods, butter, high-fat cheese\n• Light, frequent meals\n• Log symptoms for doctor',med:['Paracetamol for pain — AVOID ibuprofen if liver function uncertain'],note:'Ultrasound confirms. Recurrent → gallbladder removal surgery'},sev:'risk',sources:['Mayo Clinic','NHS','MedlinePlus']},
+  {id:'hepatitisA',el:{n:'Ηπατίτιδα Α',s:['Κόπωση','Απώλεια όρεξης','Ναυτία','Πόνος δεξιά άνω κοιλιά','Κιτρινωπό χρώμα δέρματος/ματιών','Σκουρά ούρα/ανοιχτά κόπρανα'],aid:'• Απολύτη ανάπαυση\n• Πολλά υγρά, ελαφριά διατροφή\n• Αποφυγή αλκοόλ και φαρμάκων που επιβαρύνουν το ήπαρ\n• Απομόνωση — μεταδίδεται μέσω τροφής/νερού/επαφής',med:['Κανένα ειδικό — υποστηρικτική αγωγή μόνο'],note:'Συνήθως υποχωρεί σε 1-2 μήνες. Εμβόλιο διαθέσιμο για πρόληψη'},en:{n:'Hepatitis A',s:['Fatigue','Loss of appetite','Nausea','Right upper abdominal pain','Yellow skin/eyes','Dark urine/pale stools'],aid:'• Complete rest\n• Hydration, light diet\n• No alcohol or liver-stressing drugs\n• Isolate — spreads via food/water/contact',med:['No specific treatment — supportive care only'],note:'Usually resolves in 1-2 months. Vaccine available for prevention'},sev:'caution',sources:['WHO','CDC','NHS']},
+  {id:'fattyliver',el:{n:'Λιπώδης Νόσος του Ήπατος',s:['Συχνά χωρίς συμπτώματα αρχικά','Κόπωση','Ελαφρύς πόνος δεξιά κοιλιά','Αύξηση βάρους'],aid:'• Απώλεια βάρους με υγιή τρόπο — όχι αυστηρές δίαιτες\n• Διακοπή αλκοόλ\n• Άσκηση 30λεπτα/ημέρα',med:['Κανένα χωρίς συνταγή — αλλαγή τρόπου ζωής είναι η αγωγή'],note:'Εξέταση αίματος και υπερηχογράφημα. Ελέγχου χοληστερόλης και σακχάρου'},en:{n:'Fatty Liver Disease',s:['Often no symptoms early','Fatigue','Mild right-sided pain','Weight gain'],aid:'• Healthy weight loss — not crash diets\n• Stop alcohol completely\n• Exercise 30min daily',med:['No OTC medicine — lifestyle change IS the treatment'],note:'Blood tests + ultrasound. Monitor cholesterol and blood sugar'},sev:'caution',sources:['Mayo Clinic','UpToDate','NHS']}
+ ],
+
+ urine: [
+  {id:'kidneystone',el:{n:'Λίθος Νεφρού',s:['Έντονος πόνος στην οσφυϊκή χώρα που μετακινείται προς την κοιλιά/βουβώνα','Αίμα στα ούρα (ορατό ή μικροσκοπικό)','Συχνουρία/αίσθημα ανεξόδου','Ναυτία/έμετος'],aid:'• Πολλά υγρά — 2.5-3 λίτρα την ημέρα αν μπορείς\n• Ανακούφιση με ζεστά επιθέματα στην οσφύ\n• Πηγαίνετε στον γιατρό — υπερηχογράφημα/αξονική',med:['Παρακεταμόλη για πόνο — ισχυρά αναλγητικά με συνταγή συχνά αναγκαία'],note:'🔴 Αν ο πόνος δεν υποχωρεί ή πυρετός → ΕΠΕΙΓΟΝ — κίνδυνος απόφραξης ουρητήρα'},en:{n:'Kidney Stone',s:['Severe flank pain radiating to abdomen/groin','Blood in urine (visible or microscopic)','Frequent urge/incomplete emptying','Nausea/vomiting'],aid:'• Plenty of fluids — 2.5-3L daily if possible\n• Warm compresses to lower back\n• See doctor — ultrasound/CT scan',med:['Paracetamol for pain — stronger painkillers often prescribed'],note:'🔴 Unrelieved pain or fever → EMERGENCY — risk of blockage'},sev:'risk',sources:['Mayo Clinic','NHS','UpToDate']},
+  {id:'uti',el:{n:'Λοίμωξη Ουροποιητικού',s:['Συχνή και επώδυνη ούρηση','Αίσθημα καύσου','Θολά/δύσοσμα ούρα','Πόνος κάτω κοιλιά'],aid:'• Πολλά νερά — ξεπλένουν το σύστημα\n• Σόδα με νερό μπορεί να ανακουφίσει προσωρινά\n• Ούριζε αμέσως μόλις νιώσεις την ανάγκη',med:['Παρακεταμόλη για πόνο — αντιβιοτικά ΜΟΝΟ με συνταγή'],note:'Αν πυρετός ή πόνος οσφύ → έχει ανέβει στα νεφρά — επείγον'},en:{n:'Urinary Tract Infection',s:['Frequent painful urination','Burning sensation','Cloudy/smelly urine','Lower abdominal pain'],aid:'• Drink plenty of water — flushes system\n• Baking soda in water may temporarily reduce burning\n• Urinate promptly when urge felt',med:['Paracetamol for pain — antibiotics prescription only'],note:'Fever or back pain → infection reached kidneys — urgent'},sev:'caution',sources:['NHS','Mayo Clinic','MedlinePlus']},
+  {id:'cystitis',el:{n:'Κυστίτιδα',s:['Καύσος κατά την ούρηση','Συχνουρία με λίγα ούρα κάθε φορά','Πόνος υπερηβική περιοχή'],aid:'• Πολλά υγρά — νερό, χυμός βακκινίου βοηθά στην πρόληψη υποτροπών\n• Αποφυγή καφεΐνης, αλκοόλ, πικάντικων\n• Μην καθυστερείς την ούρηση',med:['Παρακεταμόλη','Αντιβιοτικά με συνταγή'],note:'Αν επιμένει ή υποτροπιάζει → καλλιέργεια ούρων από γιατρό'},en:{n:'Cystitis',s:['Burning when urinating','Frequent small-volume urination','Pain above pubic bone'],aid:'• Hydrate well — water, cranberry juice helps prevent recurrence\n• Avoid caffeine, alcohol, spicy foods\n• Do not delay urination',med:['Paracetamol','Antibiotics prescription'],note:'Persistent or recurrent → urine culture by doctor'},sev:'caution',sources:['NHS','UpToDate','Cochrane Library']},
+  {id:'prostate',el:{n:'Διόγκωση Προστάτη',s:['Δυσκολία έναρξης ούρησης','Ασθενής ροή/διακοπτόμενη','Ανεξόδου ούρα','Συχνουρία ιδιαίτερα το βράδυ'],aid:'• Μην πίνεις πολλά υγρά πριν τον ύπνο\n• Αποφυγή αντισυμφορητικών και διουρητικών το βράδυ\n• Ούριζε δύο φορές (επανάληψη μετά λίγα λεπτά)',med:['Φυτικά σκευάσματα (σερενοά) χωρίς συνταγή — περιορισμένη τεκμηρίωση'],note:'Αξιολόγηση από ουρολόγο — έλεγχος και αποκλεισμός καρκίνου προστάτη'},en:{n:'Enlarged Prostate',s:['Difficulty starting urine stream','Weak/interrupted flow','Incomplete emptying','Frequent urination especially night'],aid:'• Limit fluids before bed\n• Avoid decongestants and diuretics at night\n• Double voiding — urinate, wait, go again',med:['Plant extracts (saw palmetto) OTC — limited evidence'],note:'Urologist assessment — examination and cancer screening essential'},sev:'caution',sources:['NHS','Mayo Clinic','UpToDate']}
+ ],
+
+ gyn: [
+  {id:'periodpain',el:{n:'Πόνος Περιόδου',s:['Κράμπες κάτω κοιλιά πριν/κατά την περίοδο','Ακτινοβολία σε οσφύ/πόδια','Ναυτία/κόπωση'],aid:'• Ζεστές επιθέσεις στην κοιλιά\n• Ήπια άσκηση — βελτιώνει κυκλοφορία\n• Χαλαρά ρούχα',med:['Παρακεταμόλη','Ιβουπροφαίνη/ναπροξένη — καλύτερα να ξεκινήσουν 1-2 μέρες πριν'],note:'Αν ο πόνος είναι ασυνήθιστα έντονος ή αυξάνεται → γυναικολόγος'},en:{n:'Period Pain / Dysmenorrhea',s:['Lower abdominal cramps before/during period','Radiates to back/legs','Nausea/fatigue'],aid:'• Warm heat packs on abdomen\n• Gentle exercise — improves circulation\n• Loose clothing',med:['Paracetamol','Ibuprofen/naproxen — best started 1-2 days before period'],note:'Unusually severe or worsening pain → gynecologist'},sev:'norm',sources:['NHS','Mayo Clinic']},
+  {id:'ovariancyst',el:{n:'Κύστη Ωοθήκης',s:['Πόνος μία πλευρά κάτω κοιλιάς','Αίσθημα βάρους/διάτασης','Αλλαγή συχνότητας ούρησης'],aid:'• Παρακολούθηση\n• Ζεστή ανακούφιση\n• Καταγραφή κύκλου και συμπτωμάτων',med:['Παρακεταμόλη για πόνο'],note:'Υπερηχογράφημα επιβεβαιώνει. Έντονος πόνος → μπορεί να έσπασε/στράφηκε — ΕΠΕΙΓΟΝ'},en:{n:'Ovarian Cyst',s:['One-sided lower abdominal pain','Heaviness/bloating','Urinary frequency change'],aid:'• Monitor symptoms\n• Warmth eases discomfort\n• Track cycle and symptoms',med:['Paracetamol for pain'],note:'Ultrasound confirms. Sudden severe pain → rupture/torsion — EMERGENCY'},sev:'risk',sources:['Mayo Clinic','NHS']},
+  {id:'vaginalinf',el:{n:'Κολπίτιδα',s:['Αλλαγή έκκριματος — χρώμα, οσμή, ποσότητα','Φαγούρα/ερυθρότητα','Πόνος κατά την επαφή/ούρηση'],aid:'• Μην πλένεις εντός του κόλπου — διαταράσσει την ισορροπία\n• Βαμβακερά εσώρουχα, χωρίς στενά τζιν\n• Αποφυγή αρωματικών σαπουνιών',med:['Αντιμυκητιασικές κρέμες/υπόθετρα χωρίς συνταγή για μυκητίαση'],note:'Αν δεν βελτιωθεί σε 3 μέρες ή άλλη έκκριμα → καλλιέργεια από γυναικολόγο'},en:{n:'Vaginal Infection',s:['Discharge change — color, odor, amount','Itching/redness','Pain on contact/urination'],aid:'• Do NOT douche — disrupts natural balance\n• Cotton underwear, no tight jeans\n• Avoid scented soaps',med:['Antifungal creams/suppositories OTC for yeast infection'],note:'No improvement in 3 days or different discharge → swab by gynecologist'},sev:'caution',sources:['NHS','UpToDate','MedlinePlus']},
+  {id:'pregwarning',el:{n:'Προειδοποίηση Εγκυμοσύνης',s:['Κολπική αιμορραγία','Πόνος κάτω κοιλιάς/οσφύος','Συμπτώματα που υποχωρούν και επιστρέφουν'],aid:'• Ανάπαυση\n• Μην ανυψώνεις βαριά\n• ΚΑΛΕΣΕ ΓΥΝΑΙΚΟΛΟΓΟ ΑΜΕΣΑ',med:['Κανένα φάρμακο χωρίς σύσταση μαιευτήρα'],note:'🔴 Αιμορραγία ή έντονος πόνος → πιθανή αποβολή ή έκτοπη — νοσοκομείο'},en:{n:'Pregnancy Warning Signs',s:['Vaginal bleeding','Lower abdominal/back pain','Symptoms disappearing then returning'],aid:'• Rest\n• Do NOT lift heavy objects\n• CALL OBSTETRICIAN NOW',med:['NO medicine without obstetrician advice'],note:'🔴 Bleeding or severe pain → miscarriage or ectopic — Hospital'},sev:'emer',sources:['WHO','Mayo Clinic','NHS']}
+ ],
+
+ male: [
+  {id:'testicularpain',el:{n:'Πόνος Όρχεως',s:['Απότομος έντονος πόνος σε ένα όρχι','Πρήξιμο/αίσθημα βάρους','Πόνος που ανταποδίδει στην κοιλιά'],aid:'• ΚΑΛΕΣΤΕ ΓΙΑΤΡΟ ΑΜΕΣΑ — αν είναι στρέψη χρειάζεται επέμβαση εντός 6 ωρών\n• Ανύψωση με υποστήριγμα',med:['Κανένα — μην καθυστερείς'],note:'🔴 Στρέψη όρχεως — κάθε λεπτό μετράει για να σωθεί το όργανο'},en:{n:'Testicular Pain',s:['Sudden severe pain in one testicle','Swelling/heaviness','Pain radiates to abdomen'],aid:'• SEE DOCTOR IMMEDIATELY — torsion needs surgery within 6 hours\n• Wear supportive underwear',med:['None — do not delay'],note:'🔴 Testicular torsion — every minute counts to save organ'},sev:'emer',sources:['NHS','Mayo Clinic']},
+  {id:'epididymitis',el:{n:'Επιδιδυμίτιδα',s:['Σταδιακός πόνος/πρήξιμο ενός όρχεως','Ευαισθησία πίσω από τον όρχι','Μερικές φορές πυρετός/ούρηση'],aid:'• Ανύψωση και υποστήριξη\n• Κρύες επιθέσεις\n• Ανάπαυση',med:['Παρακεταμόλη/Ιβουπροφαίνη — αντιβιοτικά με συνταγή'],note:'Αξιολόγηση από ουρολόγο — αποκλεισμός στρέψης πρώτα'},en:{n:'Epididymitis',s:['Gradual pain/swelling one testicle','Tenderness behind testicle','Sometimes fever/urinary symptoms'],aid:'• Support and elevate\n• Cold compresses\n• Rest',med:['Paracetamol/Ibuprofen — antibiotics prescribed'],note:'Urologist assessment — rule out torsion first'},sev:'caution',sources:['NHS','UpToDate']}
+ ],
+
+ musc: [
+  {id:'backpain',el:{n:'Οσφυαλγία',s:['Πόνος στην οσφυϊκή χώρα','Χειροτερεύει με όρθια/κάμψη','Βελτιώνεται με ανάπαυση'],aid:'• Θερμότητα τις πρώτες 48-72 ώρες, μετά εναλλαγή με κρύο\n• Διατήρηση κίνησης — η παραμονή στο κρεβάτι επιδεινώνει\n• Σωστή στάση και ανύψωση',med:['Παρακεταμόλη','Ιβουπροφαίνη/ναπροξένη','Τοπικές γέλες/επιθέματα'],note:'Αν ακτινοβολεί σε πόδια, αδυναμία ή μούδιασμα → ορθοπεδικός/νευρολόγος'},en:{n:'Lower Back Pain',s:['Lumbar area pain','Worse standing/bending','Better with rest'],aid:'• Heat first 48-72h, then alternate with cold\n• Keep moving — bed rest worsens recovery\n• Good posture and lifting technique',med:['Paracetamol','Ibuprofen/naproxen','Topical gels/patches'],note:'Pain radiating to legs, weakness, numbness → orthopedist/neurologist'},sev:'norm',sources:['NHS','Mayo Clinic','Cochrane Library']},
+  {id:'arthritis',el:{n:'Αρθρίτιδα',s:['Πόνος στις αρθρώσεις','Πρήξιμο/θερμότητα','Πρωινή δυσκαμψία πάνω από 30 λεπτά'],aid:'• Ήπια άσκηση — διατήρηση κινητικότητας είναι προτεραιότητα\n• Θερμότητα πριν από δραστηριότητα, κρύο μετά\n• Απώλεια βάρους μειώνει επιβάρυνση',med:['Παρακεταμόλη για πόνο','Ιβουπροφαίνη/ναπροξένη για φλεγμονή'],note:'Χρόνια πάθηση — ρευματολόγος για σωστή διάγνωση και αγωγή'},en:{n:'Arthritis',s:['Joint pain','Swelling/warmth','Morning stiffness over 30 min'],aid:'• Gentle exercise — preserving mobility is priority\n• Heat before activity, cold after\n• Weight loss reduces load on joints',med:['Paracetamol for pain','Ibuprofen/naproxen for inflammation'],note:'Chronic condition — rheumatologist for proper diagnosis and treatment'},sev:'caution',sources:['Mayo Clinic','NHS','UpToDate']},
+  {id:'sprain',el:{n:'Διάστρεμμα',s:['Πόνος/πρήξιμο μετά από στρέψη/πτώση','Δυσκολία βάσης βάρους','Μελανιάση'],aid:'• ΑΝΑΣΤΟΛΗ — Ανάπαυση, Κρύο, Επίδεση, Ανύψωση\n• Κρύο 15-20 λεπτά κάθε 2-3 ώρες τις πρώτες 24-48 ώρες\n• ΜΗΝ θερμότητα τις πρώτες μέρες',med:['Παρακεταμόλη/Ιβουπροφαίνη για πόνο'],note:'Αν αδυναμία ή αδυναμία βάσης → ακτινογραφία για κάταγμα'},en:{n:'Sprain',s:['Pain/swelling after twist/fall','Difficulty bearing weight','Bruising'],aid:'• R.I.C.E. — Rest, Ice, Compression, Elevation\n• Ice 15-20min every 2-3h first 24-48h\n• NO heat first few days',med:['Paracetamol/Ibuprofen for pain'],note:'Inability to bear weight → X-ray to rule out fracture'},sev:'caution',sources:['NHS','Mayo Clinic']},
+  {id:'cramp',el:{n:'Μυϊκή Κράμπα',s:['Απότομος έντονος πόνος σε γάμβα/πόδι','Σκλήρυνση του μυός'],aid:'• Απαλή διάταση του μυός κατά τη διάρκεια\n• Θερμότητα και μασάζ μετά την υποχώρηση\n• Ενυδάτωση με άλατα αν συχνή',med:['Μαγνήσιο/κάλιο συμπληρώματα χωρίς συνταγή αν συχνή'],note:'Αν συχνή και επίμονη → έλεγχος αιμάτων'},en:{n:'Muscle Cramp',s:['Sudden intense pain calf/foot','Hardening of muscle'],aid:'• Gentle stretch DURING cramp\n• Heat and massage after it passes\n• Hydrate with electrolytes if frequent',med:['Magnesium/potassium supplements OTC if recurrent'],note:'Frequent persistent → blood tests'},sev:'norm',sources:['NHS','Mayo Clinic']}
+ ],
+
+ skin: [
+  {id:'eczema',el:{n:'Έκζεμα',s:['Ξηρότητα','Ερυθρότητα','Έντονη φαγούρα','Απολέπιση/σχισίματα'],aid:'• Ενυδάτωση 2 φορές την ημέρα χωρίς άρωμα\n• Υποκατάστατα καθαρισμού αντί σαπουνιού\n• Μαλακά βαμβακερά ρούχα',med:['Υδροκορτιζόνη 1% κρέμα — βραχυχρόνια χωρίς συνταγή','Ενυδατικές αλοιφές/κρέμες'],note:'Αν εξαπλώνεται, φλεγμαίνει ή δεν βελτιώνεται → δερματολόγος'},en:{n:'Eczema',s:['Dryness','Redness','Intense itching','Scaling/cracks'],aid:'• Fragrance-free moisturizer twice daily\n• Soap substitutes instead of regular soap\n• Soft cotton clothing',med:['Hydrocortisone 1% cream — short-term OTC only','Emollients/moisturizers'],note:'Spreading, infected, or unimproving → dermatologist'},sev:'caution',sources:['NHS','Mayo Clinic','MedlinePlus']},
+  {id:'urticaria',el:{n:'Κνίδωση',s:['Εξάνθημα με λευκά κέντρα και ερυθρές ζώνες','Έντονη φαγούρα','Εμφάνιση-εξαφάνιση'],aid:'• Αποφυγή πιθανής αιτίας (τροφή, φάρμακο, έντομο)\n• Κρύες επιθέσεις/λουτρό\n• Μην ξύνεις',med:['Αντιισταμινικά (σετιριζίνη, λοραταδίνη) χωρίς συνταγή'],note:'Αν πρήξιμο λαιμού/χειλιών ή δύσπνοια → 112 ΑΜΕΣΑ'},en:{n:'Hives / Urticaria',s:['Rash with white centers and red weals','Intense itching','Appear and fade'],aid:'• Avoid trigger (food, medicine, insect)\n• Cold compresses/bath\n• Do NOT scratch',med:['Antihistamines (cetirizine, loratadine) OTC'],note:'Swelling of throat/lips or breathlessness → CALL 112 NOW'},sev:'caution',sources:['NHS','Mayo Clinic']},
+  {id:'melanoma',el:{n:'Μελάνωμα — ΚΙΝΔΥΝΟΣ',s:['Ασυμμετρία σχήματος ελιάς','Ακανόνιστες άκρες','Πολλά χρώματα','Μεγαλύτερη από 6mm','Αλλάζει μέγεθος/σχήμα/χρώμα/αιμορραγεί'],aid:'• Μην αγγίζετε/κόβετε μόνοι σας\n• Φωτογραφήστε για σύγκριση\n• ΔΕΡΜΑΤΟΛΟΓΟΣ ΑΜΕΣΑ',med:['Κανένα φάρμακο δεν βοηθά'],note:'🔴 Η έγκαιρη διάγνωση σώζει ζωές — μην καθυστερείς'},en:{n:'Melanoma — DANGER',s:['Asymmetrical mole shape','Irregular borders','Multiple colours','Larger than 6mm','Changing size/shape/colour/bleeding'],aid:'• Do NOT touch or cut yourself\n• Photograph for reference\n• SEE DERMATOLOGIST NOW',med:['No medicine will help'],note:'🔴 Early diagnosis saves lives — do not delay'},sev:'emer',sources:['WHO','Mayo Clinic','NHS']},
+  {id:'acne',el:{n:'Ακμή',s:['Σπυράκια','Μαύρα/λευκά στίγματα','Φλύκταινες','Ερυθρότητα'],aid:'• Καθαρισμός προσώπου 2 φορές την ημέρα με ήπιο καθαριστικό\n• Μην πιέζεις — δημιουργεί ουλές\n• Αποφυγή λιπαρών προϊόντων προσώπου',med:['Κρέμες με βενζοϊλο υπεροξείδιο/σαλικυλικό οξύ χωρίς συνταγή'],note:'Επίμονη ή βαθιά ακμή → δερματολόγος για αγωγή'},en:{n:'Acne',s:['Pimples','Blackheads/whiteheads','Pustules','Redness'],aid:'• Wash face twice daily with gentle cleanser\n• Do NOT squeeze — causes scarring\n• Avoid oily face products',med:['Benzoyl peroxide/salicylic acid creams OTC'],note:'Persistent or deep cystic acne → dermatologist'},sev:'norm',sources:['NHS','Mayo Clinic']},
+  {id:'ringworm',el:{n:'Δακτυλίτιδα',s:['Δακτυλιοειδές εξάνθημα με ανυψωμένες άκρες','Φαγούρα','Εξαπλώνεται'],aid:'• Διατήρηση καθαρό και στεγνό\n• Μην μοιράζεσαι πετσέτες/ρούχα\n• Αποφύγετε επαφή με ζώα',med:['Αντιμυκητιασικές κρέμες (κλοτριμαζόλη) χωρίς συνταγή — εφαρμογή 2 εβδομάδες μετά την εξαφάνιση'],note:'Αν στο τριχωτό ή εκτεταμένη → από του στόματος αγωγή με συνταγή'},en:{n:'Ringworm',s:['Ring-shaped rash with raised edge','Itching','Spreading'],aid:'• Keep clean and dry\n• Do not share towels/clothes\n• Check pets for infection',med:['Antifungal creams (clotrimazole) OTC — continue 2 weeks after clear'],note:'Scalp or widespread → oral prescription treatment'},sev:'caution',sources:['NHS','Mayo Clinic']}
+ ],
+
+ eye: [
+  {id:'conj',el:{n:'Επιπεφυκίτιδα',s:['Ερυθρότητα λευκού ματιού','Έκκριμα που κολλάει τις βλέφαρες πρωί','Φαγούρα/αίσθημα ξένου σώματος'],aid:'• Καθαρισμός από έξω προς τα μέσα με αλατόνερο\n• Κρύες επιθέσεις\n• Μην αγγίζετε με χέρια',med:['Τεχνητά δάκρυα','Αντιβιοτικές σταγόνες χωρίς συνταγή σε ορισμένες περιπτώσεις'],note:'Πόνος, μείωση όρασης ή φωτοφοβία → ΟΦΘΑΛΜΙΑΤΡΟΣ'},en:{n:'Conjunctivitis',s:['Redness of white eye','Discharge sticking lids in morning','Itching/gritty sensation'],aid:'• Wipe eyes outward with saline solution\n• Cold compresses\n• Do not touch with hands',med:['Artificial tears','Antibiotic drops OTC in some cases'],note:'Pain, vision loss, or light sensitivity → OPHTHALMOLOGIST'},sev:'caution',sources:['NHS','Mayo Clinic']},
+  {id:'stye',el:{n:'Χαλάζιο',s:['Πύωδης όγκος σε βλέφαρο','Πόνος/ερυθρότητα','Ευαισθησία'],aid:'• Ζεστές υγρές επιθέσεις 10-15 λεπτά 3-4 φορές την ημέρα\n• Μην πιέζεις/ανοίγεις\n• Καθαρισμός βλεφαρίδων',med:['Τεχνητά δάκρυα για ανακούφιση'],note:'Αν μεγαλώνει ή επανέρχεται → οφθαλμίατρος'},en:{n:'Stye',s:['Painful lump on eyelid','Redness/swelling','Tenderness'],aid:'• Warm moist compresses 10-15min 3-4× daily\n• Do NOT squeeze/pop\n• Clean lash line gently',med:['Artificial tears for comfort'],note:'Growing or recurrent → ophthalmologist'},sev:'norm',sources:['NHS','Mayo Clinic']},
+  {id:'glaucoma',el:{n:'Γλαύκωμα',s:['Συχνά χωρίς πόνο — σταδιακή απώλεια περιφερικής όρασης'],aid:'• Δεν υπάρχει πρώτη βοήθεια — ΕΤΗΣΙΟΣ ΕΛΕΓΧΟΣ',med:['Κανένα χωρίς συνταγή — σταγόνες για μείωση πίεσης'],note:'🔴 Οφθαλμίατρος — μη αναστρέψιμη βλάβη αν καθυστερήσει'},en:{n:'Glaucoma',s:['Often painless — gradual loss of side vision'],aid:'No first aid — ANNUAL EYE EXAMINATION',med:['No OTC treatment — pressure-lowering drops prescribed'],note:'🔴 Ophthalmologist — damage irreversible if delayed'},sev:'risk',sources:['WHO','Mayo Clinic','NHS']}
+ ],
+
+ psy: [
+  {id:'stress',el:{n:'Στρες / Αγχος',s:['Δυσκολία ύπνου','Συνεχής ανησυχία','Μυϊκή ένταση','Κόπωση','Αλλαγή όρεξης'],aid:'• Βαθιές αναπνοές 4-7-8: εισπνοή 4, αναμονή 7, εκπνοή 8\n• Φυσική άσκηση 30λεπτα/ημέρα — απελευθερώνει ενδορφίνες\n• Τεχνικές χαλάρωσης/διαλογισμού',med:['Κανένα φάρμακο χωρίς συνταγή — βιταμίνες Β/μαγνήσιο βοηθητικά'],note:'Επιμένει και επιδεινώνεται → ψυχολόγος/ψυχίατρος'},en:{n:'Stress / Anxiety',s:['Sleep difficulty','Persistent worry','Muscle tension','Fatigue','Appetite change'],aid:'• 4-7-8 breathing: inhale 4, hold 7, exhale 8\n• Daily exercise 30min — releases endorphins\n• Relaxation/meditation practices',med:['No OTC treatment — B vitamins/magnesium supportive only'],note:'Persistent and worsening → psychologist/psychiatrist'},sev:'caution',sources:['NHS','Mayo Clinic','UpToDate']},
+  {id:'depression',el:{n:'Κατάθλιψη',s:['Επίμονη λύπη/αδιαφορία','Απώλεια ενδιαφερόντων','Αλλαγή ύπνου/βάρους','Αίσθημα αχρειότητας','Σκέψεις για τέλος'],aid:'• Μιλήστε σε κάποιον — μην απομονώνεστε\n• Σταδιακή επιστροφή σε δραστηριότητες\n• Αναζητήστε βοήθεια — δεν είναι αδυναμία',med:['Κανένα χωρίς συνταγή'],note:'🔴 Αν σκέψεις για αυτοβλάβη — καλέστε γραμμή βοήθειας ή 112 ΑΜΕΣΑ'},en:{n:'Depression',s:['Persistent sadness/numbness','Loss of interest','Sleep/weight change','Worthlessness','Thoughts of ending life'],aid:'• Talk to someone — do not isolate\n• Gradual return to activities\n• Seek help — NOT a sign of weakness',med:['No OTC treatment'],note:'🔴 Self-harm/suicidal thoughts — call helpline or 112 NOW'},sev:'risk',sources:['WHO','NHS','Mayo Clinic']}
+ ],
+
+ child: [
+  {id:'feverchild',el:{n:'Πυρετός σε Παιδί',s:['Θερμοκρασία >37.5°C (υπόγεια)','Αλλαγή διάθεσης/δραστηριότητας','Ερυθρότητα'],aid:'• Ελαφριά ρούχα — ΜΗΝ σκέπασμα\n• Συχνά μικρές ποσότητες υγρών\n• Ελεγχος κάθε 4-6 ώρες',med:['Παρακεταμόλη σε δόση ανάλογη βάρους — ΑΠΟΦΥΓΗ ασπιρίνης'],note:'Βρέφος <3 μηνών με πυρετό → ΝΟΣΟΚΟΜΕΙΟ ΑΜΕΣΑ'},en:{n:'Fever in Child',s:['Temp >37.5°C (underarm)','Mood/activity change','Flushed skin'],aid:'• Light clothing — NO bundling\n• Small frequent sips of fluid\n• Check every 4-6h',med:['Paracetamol dose by weight — AVOID aspirin completely'],note:'Infant <3 months with fever → HOSPITAL NOW'},sev:'risk',sources:['NHS','WHO','Mayo Clinic']},
+  {id:'chickenpox',el:{n:'Ανεμοβλογία',s:['Εξάνθημα με κηλίδες → φυσαλίδες → κρούστες','Κυκλικά σε εξέλιξη','Πυρετός'],aid:'• Ανακούφιση με ψύξη\n• Κοντά νύχια για αποφυγή γρατζουνιών/ουλών\n• Απομόνωση μέχρι στεγνώσουν όλες οι κρούστες',med:['Παρακεταμόλη — ΑΠΟΦΥΓΗ ασπιρίνης','Κρεμά καλαμίνης'],note:'Εμβόλιο διαθέσιμο. Ενήλικες συχνά πιο σοβαρά'},en:{n:'Chickenpox',s:['Rash spots → blisters → crusts','Appears in crops over days','Fever'],aid:'• Cool environment soothes\n• Short nails to prevent scratching/scars\n• Isolate until all crusts dry',med:['Paracetamol — AVOID aspirin','Calamine lotion'],note:'Vaccine available. Adults often more severely affected'},sev:'caution',sources:['NHS','CDC','Mayo Clinic']}
+ ],
+
+ gen: [
+  {id:'fever',el:{n:'Πυρετός',s:['Θερμοκρασία 37.5-38°C: ήπια','38-39°C: μέτρια','>39°C: υψηλή','Ρίγη, κόπωση'],aid:'• Ελαφριά ρούχα, αερισμός χώρου\n• Πολλά υγρά — 2-3 λίτρα\n• Ανάπαυση',med:['Παρακεταμόλη ή ιβουπροφαίνη για μείωση'],note:'Πάνω από 3 μέρες ή >39°C → γιατρός'},en:{n:'Fever',s:['37.5-38°C: mild','38-39°C: moderate','>39°C: high','Chills, fatigue'],aid:'• Light clothing, ventilate room\n• Plenty of fluids — 2-3L daily\n• Rest',med:['Paracetamol or ibuprofen to lower'],note:'Over 3 days or >39°C → see doctor'},sev:'caution',sources:['NHS','WHO','Mayo Clinic']},
+  {id:'emergency',el:{n:'ΕΠΕΙΓΟΝ — Άμεση Βοήθεια',s:['Αναπνευστική δυσκολία/αποφράξη','Απώλεια αισθήσεων που δεν επανέρχεται','Αιμορραγία που δεν σταματά σε 10 λεπτά','Έντονος πόνος χωρίς εξήγηση','Αλλαγή συνείδησης/σύγχυση'],aid:'• ΚΑΛΕΣΤΕ 112 ΑΜΕΣΑ\n• Θέση ανάπαυσης αν αναπνέει και συνείδηση έχει\n• Μην δίνετε τίποτα από το στόμα',med:['Κανένα — καθυστέρηση επικίνδυνη'],note:'🔴 Μην διστάζετε — κάθε δευτερόλεπτο μετράει'},en:{n:'EMERGENCY — Immediate Help',s:['Breathing difficulty/blocked airway','Unconsciousness not recovering','Uncontrolled bleeding >10min','Unexplained severe pain','Confusion/altered consciousness'],aid:'• CALL 112 NOW\n• Recovery position if breathing and conscious\n• Nothing by mouth',med:['None — delay dangerous'],note:'🔴 Do not hesitate — every second counts'},sev:'emer',sources:['WHO','NHS','Mayo Clinic']}
+ ]
+};
+
+/* =========================================================
+   AREA & SYMPTOM LOGIC
+   ========================================================= */
+function selectArea(btn){
+ document.querySelectorAll('[data-area]').forEach(b=>b.classList.remove('sel'));
+ btn.classList.add('sel');
+ selectedArea = btn.dataset.area;
+ selSyms.clear();
+ renderSyms();
+}
+
+function renderSyms(){
+ const list = DB[selectedArea] || [];
+ const cont = document.getElementById('symCont');
+ if(!list.length){
+   cont.innerHTML = '<p style="color:var(--text-soft);text-align:center;padding:15px">—</p>';
+   return;
+ }
+ cont.innerHTML = list.map(cond=>{
+   const syms = lang==='el' ? cond.el.s : cond.en.s;
+   return `<div class="symlab" data-id="${cond.id}">
+     <span class="sym-title">📌 ${lang==='el'?cond.el.n:cond.en.n}</span>
+     ${syms.map((sym, i)=>{
+       const key = cond.id + '::' + i;
+       return `<label>
+         <input type="checkbox" data-key="${key}" ${selSyms.has(key)?'checked':''} onchange="toggleSym('${key}')">
+         <span>${sym}</span>
+       </label>`;
+     }).join('')}
+   </div>`;
+ }).join('');
+}
+
+function toggleSym(key){
+ if(selSyms.has(key)) selSyms.delete(key);
+ else selSyms.add(key);
+ const cb = document.querySelector(`[data-key="${key}"]`);
+ if(cb) cb.closest('.symlab').classList.toggle('act', [...selSyms].some(k=>k.startsWith(cb.closest('.symlab').dataset.id + '::')));
+}
+
+function checkNow(){
+ const resCont = document.getElementById('resCont');
+ if(!selSyms.size){
+  resCont.innerHTML = `<p style="color:var(--text-soft);text-align:center;padding:20px">
+  <span class="el">⚠️ Επιλέξτε τουλάχιστον ένα σύμπτωμα</span>
+  <span class="en">⚠️ Select at least one symptom</span>
+  </p>`;
+  return;
+ }
+
+ const selectedCondIds = new Set([...selSyms].map(k=>k.split('::')[0]));
+ const results = [];
+ Object.values(DB).flat().forEach(cond=>{
+  if(!selectedCondIds.has(cond.id)) return;
+  const condSyms = lang==='el' ? cond.el.s : cond.en.s;
+  const selectedForThis = [...selSyms].filter(k=>k.startsWith(cond.id + '::')).length;
+  const matchPercent = Math.round((selectedForThis / condSyms.length) * 100);
+  results.push({...cond, matchCount: selectedForThis, totalSyms: condSyms.length, matchPercent});
+ });
+
+ const sorted = results.sort((a,b)=>{
+  if(a.sev === 'emer' && b.sev !== 'emer') return -1;
+  if(b.sev === 'emer' && a.sev !== 'emer') return 1;
+  return b.matchPercent - a.matchPercent;
+ }).slice(0,8);
+
+ if(!sorted.length){
+  resCont.innerHTML = `<p style="color:var(--text-soft);text-align:center;padding:20px">
+  <span class="el">Δεν βρέθηκε αντιστοιχία.</span>
+  <span class="en">No match found.</span>
+  </p>`;
+  return;
+ }
+
+ renderResults(sorted, resCont);
+}
+
+/* =========================================================
+   NATURAL LANGUAGE INPUT
+   ========================================================= */
+/* Λέξεις-κλειδιά → πιθανές καταστάσεις */
+const KEYWORD_MAP = {
+  // Head
+  'πονοκέφαλο|κεφάλι|ημικραν|migraine|headache': ['migraine','tension','cluster','sinusitis','stroke'],
+  // Fever
+  'πυρετ|ρίγη|fever|chills': ['flu','covid','pneumonia','fever','gastroent','uti'],
+  // Respiratory
+  'βήχ|cough': ['cold','flu','covid','bronchitis','pneumonia','asthma'],
+  'αναπν|δύσπνοι|breath|λαχάνια': ['asthma','pneumonia','pe','heartattack','pleurisy'],
+  // ENT
+  'λαιμ|καταπ|throat|swallow': ['sorethroat','strep','tonsillitis','laryngitis'],
+  // Gastro
+  'κοιλι|στομάχ|έμετ|ναυτ|stomach|vomit|nausea|abdomen': ['gastritis','reflux','gastroent','foodpoison','appendicitis','ulcer'],
+  'διάρροι|diarrhea': ['gastroent','foodpoison','IBS'],
+  'δυσκοιλι|constipat': ['IBS'],
+  // Chest
+  'στήθ|καρδι|chest|heart': ['heartattack','angina','pleurisy','pe','arrhythmia'],
+  // Urinary
+  'ούρα|ουρ|νεφρ|urine|kidney|bladder': ['uti','cystitis','kidneystone','prostate'],
+  // Skin
+  'δέρμα|εξάνθη|skin|rash|φαγούρ|itch': ['eczema','urticaria','ringworm','acne','shingles'],
+  'ελιά|mole': ['melanoma'],
+  // Eyes
+  'μάτι|όρασ|eye|vision': ['conj','stye','glaucoma','migraine'],
+  // Musculoskeletal
+  'πλάτη|μέση|back': ['backpain','kidneystone'],
+  'αρθρ|joint|γόνατ|knee': ['arthritis','sprain'],
+  // Mental
+  'άγχος|ανησυχ|stress|anxiety|κατάθλιψ|depress': ['stress','depression'],
+  // Neuro
+  'ζάλη|dizz|ίλιγγ|vertigo': ['migraine','stroke','arrhythmia','hypertension'],
+  'μούδια|numb|αδυναμ|weak': ['stroke','backpain'],
+  // General red flags
+  'αίμα|blood': ['ulcer','pe','melanoma','pregwarning'],
+  'λιποθυ|faint|απώλεια συνείδησης': ['emergency','stroke','heartattack','arrhythmia']
+};
+
+function analyzeNatural(){
+  const text = (document.getElementById('nlInput').value || '').toLowerCase().trim();
+  const resCont = document.getElementById('nlResults');
+  if(!text){
+    resCont.innerHTML = `<p style="color:var(--text-soft);text-align:center;padding:20px">
+    <span class="el">⚠️ Γράψτε πρώτα πώς νιώθετε</span>
+    <span class="en">⚠️ Type how you feel first</span>
+    </p>`;
+    return;
+  }
+
+  const foundIds = new Set();
+  const matchedKeywords = [];
+
+  for(const pattern in KEYWORD_MAP){
+    const regex = new RegExp(pattern,'i');
+    if(regex.test(text)){
+      matchedKeywords.push(pattern.split('|')[0]);
+      KEYWORD_MAP[pattern].forEach(id=>foundIds.add(id));
+    }
+  }
+
+  // Emergency keyword detection
+  const emergencyPattern = /(αίμα|λιποθυμ|δεν αναπνέ|δύσπνοι|πόνο στο στήθος|μούδια|παράλυ|δεν μιλά|112|αυτοκτον|αυτοτραυματ)/i;
+  const hasEmergency = emergencyPattern.test(text);
+
+  const allConds = Object.values(DB).flat();
+  const found = allConds.filter(c=>foundIds.has(c.id)).slice(0,10);
+
+  if(!found.length && !hasEmergency){
+    resCont.innerHTML = `
+    <div class="res-card res-info">
+      <h3>🤔 <span class="el">Δεν βρέθηκε συγκεκριμένη αντιστοιχία</span><span class="en">No specific match found</span></h3>
+      <div class="res-section">
+        <strong class="el">Τι μπορείτε να κάνετε:</strong>
+        <strong class="en">What you can do:</strong><br>
+        <span class="el">• Δοκιμάστε να γράψετε πιο συγκεκριμένα (πού πονάει, από πότε, τι άλλο νιώθετε)<br>
+        • Ή χρησιμοποιήστε την καρτέλα <strong>✅ Συμπτώματα</strong> για πιο στοχευμένη επιλογή<br>
+        • Αν τα συμπτώματα επιμένουν ή επιδεινώνονται → επισκεφθείτε γιατρό</span>
+        <span class="en">• Try being more specific (where it hurts, since when, what else you feel)<br>
+        • Or use the <strong>✅ Symptoms</strong> tab for more targeted selection<br>
+        • If symptoms persist or worsen → see a doctor</span>
+      </div>
+    </div>`;
+    return;
+  }
+
+  let html = '';
+  if(hasEmergency){
+    html += `
+    <div class="res-card res-dang">
+      <h3>🚨 <span class="el">ΠΡΟΣΟΧΗ — ΠΙΘΑΝΟ ΕΠΕΙΓΟΝ</span><span class="en">WARNING — POSSIBLE EMERGENCY</span></h3>
+      <div class="res-section">
+        <strong class="el">Αν έχετε:</strong>
+        <strong class="en">If you have:</strong><br>
+        <span class="el">• Πόνο/βάρος στο στήθος<br>
+        • Δυσκολία στην αναπνοή<br>
+        • Αδυναμία σε πρόσωπο/χέρι/πόδι<br>
+        • Αλλαγή ομιλίας ή σύγχυση<br>
+        • Αιμορραγία που δεν σταματά<br>
+        • Σκέψεις αυτοτραυματισμού</span>
+        <span class="en">• Chest pain/pressure<br>
+        • Difficulty breathing<br>
+        • Weakness in face/arm/leg<br>
+        • Speech changes or confusion<br>
+        • Uncontrolled bleeding<br>
+        • Self-harm thoughts</span>
+        <div style="margin-top:10px;padding:10px;background:rgba(220,38,38,.15);border-radius:8px;font-weight:700;font-size:1rem">
+          📞 <span class="el">ΚΑΛΕΣΤΕ 112 ή 166 ΑΜΕΣΑ</span>
+          <span class="en">CALL 112 or 166 NOW</span>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if(found.length){
+    // Sort: emergency first
+    found.sort((a,b)=>{
+      const sevOrder = {emer:0,risk:1,caution:2,norm:3};
+      return (sevOrder[a.sev]||4) - (sevOrder[b.sev]||4);
+    });
+    html += renderResultsHTML(found.map(c=>({...c, matchPercent: 75, matchCount: 1, totalSyms: c.el.s.length})), matchedKeywords);
+  }
+
+  resCont.innerHTML = html;
+}
+
+function addChip(text){
+  const ta = document.getElementById('nlInput');
+  ta.value = (ta.value ? ta.value + ' ' : '') + text + '.';
+  ta.focus();
+}
+
+function clearNL(){
+  const ta = document.getElementById('nlInput');
+  if(ta) ta.value = '';
+  const r = document.getElementById('nlResults');
+  if(r) r.innerHTML = '';
+}
+
+/* =========================================================
+   PHOTO ANALYSIS (BASIC — NOT AI DIAGNOSIS)
+   ========================================================= */
+function handlePhoto(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  if(file.size > 10*1024*1024){
+    alert(lang==='el' ? 'Η φωτογραφία είναι πολύ μεγάλη (max 10MB)' : 'Photo too large (max 10MB)');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e=>{
+    currentPhoto = e.target.result;
+    document.getElementById('photoPreviewCont').innerHTML =
+      `<img src="${currentPhoto}" class="photo-preview" alt="preview">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function analyzePhoto(){
+  const res = document.getElementById('photoResults');
+  if(!currentPhoto){
+    res.innerHTML = `<p style="color:var(--text-soft);text-align:center;padding:20px">
+    <span class="el">⚠️ Ανεβάστε πρώτα φωτογραφία</span>
+    <span class="en">⚠️ Upload a photo first</span></p>`;
+    return;
+  }
+
+  const img = new Image();
+  img.onload = ()=>{
+    // Canvas analysis
+    const canvas = document.createElement('canvas');
+    const maxDim = 400;
+    let w = img.width, h = img.height;
+    if(w > h && w > maxDim){ h = h * maxDim / w; w = maxDim; }
+    else if(h > maxDim){ w = w * maxDim / h; h = maxDim; }
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+
+    let rSum=0, gSum=0, bSum=0, pixels=0;
+    let redDominant=0, yellowDominant=0, darkPixels=0, veryBright=0;
+    let rValues=[], gValues=[], bValues=[];
+
+    for(let i=0; i<data.length; i+=16){ // sample every 4th pixel
+      const r=data[i], g=data[i+1], b=data[i+2];
+      rSum+=r; gSum+=g; bSum+=b; pixels++;
+      rValues.push(r); gValues.push(g); bValues.push(b);
+      const brightness = (r+g+b)/3;
+      if(brightness < 60) darkPixels++;
+      if(brightness > 220) veryBright++;
+      if(r > g+30 && r > b+30) redDominant++;
+      if(r > 180 && g > 150 && b < 120) yellowDominant++;
+    }
+
+    const avgR = Math.round(rSum/pixels);
+    const avgG = Math.round(gSum/pixels);
+    const avgB = Math.round(bSum/pixels);
+    const avgBrightness = Math.round((avgR+avgG+avgB)/3);
+    const variance = calcVariance(rValues, avgR) + calcVariance(gValues, avgG) + calcVariance(bValues, avgB);
+    const redPercent = Math.round(redDominant / pixels * 100);
+    const yellowPercent = Math.round(yellowDominant / pixels * 100);
+    const darkPercent = Math.round(darkPixels / pixels * 100);
+    const brightPercent = Math.round(veryBright / pixels * 100);
+
+    // Interpret
+    const observations = [];
+    const recommendations = [];
+    const possibleAreas = [];
+
+    if(redPercent > 25){
+      observations.push(lang==='el' ? `🔴 Έντονη παρουσία κόκκινου (${redPercent}%) — πιθανή ερυθρότητα, φλεγμονή, ερεθισμός ή αιμάτωμα` : `🔴 Strong red presence (${redPercent}%) — possible redness, inflammation, irritation or hematoma`);
+      possibleAreas.push('skin','eye');
+    } else if(redPercent > 12){
+      observations.push(lang==='el' ? `🟠 Μέτρια παρουσία κόκκινου (${redPercent}%) — μπορεί να υποδηλώνει ήπιο ερεθισμό` : `🟠 Moderate red presence (${redPercent}%) — may indicate mild irritation`);
+    }
+
+    if(yellowPercent > 20){
+      observations.push(lang==='el' ? `🟡 Έντονο κίτρινο (${yellowPercent}%) — πιθανό πύον, ίκτερος ή φλεγμονή` : `🟡 Strong yellow (${yellowPercent}%) — possible pus, jaundice or infection`);
+      possibleAreas.push('skin','hepat');
+      recommendations.push(lang==='el' ? '⚠️ Αν υπάρχει πύον ή κιτρινίλα → γιατρός άμεσα' : '⚠️ If pus or yellowness → see doctor now');
+    }
+
+    if(darkPercent > 40){
+      observations.push(lang==='el' ? `⚫ Πολύ σκούρες περιοχές (${darkPercent}%) — πιθανή μελανιά, νέκρωση ή σκιά` : `⚫ Very dark areas (${darkPercent}%) — possible bruise, necrosis or shadow`);
+      recommendations.push(lang==='el' ? '⚠️ Αν υπάρχει μαύρο/νεκρωτικό δέρμα → επείγον' : '⚠️ If black/necrotic skin → urgent');
+    }
+
+    if(brightPercent > 30){
+      observations.push(lang==='el' ? `⚪ Πολύ φωτεινές περιοχές (${brightPercent}%) — πιθανή αντανάκλαση, ξηρότητα ή απολέπιση` : `⚪ Very bright areas (${brightPercent}%) — possible reflection, dryness or scaling`);
+    }
+
+    if(variance > 20000){
+      observations.push(lang==='el' ? '🎨 Υψηλή ανομοιογένεια χρώματος — πιθανή ασυμμετρία, πολλαπλές αποχρώσεις' : '🎨 High color heterogeneity — possible asymmetry, multiple shades');
+      possibleAreas.push('skin');
+      recommendations.push(lang==='el' ? '⚠️ Αν υπάρχει ελιά με πολλά χρώματα/ασυμμετρία → δερματολόγος' : '⚠️ If mole has multiple colors/asymmetry → dermatologist');
+    }
+
+    if(avgBrightness < 60){
+      observations.push(lang==='el' ? `🌑 Πολύ σκοτεινή φωτογραφία (φωτεινότητα: ${avgBrightness}/255) — μπορεί να μην είναι ευκρινής` : `🌑 Very dark photo (brightness: ${avgBrightness}/255) — may not be clear`);
+      recommendations.push(lang==='el' ? '📸 Δοκιμάστε ξανά με καλύτερο φωτισμό' : '📸 Try again with better lighting');
+    }
+
+    if(!observations.length){
+      observations.push(lang==='el' ? '✅ Δεν εντοπίστηκαν έντονα χρώματα/μοτίβα που να υποδηλώνουν σαφή προβλήματα' : '✅ No strong colors/patterns suggesting clear problems detected');
+    }
+
+    // General recommendations
+    recommendations.push(lang==='el' ? '👨‍⚕️ Πάντα να συμβουλεύεστε γιατρό — η εφαρμογή ΔΕΝ διαγιγνώσκει' : '👨‍⚕️ Always consult a doctor — the app does NOT diagnose');
+    recommendations.push(lang==='el' ? '📸 Για καλύτερα αποτελέσματα: φωτογραφία με φυσικό φωτισμό, καθαρή εστίαση' : '📸 For best results: photo with natural light, clear focus');
+
+    const redFlag = redPercent > 30 || yellowPercent > 25 || darkPercent > 50;
+
+    let areaLabel = '';
+    if(possibleAreas.includes('skin')) areaLabel += '🩹 Δέρμα · ';
+    if(possibleAreas.includes('eye')) areaLabel += '👁️ Μάτι · ';
+    if(possibleAreas.includes('hepat')) areaLabel += '🟡 Ήπαρ · ';
+    areaLabel = areaLabel.replace(/ · $/,'');
+
+    res.innerHTML = `
+    <div class="analysis-result ${redFlag?'res-dang':''}">
+      <h4>🔬 ${lang==='el'?'Αποτελέσματα Ανάλυσης':'Analysis Results'}</h4>
+      <div style="margin-bottom:10px;padding:8px;background:rgba(0,0,0,.05);border-radius:8px;font-size:.8rem;font-family:monospace">
+        <strong>📊 Metrics:</strong><br>
+        RGB avg: (${avgR}, ${avgG}, ${avgB}) · Brightness: ${avgBrightness}/255<br>
+        Red: ${redPercent}% · Yellow: ${yellowPercent}% · Dark: ${darkPercent}% · Bright: ${brightPercent}%<br>
+        Variance: ${Math.round(variance)}
+      </div>
+      ${areaLabel ? `<div style="margin-bottom:10px"><strong>${lang==='el'?'Πιθανή περιοχή':'Possible area'}:</strong> ${areaLabel}</div>` : ''}
+      <div class="res-section">
+        <strong>👁️ ${lang==='el'?'Παρατηρήσεις':'Observations'}:</strong><br>
+        ${observations.map(o=>'• '+o).join('<br>')}
+      </div>
+      <div class="res-section">
+        <strong>💡 ${lang==='el'?'Συστάσεις':'Recommendations'}:</strong><br>
+        ${recommendations.map(r=>'• '+r).join('<br>')}
+      </div>
+      ${redFlag ? `
+      <div style="margin-top:10px;padding:12px;background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.1));border-left:4px solid #ef4444;border-radius:8px;font-weight:700">
+        🚨 ${lang==='el'?'ΠΡΟΣΟΧΗ: Η εικόνα δείχνει έντονα ευρήματα — επισκεφθείτε γιατρό ΑΜΕΣΑ':'WARNING: Image shows strong findings — SEE DOCTOR NOW'}
+      </div>` : ''}
+      <div style="margin-top:12px;padding:10px;background:rgba(220,38,38,.08);border-radius:8px;font-size:.78rem;line-height:1.5">
+        <strong>⚠️ ${lang==='el'?'ΣΗΜΑΝΤΙΚΟ':'IMPORTANT'}:</strong>
+        ${lang==='el'
+          ?'Η παραπάνω ανάλυση είναι βασική επεξεργασία εικόνας (χρώμα, φωτεινότητα, ανομοιογένεια) και ΔΕΝ αποτελεί ιατρική διάγνωση. Απευθυνθείτε σε γιατρό για σωστή αξιολόγηση.'
+          :'The above analysis is basic image processing (color, brightness, heterogeneity) and is NOT a medical diagnosis. Consult a doctor for proper assessment.'}
+      </div>
+      <div style="margin-top:10px;font-size:.78rem">
+        <strong>🔗 ${lang==='el'?'Χρήσιμοι σύνδεσμοι':'Useful links'}:</strong><br>
+        <a href="https://www.nhs.uk/conditions/skin-conditions/" target="_blank" rel="noopener">NHS — Skin conditions</a> ·
+        <a href="https://www.mayoclinic.org/diseases-conditions/skin-cancer/symptoms-causes/syc-20377605" target="_blank" rel="noopener">Mayo Clinic — Skin cancer</a> ·
+        <a href="https://www.who.int/health-topics/vision" target="_blank" rel="noopener">WHO — Vision</a>
+      </div>
+    </div>`;
+
+    // Also run through DB if possibleAreas detected
+    if(possibleAreas.length){
+      const conds = [];
+      possibleAreas.forEach(area=>{
+        (DB[area]||[]).forEach(c=>{
+          if(!conds.find(x=>x.id===c.id)) conds.push({...c, matchPercent: 60});
+        });
+      });
+      if(conds.length){
+        res.innerHTML += renderResultsHTML(conds.slice(0,6), []);
+      }
+    }
+  };
+  img.src = currentPhoto;
+}
+
+function calcVariance(arr, mean){
+  let sum = 0;
+  for(let i=0; i<arr.length; i+=10){
+    sum += Math.pow(arr[i]-mean, 2);
+  }
+  return sum / Math.max(1, Math.floor(arr.length/10));
+}
+
+function clearPhoto(){
+  currentPhoto = null;
+  document.getElementById('photoPreviewCont').innerHTML = '';
+  document.getElementById('photoInput').value = '';
+  document.getElementById('photoResults').innerHTML = '';
+}
+
+/* =========================================================
+   RENDER RESULTS (shared)
+   ========================================================= */
+const OFFICIAL_LINKS = {
+  'mayoclinic': 'https://www.mayoclinic.org/diseases-conditions',
+  'nhs': 'https://www.nhs.uk/conditions/',
+  'who': 'https://www.who.int/health-topics',
+  'medlineplus': 'https://medlineplus.gov/',
+  'cochrane': 'https://www.cochranelibrary.com/',
+  'uptodate': 'https://www.uptodate.com/contents/'
+};
+
+function buildSearchLink(condName, source){
+  const map = {
+    'mayoclinic': 'https://www.mayoclinic.org/search/search-results?q=',
+    'nhs': 'https://www.nhs.uk/search/?q=',
+    'who': 'https://www.who.int/home/search?indexCatalogue=genericsearchindex1&searchQuery=',
+    'medlineplus': 'https://medlineplus.gov/search/?query=',
+    'cochrane': 'https://www.cochranelibrary.com/search?q=',
+    'uptodate': 'https://www.uptodate.com/contents/search?search='
+  };
+  return (map[source]||'') + encodeURIComponent(condName);
+}
+
+function renderResultsHTML(sorted, matchedKeywords){
+  const sevClass = {emer:'res-dang',risk:'res-warn',caution:'res-info',norm:'res-succ'};
+  const tagClass = {emer:'tag-emer',risk:'tag-risk',caution:'tag-caution',norm:'tag-norm'};
+  const sevLabel = {
+    emer: {el:'🔴 ΕΠΕΙΓΟΝ', en:'🔴 EMERGENCY'},
+    risk: {el:'⚠️ Υψηλή Σοβαρότητα', en:'⚠️ High Severity'},
+    caution: {el:'ℹ️ Προσοχή', en:'ℹ️ Caution'},
+    norm: {el:'✅ Συνήθως Ήπια', en:'✅ Usually Mild'}
+  };
+
+  let html = '';
+  if(matchedKeywords && matchedKeywords.length){
+    html += `<div class="note-bar" style="margin-bottom:10px">
+      🔍 <strong>${lang==='el'?'Αναγνωρίστηκαν λέξεις':'Recognized keywords'}:</strong>
+      ${matchedKeywords.map(k=>`<span class="tag tag-caution">${k}</span>`).join(' ')}
+    </div>`;
+  }
+
+  html += sorted.map(cond=>{
+    const d = lang==='el' ? cond.el : cond.en;
+    const sources = cond.sources || ['NHS', 'Mayo Clinic', 'WHO'];
+    const sourceLinks = sources.map(s=>{
+      const key = s.toLowerCase().replace(/[^a-z]/g,'');
+      const srcKey = key.includes('nhs') ? 'nhs' : key.includes('mayo') ? 'mayoclinic' : key.includes('who')||key.includes('ποy') ? 'who' : key.includes('medline') ? 'medlineplus' : key.includes('cochrane') ? 'cochrane' : key.includes('uptodate') ? 'uptodate' : 'nhs';
+      return `<a href="${buildSearchLink(d.n, srcKey)}" target="_blank" rel="noopener">${s} 🔗</a>`;
+    }).join(' · ');
+
+    return `
+    <div class="res-card ${sevClass[cond.sev]}">
+     <h3>${d.n}</h3>
+     <span class="tag ${tagClass[cond.sev]}">${sevLabel[cond.sev][lang]}</span>
+     <span class="tag tag-percent">${cond.matchPercent||0}% ${lang==='el'?'αντιστοιχία':'match'}</span>
+     <div class="res-section"><strong>📋 ${lang==='el'?'Συμπτώματα':'Symptoms'}:</strong>${d.s.join(' · ')}</div>
+     <div class="res-section"><strong>🆘 ${lang==='el'?'Πρώτες Βοήθειες':'First Aid'}:</strong>${d.aid.replace(/\n/g,'<br>')}</div>
+     <div class="res-section"><strong>💊 ${lang==='el'?'Φάρμακα':'Medicines'}:</strong>${d.med.join(' · ')}</div>
+     <div class="res-section"><strong>📝 ${lang==='el'?'Σημείωση':'Note'}:</strong>${d.note}</div>
+     <div class="res-section" style="font-size:.75rem"><strong>📚 ${lang==='el'?'Επίσημες Πηγές':'Official Sources'}:</strong>${sourceLinks}</div>
+    </div>`;
+  }).join('');
+
+  html += `
+   <div class="note-bar">
+    <strong>⚕️ ${lang==='el'?'Αποποίηση':'Disclaimer'}:</strong>
+    ${lang==='el'
+      ?'Βασίζεται σε ΠΟΥ, Mayo Clinic, NHS, MedlinePlus, Cochrane, UpToDate. ΔΕΝ υποκαθιστά ιατρική διάγνωση.'
+      :'Based on WHO, Mayo Clinic, NHS, MedlinePlus, Cochrane, UpToDate. Does NOT replace medical diagnosis.'}
+   </div>`;
+
+  return html;
+}
+
+function renderResults(sorted, container){
+  container.innerHTML = renderResultsHTML(sorted, []);
+}
+
+function clearAll(){
+ selSyms.clear();
+ renderSyms();
+ const c = document.getElementById('resCont');
+ if(c) c.innerHTML = `
+ <p style="color:var(--text-soft);text-align:center;padding:25px">
+ <span class="el">Επιλέξτε περιοχή και συμπτώματα για να εμφανιστούν τα αποτελέσματα</span>
+ <span class="en">Select area and symptoms to see results</span>
+ </p>`;
+}
+
+/* === DRAG & DROP PHOTO === */
+document.addEventListener('DOMContentLoaded', ()=>{
+  const zone = document.getElementById('uploadZone');
+  if(!zone) return;
+  zone.addEventListener('dragover', e=>{e.preventDefault(); zone.classList.add('dragover');});
+  zone.addEventListener('dragleave', ()=>zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e=>{
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if(file && file.type.startsWith('image/')){
+      const ev = {target:{files:[file]}};
+      handlePhoto(ev);
+    }
+  });
+  // Init
+  renderSyms();
+  updatePlaceholders();
+});
+</script>
+
+</body>
+</html>
+
