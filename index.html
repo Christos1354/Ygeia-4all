@@ -1511,7 +1511,7 @@ const store = {
   get(k,d){try{const v=localStorage.getItem('ygeia-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){try{localStorage.setItem('ygeia-'+k,JSON.stringify(v));return true}catch(e){return false}}
 };
-let LANG = store.get('lang','el');
+let LANG = store.get('lang', /^el/i.test(navigator.language||'el') ? 'el' : 'en'); // 13-10-2026: γλώσσα επισκέπτη / visitor's language
 const L = (el,en) => LANG==='el'?el:en;
 const D = c => LANG==='el'?c.el:c.en;
 
