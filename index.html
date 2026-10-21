@@ -365,6 +365,38 @@ html.dark .sec.danger{background:#4c0519;border-color:#9f1239}
 .medcard h2{font-size:1.5rem}
 @media(max-width:600px){.who button{padding:6px 11px;font-size:.92rem}.figure text{font-size:15px}}
 
+
+/* ---------- ΨΥΧΗ & ΣΩΜΑ (20-10-2026) ---------- */
+.tile.wide{grid-column:1/-1;flex-direction:row;justify-content:flex-start;text-align:left;min-height:0;padding:18px 20px;gap:16px}
+.tile.wide .wt{display:flex;flex-direction:column;gap:4px}
+.tile.wide b{font-size:1.3rem}
+.tile.wide small{display:block!important;font-size:.95rem}
+.t11{background:linear-gradient(135deg,#7c3aed,#c026d3 55%,#f59e0b)}
+.sec.friend{background:#fef9c3;border:2px solid #fde047;font-size:1.05rem;line-height:1.55}
+html.dark .sec.friend{background:#422006;border-color:#a16207}
+.sec.sage,.card.sage{background:linear-gradient(135deg,#ede9fe,#fdf4ff);border-left:6px solid #8b5cf6}
+html.dark .sec.sage,html.dark .card.sage{background:linear-gradient(135deg,#2e1065,#3b0764)}
+.sage blockquote,.soulhero blockquote{font-size:1.18rem;font-style:italic;line-height:1.55;margin:8px 0;font-family:Georgia,'Times New Roman',serif}
+.sagewho{font-weight:700;color:#6d28d9;margin-bottom:6px}
+html.dark .sagewho{color:#c4b5fd}
+.sage .today{margin-top:8px;line-height:1.5}
+.sage .today b.in{display:inline;margin:0}
+.sec.helpline{background:#fdf2f8;border:2px dashed #f472b6;line-height:1.6}
+html.dark .sec.helpline{background:#500724;border-color:#be185d}
+.sec.helpline a{font-weight:900;color:inherit}
+.sec.helpline b{display:inline;margin:0}
+.soulhero{background:linear-gradient(135deg,#6d28d9,#a21caf 60%,#d97706);color:#fff}
+.soulhero h2,.soulhero .lead{color:#fff}
+.soulhero .sagewho{color:#fde68a}
+.soulsafe{border:2px solid #f9a8d4;line-height:1.55}
+.crisis .ct{font-size:1.2rem}
+.ep7link{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:18px;border-radius:22px;text-decoration:none;color:#3a2600!important;background:linear-gradient(135deg,#fde68a,#f59e0b 70%,#d97706);box-shadow:0 8px 22px rgba(217,119,6,.35)}
+.ep7link .e{font-size:2.6rem;line-height:1}
+.ep7link .wt{flex:1;display:flex;flex-direction:column;gap:4px}
+.ep7link b{font-size:1.25rem}
+.ep7link small{font-size:.98rem;line-height:1.35}
+.ep7link .go{font-size:2.2rem;font-weight:900}
+.crisis small{font-weight:600}
 </style>
 </head>
 <body>
@@ -637,6 +669,433 @@ const CONCEPTS = [
  ['child_hint','Παιδί ή βρέφος','Child or baby','παιδ|μωρ|βρεφ|νηπι|εγγον|κορη μου|γιοσ μου|γιο μου|κορουλ|child|baby|infant|toddler|=kid|=kids|=son|daughter','q'],
  ['senior_hint','Ηλικιωμένος','Older person','γιαγια|παππου|ηλικιωμεν|γεροντ|μητερα μου|πατερα μου|μαμα μου|μπαμπα μου|elderly|grandma|grandmother|grandpa|grandfather|older|my mother|my father|my mum|my dad','q']
 ];
+
+/* ===================== ΨΥΧΗ & ΣΩΜΑ — 30 νέες ψυχοσωματικές παθήσεις (20-10-2026) =====================
+   Κάθε πάθηση έχει: συμπτώματα, «λόγια φίλου» (w), τι να κάνετε, πότε γιατρός,
+   και τη σοφία ενός Έλληνα φιλοσόφου (ph: ποιος, πηγή, λόγια σε ελεύθερη απόδοση, τι κάνουμε σήμερα). */
+CONCEPTS.push(
+ ['anger','Θυμός, εκρήξεις οργής','Anger, outbursts','θυμ|=οργη|=οργησ|οργιζ|οργισμεν|εκρηξ|ξεσπαω|ξεσπασ|φωναζ|χανω τον ελεγχο|βραζω|angry|anger|rage|outburst|lose my temper|temper',''],
+ ['health_worry','Φόβος ότι έχετε σοβαρή αρρώστια','Fear of having a serious illness','μηπωσ εχω|φοβ αρρωστ|φοβαμ οτι εχω|φοβ καρκιν|φοβ για την υγει|ανησυχ για την υγει|ψαχν συμπτωματ|ψαχνω στο ιντερνετ|υποχονδρ|worried about my health|health anxiety|fear of cancer|hypochondri|afraid i have|googling symptoms',''],
+ ['death_fear','Φόβος για τον θάνατο ή τα γηρατειά','Fear of death or ageing','φοβ θανατ|φοβαμαι τον θανατ|φοβ γηρατει|φοβ γερασ|φοβ οτι γερν|φοβ τα γηρατ|σκεφτομ τον θανατ|fear of death|afraid of dying|fear of dying|afraid of getting old|fear of ageing|fear of aging',''],
+ ['retired','Σύνταξη','Retirement','συνταξ|συνταξιουχ|retire|pension',''],
+ ['empty_nest','Τα παιδιά έφυγαν από το σπίτι','The children have left home','εφυγαν τα παιδι|φυγαν τα παιδ|αδει σπιτ|αδεια φωλια|αδειο σπιτ|τα παιδια μεγαλωσ|παντρευτηκ τα παιδ|empty nest|kids left|children left home|children moved out',''],
+ ['low_self','Χαμηλή αυτοεκτίμηση','Low self-esteem','δεν αξιζω|δεν ειμαι αρκετ|αυτοεκτιμ|αυτοπεποιθ|ντρεπομαι για τον εαυτο|συγκρινομ|συγκρινω τον εαυτο|δεν μ αγαπα κανεισ|δεν με αγαπα κανεισ|low self esteem|not good enough|no confidence|compare myself|hate myself',''],
+ ['perfectionist','Τελειομανία','Perfectionism','τελειομαν|ολα τελεια|να ειναι τελει|ποτε δεν ειμαι ικανοποιημεν|perfectionis|everything perfect|never good enough',''],
+ ['guilt_feel','Ενοχές, τύψεις','Guilt, remorse','ενοχ|τυψ|φταιω|φταιξιμ|μετανιων|guilt|guilty|regret|my fault|remorse',''],
+ ['envy','Ζήλια, φθόνος','Jealousy, envy','ζηλει|ζηλευ|ζηλια|ζηλοτυπ|φθον|jealous|envy|envious',''],
+ ['resentment','Πικρία, δεν μπορείτε να συγχωρήσετε','Bitterness, cannot forgive','πικρια|πικραθ|πικραμεν|μνησικακ|συγχωρ|με αδικησ|μ αδικησ|αδικια|κακια|resent|bitter|forgive|wronged|grudge',''],
+ ['breakup','Χωρισμός, διαζύγιο','Break-up, divorce','χωρισαμε|χωρισα|χωρισμ|χωριστηκ|=χωρισε|διαζυγ|με αφησε|μ αφησε|με εγκατελ|=πρωην|ερωτικ απογοητ|breakup|break up|broke up|divorce|left me|my ex',''],
+ ['stress_worse','Χειροτερεύει με το άγχος ή το στρες','Worse with stress or worry','στρεσ|στρεσαρ|με το αγχοσ|οταν αγχων|απο το αγχοσ|απο αγχοσ|απο τα νευρα|οταν νευριαζ|stress|stressed|when i worry|when nervous',''],
+ ['muscle_tension','Σφιγμένοι μύες (ώμοι, αυχένας)','Tense muscles (shoulders, neck)','σφιγμεν ωμ|σφιγμεν αυχεν|σφιγμεν μυ|σφιχτ ωμ|πιασμεν ωμ|πιασμεν αυχεν|μυικ ενταση|ενταση στουσ ωμουσ|ωμοι σφιγμ|tight shoulders|muscle tension|tense muscles|tense shoulders|tight neck',''],
+ ['tests_normal','Οι εξετάσεις βγαίνουν καλές','Tests come back normal','εξετασ καλεσ|εξετασ ειναι καλεσ|εξετασ βγαιν καλ|εξετασ καθαρ|καθαρεσ εξετασ|εξετασ ολα καλα|δεν βρισκ τιποτα|δεν βρηκ τιποτα|δεν βρηκαν τιποτα|δεν μου βρηκ τιποτα|λενε οτι δεν εχω τιποτα|tests normal|normal tests|tests are fine|tests were fine|doctors find nothing|found nothing|nothing found|all clear',''],
+ ['overthinking','Σκέψεις που δεν σταματούν','Thoughts that will not stop','σκεφτομ συνεχ|σκεφτομαι πολυ|σκεψ δεν σταματ|δεν σταματ το μυαλ|το μυαλο μου τρεχ|στριφογυριζ|αναλυω συνεχ|υπερανα|γυριζ στο μυαλ|overthink|racing thoughts|can t stop thinking|ruminat|mind won t stop',''],
+ ['apathy','Απάθεια, χωρίς κίνητρο','Apathy, no motivation','απαθ|δεν εχω κινητρ|χωρισ κινητρ|βαριεμ|βαρεμαρ|δεν θελω να κανω τιποτα|αναβαλλ|αναβλητικ|δεν σηκων απο το κρεβατ|apath|no motivation|unmotivated|procrastinat|bored|can t get going',''],
+ ['phone_addict','Πολύ κινητό και οθόνες','Too much phone and screens','κινητ ολη μερα|κολλημεν στο κινητ|εξαρτ κινητ|εθισ κινητ|εθισ οθον|ωρεσ στο κινητ|social media|facebook|tiktok|instagram|scroll|phone all day|addicted to my phone|screen time|doom scroll',''],
+ ['meaningless','Χάθηκε το νόημα, κενό μέσα','Lost meaning, empty inside','νοημα|χωρισ σκοπο|ποιοσ ο σκοποσ|κενο μεσα μου|νιωθω κενοσ|νιωθω κενη|νιωθω αδειοσ|νιωθω αδεια|υπαρξιακ|meaningless|no purpose|no meaning|empty inside|what s the point|existential',''],
+ ['life_change','Μεγάλη αλλαγή στη ζωή','A big change in life','μετακομ|αλλαγη ζωησ|μεγαλη αλλαγη|νεα δουλει|μεταναστ|ξενιτει|αλλαξα πολη|αλλαξα χωρα|δεν προσαρμοζ|προσαρμοσ|moved house|moved country|big change|new job|adjust|relocat',''],
+ ['diagnosis_news','Σοβαρή ή χρόνια διάγνωση','A serious or chronic diagnosis','μου βρηκαν|διαγνωσ|διαγνωστηκ|εμαθα οτι εχω|μου ειπαν οτι εχω|χρονια ασθεν|χρονια παθησ|σοβαρη ασθεν|σοβαρη αρρωστ|diagnos|i was told i have|chronic illness|serious illness',''],
+ ['shame_blush','Κοκκίνισμα, ντροπή','Blushing, shame','κοκκινιζ|ντρεπ|ντροπ|ερυθροφοβ|blush|ashamed|shame|embarrass',''],
+ ['money_worry','Οικονομικό άγχος, χρέη','Money worries, debts','οικονομικ|=λεφτα|=χρηματα|χρεη|=χρεοσ|χρεωμεν|χρεωθ|δανει|=δοσεισ|δεν βγαινω|δεν φτανουν τα λεφτα|λογαριασμ|money|debt|bills|can t pay|financial|mortgage|loan',''],
+ ['family_conflict','Καβγάδες, ένταση στην οικογένεια','Family arguments, tension','καβγ|καυγ|τσακων|τσακωθ|τσακωμ|συγκρουσ|γκρινι|δεν μιλαμε|οικογενειακ προβλ|προβλημ στο σπιτι|προβλημ με τον αντρα|προβλημ με τη γυναικα|προβλημ με τα παιδια|argu|fight with|family conflict|family problems|in laws',''],
+ ['performance_anx','Άγχος επίδοσης στην ερωτική ζωή','Performance anxiety in sex','αγχ επιδοσ|αγχοσ στο σεξ|αγχ στην επαφ|φοβ μην αποτυχ|αγχ στο κρεβατ|performance anxiety|anxious in bed|nervous about sex','']
+);
+
+/* Περισσότερες φράσεις για σκέψεις αυτοτραυματισμού — η ασφάλεια πρώτα */
+(function(){const s=CONCEPTS.find(c=>c[0]==='suicidal');if(s)s[3]+='|κακο στον εαυτο|κανω κακο στον εαυτο|βλαψω τον εαυτο|αυτοτραυματ|να σκοτωθ|να αυτοκτον|τι νοημα εχει να ζω|νοημα να ζω|δεν θελω να υπαρχ|θελω να εξαφανιστ για παντα|να κοψω τισ φλεβ|self harm|selfharm|hurt myself|no reason to live|don t want to live|cut myself'})();
+
+const PSY_NEW = [
+{id:'anger',areas:['psy','cardio'],sev:'norm',f:3,req:['anger','irritable'],
+ k:[['anger','irritable'],['palpitations','high_bp'],['headache','muscle_tension'],['family_conflict']],ctx:[0,0,0,1],
+ el:{n:'Θυμός και εκρήξεις οργής',s:['Θυμώνετε γρήγορα και έντονα','Φωνάζετε ή λέτε λόγια που μετά μετανιώνετε','Η καρδιά χτυπά δυνατά, ζεσταίνεται το πρόσωπο','Πονοκέφαλος ή σφιγμένοι ώμοι μετά τον καβγά','Ένταση στο σπίτι ή στη δουλειά'],
+  w:'Ο θυμός δεν σας κάνει κακό άνθρωπο. Είναι σήμα ότι κάτι σας πόνεσε ή σας φάνηκε άδικο. Το ζητούμενο δεν είναι να μη θυμώνετε ποτέ, αλλά να μη σας κυβερνά ο θυμός.',
+  aid:'• Όταν νιώσετε τη φωτιά να ανεβαίνει, σταματήστε και μετρήστε αργά ως το 10\n• Πάρτε 5 αργές ανάσες: εισπνοή 4 δευτερόλεπτα, εκπνοή 6\n• Βγείτε λίγο από το δωμάτιο ή κάντε περίπατο 10 λεπτών\n• Μιλήστε όταν ηρεμήσετε, με «εγώ νιώθω…» αντί για «εσύ πάντα…»\n• Λιγότερος καφές και αλκοόλ — ανάβουν τον θυμό',
+  note:'Αν ο θυμός φέρνει βία, σπάσιμο πραγμάτων ή φόβο στους δικούς σας → ψυχολόγος ή ψυχίατρος. Αν έχετε υψηλή πίεση, πείτε στον γιατρό σας πόσο συχνά θυμώνετε.',
+  ph:{who:'Αριστοτέλης',src:'Ηθικά Νικομάχεια, Β΄ 9',q:'Το να θυμώσει κανείς είναι εύκολο, το μπορεί ο καθένας. Το να θυμώσει όμως με τον σωστό άνθρωπο, όσο πρέπει, την κατάλληλη στιγμή, για τον σωστό λόγο και με τον σωστό τρόπο — αυτό δεν είναι εύκολο.',t:'Σήμερα, πριν απαντήσετε θυμωμένα, ρωτήστε τον εαυτό σας: «Είναι η σωστή στιγμή; Είναι το σωστό μέτρο;» Αν όχι, αφήστε την απάντηση για αύριο.'}},
+ en:{n:'Anger and outbursts',s:['You get angry quickly and strongly','You shout or say things you regret later','Pounding heart, hot face','Headache or tight shoulders after a row','Tension at home or at work'],
+  w:'Anger does not make you a bad person. It is a signal that something hurt you or seemed unfair. The aim is not never to be angry, but not to be ruled by anger.',
+  aid:'• When you feel the fire rising, stop and count slowly to 10\n• Take 5 slow breaths: in for 4 seconds, out for 6\n• Leave the room for a while or take a 10-minute walk\n• Talk once you are calm, with “I feel…” instead of “you always…”\n• Less coffee and alcohol — they fuel anger',
+  note:'If anger leads to violence, breaking things or fear in your family → psychologist or psychiatrist. If you have high blood pressure, tell your doctor how often you get angry.',
+  ph:{who:'Aristotle',src:'Nicomachean Ethics, II 9',q:'Anyone can become angry — that is easy. But to be angry with the right person, to the right degree, at the right time, for the right reason and in the right way — that is not easy.',t:'Today, before answering in anger, ask yourself: “Is this the right moment? Is this the right measure?” If not, leave the answer for tomorrow.'}}},
+
+{id:'healthanx',areas:['psy'],sev:'norm',f:2,req:['health_worry'],
+ k:[['health_worry'],['anxiety','panic'],['tests_normal'],['palpitations','insomnia']],ctx:[0,0,0,0],
+ el:{n:'Άγχος για την υγεία (υποχονδρία)',s:['Φόβος ότι έχετε σοβαρή αρρώστια','Ψάχνετε συχνά συμπτώματα στο ίντερνετ','Ελέγχετε συνεχώς το σώμα σας (σφυγμό, πίεση, ελιές)','Οι καλές εξετάσεις σας ηρεμούν μόνο για λίγο','Άγχος, ταχυπαλμία, αϋπνία'],
+  w:'Ο φόβος για την υγεία είναι πολύ ανθρώπινος — συνήθως τον έχουν άνθρωποι που αγαπούν τη ζωή. Ο φόβος όμως μεγαλώνει όσο τον «ταΐζουμε» με ψάξιμο και ελέγχους.',
+  aid:'• Ένας σταθερός οικογενειακός γιατρός με τακτικά ραντεβού — όχι πολλοί γιατροί για το ίδιο θέμα\n• Ορίστε «ώρα ανησυχίας»: 15 λεπτά τη μέρα, όχι όλη μέρα\n• Βάλτε όριο στο ψάξιμο συμπτωμάτων στο ίντερνετ\n• Μετράτε πίεση ή σφυγμό μόνο όσες φορές σας είπε ο γιατρός\n• Περπάτημα και ασχολίες που σας απορροφούν',
+  note:'Αν ο φόβος σάς κόβει τη ζωή (δουλειά, ύπνο, έξοδο) → ψυχολόγος ή ψυχίατρος· η γνωσιακή-συμπεριφορική θεραπεία βοηθά πολύ. Κάθε νέο, επίμονο σύμπτωμα → πάντα γιατρός.',
+  ph:{who:'Επίκτητος',src:'Διατριβές, Β΄ 13',q:'Όταν βλέπω άνθρωπο να αγωνιά, λέω: τι άραγε θέλει αυτός; Αν δεν ήθελε κάτι που δεν εξαρτάται από τον ίδιο, πώς θα αγωνιούσε;',t:'Χωρίστε ένα χαρτί σε δύο στήλες: «Εξαρτάται από μένα» (περίπατος, φαγητό, ραντεβού στον γιατρό) και «Δεν εξαρτάται από μένα». Σήμερα δουλέψτε μόνο την πρώτη στήλη.'}},
+ en:{n:'Health anxiety',s:['Fear that you have a serious illness','You often search symptoms online','You keep checking your body (pulse, blood pressure, moles)','Good test results calm you only for a short time','Worry, racing heart, poor sleep'],
+  w:'Fear about health is very human — it is often felt by people who love life. But fear grows the more we “feed” it with searching and checking.',
+  aid:'• One regular family doctor with planned visits — not many doctors for the same thing\n• Set a “worry time”: 15 minutes a day, not all day\n• Limit searching symptoms online\n• Measure blood pressure or pulse only as often as your doctor said\n• Walking and absorbing activities',
+  note:'If the fear stops you living (work, sleep, going out) → psychologist or psychiatrist; cognitive behavioural therapy helps a lot. Any new, persistent symptom → always see a doctor.',
+  ph:{who:'Epictetus',src:'Discourses, II 13',q:'When I see a man anxious, I ask: what does he want? If he did not want something outside his control, how could he still be anxious?',t:'Divide a page in two columns: “Up to me” (a walk, food, a doctor’s appointment) and “Not up to me”. Today, work only on the first column.'}}},
+
+{id:'deathfear',areas:['psy','senior'],sev:'norm',f:2,req:['death_fear'],
+ k:[['death_fear'],['anxiety','panic'],['insomnia','overthinking']],ctx:[0,0,0],
+ el:{n:'Φόβος για τα γηρατειά και τον θάνατο',s:['Σκέψεις και φόβος για το τέλος της ζωής','Ανησυχία για τα γηρατειά, την αρρώστια, τη μοναξιά','Αϋπνία ή ξύπνημα με αγωνία τη νύχτα','Θλίψη όταν φεύγουν φίλοι ή συνομήλικοι'],
+  w:'Κάθε σκεπτόμενος άνθρωπος έχει σταθεί μπροστά σε αυτό το ερώτημα. Δεν είστε αδύναμοι — είστε άνθρωπος που αγαπά τη ζωή. Και η ζωή που έχετε τώρα είναι πολύτιμη.',
+  aid:'• Κάθε βράδυ γράψτε τρία καλά της ημέρας\n• Μιλήστε για τον φόβο σας με φίλο, ιερέα ή ψυχολόγο\n• Τακτοποιήστε όσα σας βαραίνουν (χαρτιά, επιθυμίες) — φέρνει ηρεμία\n• Μοιραστείτε ιστορίες και γνώσεις με νεότερους\n• Κίνηση, φύση, μουσική, προσευχή ή διαλογισμός — ό,τι σας γαληνεύει',
+  note:'Αν ο φόβος φέρνει κρίσεις πανικού ή σας κρατά κλεισμένους στο σπίτι → γιατρός ή ψυχολόγος.',
+  ph:{who:'Επίκουρος',src:'Επιστολή προς Μενοικέα, 122',q:'Να φιλοσοφούν και ο νέος και ο ηλικιωμένος: ο ηλικιωμένος, για να μένει νέος στα αγαθά με την ευγνωμοσύνη για όσα έζησε· ο νέος, για να μη φοβάται το μέλλον.',t:'Θυμηθείτε σήμερα μια όμορφη στιγμή της ζωής σας και πείτε την σε κάποιον. Η ευγνωμοσύνη για όσα ζήσαμε είναι, κατά τον Επίκουρο, φάρμακο για τον φόβο.'}},
+ en:{n:'Fear of ageing and death',s:['Thoughts and fear about the end of life','Worry about old age, illness, loneliness','Poor sleep or waking up anxious at night','Sadness when friends or peers pass away'],
+  w:'Every thinking person has stood before this question. You are not weak — you are a person who loves life. And the life you have now is precious.',
+  aid:'• Every evening write three good things from the day\n• Talk about your fear with a friend, a priest or a psychologist\n• Put in order what weighs on you (papers, wishes) — it brings peace\n• Share stories and knowledge with younger people\n• Movement, nature, music, prayer or meditation — whatever calms you',
+  note:'If the fear brings panic attacks or keeps you shut in at home → doctor or psychologist.',
+  ph:{who:'Epicurus',src:'Letter to Menoeceus, 122',q:'Let both young and old pursue wisdom: the old, so that they stay young in good things through gratitude for what has been; the young, so that they do not fear what is to come.',t:'Today, recall a beautiful moment of your life and tell it to someone. Gratitude for what we have lived is, for Epicurus, a medicine for fear.'}}},
+
+{id:'retirement',areas:['psy','senior'],sev:'norm',f:2,req:['retired'],
+ k:[['retired'],['sadness','apathy'],['meaningless','loneliness'],['family_conflict']],ctx:[0,0,0,1],
+ el:{n:'Δυσκολία μετά τη σύνταξη',s:['Νιώθετε άχρηστοι ή χωρίς ρόλο','Οι μέρες μοιάζουν άδειες και ίδιες','Κούραση, βαρεμάρα, κακή διάθεση','Περισσότερες εντάσεις στο σπίτι','Λιγότερη επαφή με ανθρώπους'],
+  w:'Η σύνταξη δεν είναι το τέλος της χρησιμότητας — είναι η πρώτη φορά που ο χρόνος σας ανήκει. Η αξία σας δεν ήταν ποτέ ο μισθός ή η θέση, αλλά αυτό που είστε.',
+  aid:'• Φτιάξτε πρόγραμμα: ώρα ξυπνήματος, περίπατος, μια ασχολία, μια συνάντηση\n• Εθελοντισμός, σύλλογοι, ενορία, χορωδία, κήπος\n• Μάθετε κάτι νέο: γλώσσα, μουσικό όργανο, υπολογιστή\n• Μοιραστείτε την πείρα σας με νέους\n• Δώστε χώρο και στον σύντροφό σας — ο καθένας και κάτι δικό του',
+  note:'Αν η κακή διάθεση κρατά πάνω από 2 εβδομάδες ή χάσατε κάθε ενδιαφέρον → οικογενειακός γιατρός (μπορεί να είναι κατάθλιψη, που θεραπεύεται).',
+  ph:{who:'Σόλων',src:'Απόσπασμα 18',q:'Γερνώ και πάντα μαθαίνω πολλά.',t:'Διαλέξτε σήμερα κάτι που θέλατε πάντα να μάθετε και κάντε το πρώτο μικρό βήμα — ένα βίντεο, ένα βιβλίο, ένα τηλεφώνημα.'}},
+ en:{n:'Difficulty after retirement',s:['You feel useless or without a role','Days feel empty and all the same','Tiredness, boredom, low mood','More tension at home','Less contact with people'],
+  w:'Retirement is not the end of being useful — it is the first time your time belongs to you. Your worth was never your salary or your title, but who you are.',
+  aid:'• Make a routine: wake-up time, a walk, an activity, a meeting\n• Volunteering, clubs, parish, choir, garden\n• Learn something new: a language, an instrument, the computer\n• Share your experience with young people\n• Give your partner space too — each of you something of your own',
+  note:'If low mood lasts over 2 weeks or you have lost all interest → family doctor (it may be depression, which can be treated).',
+  ph:{who:'Solon',src:'Fragment 18',q:'I grow old always learning many things.',t:'Choose something you always wanted to learn and take the first small step today — a video, a book, a phone call.'}}},
+
+{id:'emptynest',areas:['psy'],sev:'norm',f:2,req:['empty_nest'],
+ k:[['empty_nest'],['sadness','loneliness'],['meaningless','family_conflict']],ctx:[0,0,0],
+ el:{n:'«Άδεια φωλιά» (τα παιδιά έφυγαν από το σπίτι)',s:['Το σπίτι μοιάζει άδειο και σιωπηλό','Λύπη, νοσταλγία, δάκρυα','Αίσθηση ότι τελείωσε ο ρόλος σας','Ανησυχία για τα παιδιά','Νέα «απόσταση» ή εντάσεις στο ζευγάρι'],
+  w:'Η λύπη σας δείχνει πόση αγάπη δώσατε. Τα παιδιά που φεύγουν για να ζήσουν τη ζωή τους είναι η επιτυχία σας, όχι η απώλειά σας.',
+  aid:'• Ορίστε σταθερή μέρα για τηλεφώνημα ή βιντεοκλήση — χωρίς πίεση\n• Ξαναβρείτε τον σύντροφό σας: βόλτες, ταξίδια, κοινά ενδιαφέροντα\n• Αφιερώστε χρόνο σε ό,τι είχατε αφήσει για «αργότερα»\n• Νέες φιλίες και ομάδες\n• Κάντε ένα δωμάτιο χώρο για χόμπι',
+  note:'Αν η λύπη δεν υποχωρεί σε μερικές εβδομάδες ή χάνετε τον ύπνο και την όρεξη → γιατρός ή ψυχολόγος.',
+  ph:{who:'Πλούταρχος',src:'Περί ευθυμίας',q:'Οι πολλοί προσπερνούν όσα έχουν και κοιτάζουν μόνο όσα τους λείπουν. Ο φρόνιμος χαίρεται με ευγνωμοσύνη τα αγαθά που ήδη υπάρχουν στη ζωή του.',t:'Γράψτε σήμερα πέντε καλά που έχετε τώρα — ανάμεσά τους και ότι τα παιδιά σας στέκονται στα πόδια τους.'}},
+ en:{n:'“Empty nest” (the children have left home)',s:['The house feels empty and silent','Sadness, nostalgia, tears','A sense that your role has ended','Worry about the children','New “distance” or tension in the couple'],
+  w:'Your sadness shows how much love you gave. Children leaving to live their own lives are your success, not your loss.',
+  aid:'• Set a regular day for a call or video call — without pressure\n• Rediscover your partner: walks, trips, shared interests\n• Give time to what you had left for “later”\n• New friendships and groups\n• Turn a room into a space for a hobby',
+  note:'If the sadness does not ease in a few weeks, or you lose sleep and appetite → doctor or psychologist.',
+  ph:{who:'Plutarch',src:'On Tranquillity of Mind',q:'Most people overlook what they have and look only at what they lack. The wise enjoy with gratitude the good things already present in their life.',t:'Write down today five good things you have now — among them, that your children stand on their own feet.'}}},
+
+{id:'selfesteem',areas:['psy'],sev:'norm',f:3,req:['low_self'],
+ k:[['low_self'],['sadness','shame_blush'],['anxiety','loneliness']],ctx:[0,0,0],
+ el:{n:'Χαμηλή αυτοεκτίμηση',s:['Νιώθετε ότι δεν αξίζετε ή ότι «δεν είστε αρκετοί»','Συγκρίνεστε συνεχώς με τους άλλους','Δύσκολα λέτε «όχι»','Ντροπή, φόβος κριτικής','Αυστηρή εσωτερική φωνή'],
+  w:'Αν ένας φίλος σας μιλούσε όπως μιλάτε εσείς στον εαυτό σας, θα τον σταματούσατε. Αξίζετε την ίδια καλοσύνη που δίνετε στους άλλους.',
+  aid:'• Κάθε βράδυ γράψτε ένα πράγμα που κάνατε καλά\n• Όταν ακούτε την αυστηρή φωνή, ρωτήστε: «Θα το έλεγα αυτό σε φίλο;»\n• Πείτε ένα μικρό «όχι» αυτή την εβδομάδα\n• Λιγότερα κοινωνικά δίκτυα — δείχνουν μόνο τη βιτρίνα των άλλων\n• Κάντε κάτι που ξέρετε καλά και βοηθά άλλους',
+  note:'Αν η χαμηλή αυτοεκτίμηση φέρνει θλίψη, απομόνωση ή σκέψεις αυτοτιμωρίας → ψυχολόγος ή ψυχίατρος.',
+  ph:{who:'Επίκτητος',src:'Εγχειρίδιο, 44',q:'Αυτά τα λόγια δεν στέκουν: «Είμαι πλουσιότερος από σένα, άρα είμαι καλύτερος» ή «Μιλώ καλύτερα από σένα, άρα είμαι καλύτερος». Εσύ δεν είσαι ούτε τα αποκτήματά σου ούτε τα λόγια σου.',t:'Σήμερα, κάθε φορά που συγκρίνεστε, πείτε: «Ο άλλος έχει άλλα πράγματα — όχι μεγαλύτερη αξία ως άνθρωπος».'}},
+ en:{n:'Low self-esteem',s:['You feel you are worthless or “not enough”','You constantly compare yourself with others','You find it hard to say “no”','Shame, fear of criticism','A harsh inner voice'],
+  w:'If a friend spoke to you the way you speak to yourself, you would stop them. You deserve the same kindness you give to others.',
+  aid:'• Every evening write one thing you did well\n• When you hear the harsh voice, ask: “Would I say this to a friend?”\n• Say one small “no” this week\n• Less social media — it only shows other people’s shop window\n• Do something you are good at that helps others',
+  note:'If low self-esteem brings sadness, isolation or thoughts of punishing yourself → psychologist or psychiatrist.',
+  ph:{who:'Epictetus',src:'Enchiridion, 44',q:'These reasonings do not hold: “I am richer than you, so I am better than you” or “I speak better than you, so I am better than you.” You are neither your possessions nor your speech.',t:'Today, each time you compare yourself, say: “They have different things — not greater worth as a person.”'}}},
+
+{id:'perfection',areas:['psy'],sev:'norm',f:2,req:['perfectionist'],
+ k:[['perfectionist'],['anxiety','overthinking'],['fatigue','insomnia','apathy']],ctx:[0,0,0],
+ el:{n:'Τελειομανία',s:['Όλα πρέπει να γίνουν τέλεια','Ξανακάνετε και ξαναελέγχετε τα πράγματα','Αναβάλλετε από φόβο μήπως δεν βγει τέλειο','Κούραση, ένταση, αϋπνία','Δύσκολα χαίρεστε ό,τι πετύχατε'],
+  w:'Η φροντίδα σας για το καλό είναι αρετή. Όταν όμως γίνεται απαίτηση για το τέλειο, σας κλέβει τη χαρά. Το «αρκετά καλό» είναι συχνά το σοφό.',
+  aid:'• Πριν ξεκινήσετε, ορίστε τι είναι «αρκετά καλό»\n• Βάλτε χρονικό όριο σε κάθε δουλειά\n• Αφήστε επίτηδες ένα μικρό λάθος χωρίς διόρθωση — δείτε ότι ο κόσμος δεν χάλασε\n• Χαρείτε τα βήματα, όχι μόνο το τέλος\n• Ζητήστε βοήθεια και μοιράστε δουλειές',
+  note:'Αν η τελειομανία φέρνει ελέγχους που δεν σταματούν ή μεγάλη αγωνία → ψυχολόγος (μπορεί να σχετίζεται με ιδεοψυχαναγκαστική διαταραχή, που θεραπεύεται).',
+  ph:{who:'Κλεόβουλος ο Λίνδιος (ένας από τους Επτά Σοφούς)',src:'Διογένης Λαέρτιος, Α΄ 93',q:'Μέτρον άριστον — το μέτρο είναι το καλύτερο.',t:'Σε μια δουλειά σήμερα σταματήστε όταν φτάσει «στο 80%» — και παρατηρήστε ότι ήταν αρκετό.'}},
+ en:{n:'Perfectionism',s:['Everything must be perfect','You redo and re-check things','You put things off for fear they will not be perfect','Tiredness, tension, poor sleep','You hardly enjoy what you achieve'],
+  w:'Your care for doing things well is a virtue. But when it becomes a demand for perfection, it steals your joy. “Good enough” is often the wise choice.',
+  aid:'• Before you start, decide what “good enough” means\n• Put a time limit on each task\n• Leave one small mistake uncorrected on purpose — see that the world did not fall apart\n• Enjoy the steps, not only the end\n• Ask for help and share tasks',
+  note:'If perfectionism brings endless checking or great distress → psychologist (it may relate to obsessive-compulsive disorder, which is treatable).',
+  ph:{who:'Cleobulus of Lindos (one of the Seven Sages)',src:'Diogenes Laertius, I 93',q:'Measure is best.',t:'In one task today, stop when it is “80% done” — and notice that it was enough.'}}},
+
+{id:'guilt',areas:['psy'],sev:'norm',f:2,req:['guilt_feel'],
+ k:[['guilt_feel'],['sadness'],['overthinking','insomnia']],ctx:[0,0,0],
+ el:{n:'Ενοχές που βαραίνουν',s:['Σκέφτεστε ξανά και ξανά ένα λάθος σας','Νιώθετε ότι «φταίτε» για πολλά','Δύσκολα συγχωρείτε τον εαυτό σας','Αϋπνία, βάρος στο στήθος','Λύπη'],
+  w:'Η ενοχή δείχνει ότι έχετε συνείδηση και καρδιά. Δεν είναι όμως ισόβια ποινή. Το λάθος είναι μάθημα — και μετά το μάθημα έρχεται η συγχώρεση.',
+  aid:'• Γράψτε τι ακριβώς έγινε και τι μερίδιο είχατε πραγματικά (όχι όλο)\n• Αν μπορείτε, επανορθώστε: μια συγγνώμη, μια πράξη καλοσύνης\n• Πείτε στον εαυτό σας: «Τότε ήξερα λιγότερα από όσα ξέρω τώρα»\n• Μιλήστε με άνθρωπο εμπιστοσύνης ή με τον πνευματικό σας\n• Κάντε κάτι καλό για κάποιον άλλον',
+  note:'Αν οι ενοχές είναι συνεχείς, χωρίς πραγματικό λόγο, ή φέρνουν σκέψεις αυτοτιμωρίας → ψυχίατρος ή ψυχολόγος σήμερα.',
+  ph:{who:'Πυθαγόρειοι',src:'Χρυσά Έπη, 40–44',q:'Μην αφήσεις τον ύπνο να κλείσει τα μάτια σου πριν εξετάσεις τις πράξεις της ημέρας: Πού έσφαλα; Τι έκανα; Τι παρέλειψα; Για τα κακά, επίπληξε τον εαυτό σου· για τα καλά, χάρηκε.',t:'Απόψε κάντε την εξέταση μία φορά — δίκαια: ένα λάθος για να το διορθώσετε, ένα καλό για να το χαρείτε. Και μετά κλείστε το βιβλίο της ημέρας.'}},
+ en:{n:'Burdening guilt',s:['You go over a mistake again and again','You feel you are “to blame” for many things','You find it hard to forgive yourself','Poor sleep, a weight on your chest','Sadness'],
+  w:'Guilt shows that you have a conscience and a heart. But it is not a life sentence. A mistake is a lesson — and after the lesson comes forgiveness.',
+  aid:'• Write what exactly happened and what share was really yours (not all of it)\n• If you can, make amends: an apology, an act of kindness\n• Tell yourself: “Back then I knew less than I know now”\n• Talk with someone you trust or your spiritual guide\n• Do something good for someone else',
+  note:'If guilt is constant, without real reason, or brings thoughts of punishing yourself → psychiatrist or psychologist today.',
+  ph:{who:'The Pythagoreans',src:'Golden Verses, 40–44',q:'Do not let sleep close your eyes before you have reviewed the day’s deeds: Where did I go wrong? What did I do? What did I leave undone? For the bad, rebuke yourself; for the good, rejoice.',t:'Tonight, do the review once — fairly: one mistake to correct, one good thing to enjoy. Then close the book of the day.'}}},
+
+{id:'envy',areas:['psy'],sev:'norm',f:2,req:['envy'],
+ k:[['envy'],['irritable','sadness','anger'],['low_self','phone_addict']],ctx:[0,0,0],
+ el:{n:'Ζήλια και φθόνος',s:['Πικραίνεστε με την επιτυχία ή την ευτυχία άλλων','Συγκρίνεστε συνεχώς','Θυμός ή λύπη μετά τα κοινωνικά δίκτυα','Ζήλια στη σχέση, δυσπιστία','Χαμένος ύπνος από σκέψεις'],
+  w:'Η ζήλια είναι συνηθισμένο ανθρώπινο συναίσθημα — δεν σας κάνει κακό άνθρωπο. Συχνά δείχνει κάτι που επιθυμείτε για τον εαυτό σας. Ας την κάνουμε πυξίδα, όχι δηλητήριο.',
+  aid:'• Ρωτήστε: «Τι μου δείχνει η ζήλια για το τι θέλω;» και κάντε ένα βήμα προς αυτό\n• Λιγότερα κοινωνικά δίκτυα\n• Ευγνωμοσύνη: τρία καλά της μέρας\n• Στη σχέση: μιλήστε ήρεμα για τον φόβο σας, χωρίς έλεγχο του κινητού του άλλου\n• Πείτε ένα ειλικρινές «μπράβο» σε κάποιον',
+  note:'Αν η ζήλια στη σχέση φέρνει ελέγχους, απειλές ή φόβο → ζητήστε βοήθεια από ψυχολόγο.',
+  ph:{who:'Δημόκριτος',src:'Απόσπασμα Β 191',q:'Μην έχεις τον νου σου διαρκώς σε όσους ζηλεύονται και θαυμάζονται· κοίτα και τη ζωή όσων δυσκολεύονται. Τότε όσα έχεις θα σου φανούν μεγάλα, και η ψυχή σου θα πάψει να υποφέρει από τον φθόνο.',t:'Ευχαριστήστε σήμερα για τρία πράγματα στη ζωή σας που άλλοι θα ήθελαν να έχουν.'}},
+ en:{n:'Jealousy and envy',s:['Others’ success or happiness makes you bitter','You constantly compare yourself','Anger or sadness after social media','Jealousy in the relationship, mistrust','Lost sleep from thoughts'],
+  w:'Envy is a common human feeling — it does not make you a bad person. It often points to something you want for yourself. Let us make it a compass, not a poison.',
+  aid:'• Ask: “What does envy show me about what I want?” and take a step towards it\n• Less social media\n• Gratitude: three good things each day\n• In the relationship: speak calmly about your fear, without checking the other’s phone\n• Say a sincere “well done” to someone',
+  note:'If jealousy in the relationship brings checking, threats or fear → seek help from a psychologist.',
+  ph:{who:'Democritus',src:'Fragment B 191',q:'Do not keep your mind on those who are envied and admired; look also at the lives of those who struggle. Then what you have will seem great, and your soul will stop suffering from envy.',t:'Today, give thanks for three things in your life that others would wish to have.'}}},
+
+{id:'resentment',areas:['psy'],sev:'norm',f:2,req:['resentment'],
+ k:[['resentment'],['anger','irritable'],['overthinking','insomnia'],['family_conflict']],ctx:[0,0,0,1],
+ el:{n:'Πικρία και δυσκολία συγχώρεσης',s:['Ξαναζείτε μια αδικία που σας έκαναν','Θυμός όταν σκέφτεστε τον άνθρωπο','Σφίξιμο στο στομάχι ή στο στήθος','Αϋπνία από σκέψεις','Απομάκρυνση από δικούς σας ανθρώπους'],
+  w:'Ο πόνος από την αδικία είναι αληθινός. Η πικρία όμως είναι σαν πέτρα που κουβαλάτε και βαραίνει μόνο εσάς. Συγχώρεση δεν σημαίνει ότι εκείνο ήταν σωστό — σημαίνει ότι εσείς απελευθερώνεστε.',
+  aid:'• Γράψτε ένα γράμμα που δεν θα στείλετε — πείτε τα όλα\n• Χωρίστε: τι έγινε, και τι λέτε εσείς στον εαυτό σας ξανά και ξανά\n• Βάλτε όρια: συγχώρεση δεν σημαίνει ότι επιτρέπετε να ξανασυμβεί\n• Όταν έρθει η σκέψη, στρέψτε τον νου σε μια ασχολία\n• Αν θέλετε, μιλήστε με πνευματικό ή ψυχολόγο',
+  note:'Αν υπήρξε ή συνεχίζεται κακοποίηση → μιλήστε με ειδικό. Κύπρος: γραμμή 1440 για βία στην οικογένεια (24 ώρες).',
+  ph:{who:'Επίκτητος',src:'Εγχειρίδιο, 43',q:'Κάθε πράγμα έχει δύο λαβές: από τη μία σηκώνεται, από την άλλη όχι. Αν ο αδελφός σου σε αδικεί, μην τον πιάνεις από τη λαβή «με αδικεί» — αυτή δεν σηκώνεται. Πιάσε τον από την άλλη: «είναι αδελφός μου, μεγαλώσαμε μαζί». Από εκεί θα σηκωθεί.',t:'Βρείτε σήμερα τη «δεύτερη λαβή» για έναν άνθρωπο που σας πίκρανε — κάτι αληθινό που μπορείτε να κρατήσετε χωρίς να πονάτε.'}},
+ en:{n:'Bitterness and difficulty forgiving',s:['You relive an injustice done to you','Anger when you think of the person','Tightness in the stomach or chest','Sleepless from thoughts','Drifting away from your own people'],
+  w:'The pain of injustice is real. But bitterness is like a stone you carry that weighs only on you. Forgiveness does not mean it was right — it means you set yourself free.',
+  aid:'• Write a letter you will not send — say everything\n• Separate: what happened, and what you tell yourself again and again\n• Set boundaries: forgiving does not mean allowing it to happen again\n• When the thought comes, turn your mind to an activity\n• If you wish, talk with a spiritual guide or psychologist',
+  note:'If there was or still is abuse → talk to a specialist. Cyprus: 1440 helpline for domestic violence (24 hours).',
+  ph:{who:'Epictetus',src:'Enchiridion, 43',q:'Everything has two handles: by one it can be carried, by the other it cannot. If your brother wrongs you, do not take it by the handle “he wrongs me” — that one cannot be carried. Take it by the other: “he is my brother, we grew up together”. By that it can be carried.',t:'Find today the “second handle” for someone who hurt you — something true you can hold without pain.'}}},
+
+{id:'breakup',areas:['psy'],sev:'norm',f:2,req:['breakup'],
+ k:[['breakup'],['sadness','loneliness'],['insomnia','appetite_loss','overthinking']],ctx:[0,0,0],
+ el:{n:'Χωρισμός ή διαζύγιο',s:['Θλίψη, δάκρυα, κενό','Σκέψεις που γυρίζουν στο παρελθόν','Αϋπνία, χωρίς όρεξη','Θυμός ή ενοχές','Φόβος για το μέλλον και τη μοναξιά'],
+  w:'Ο χωρισμός πονά όσο ένα πένθος — γιατί είναι πένθος. Δώστε χρόνο στον εαυτό σας. Η καρδιά θεραπεύεται πιο αργά απ’ όσο θα θέλαμε, αλλά θεραπεύεται.',
+  aid:'• Κρατήστε πρόγραμμα: ύπνος, φαγητό, περίπατος — ακόμη κι αν δεν έχετε όρεξη\n• Περιορίστε τον έλεγχο του πρώην στα κοινωνικά δίκτυα\n• Περιβάλλετε τον εαυτό σας με φίλους και οικογένεια\n• Αν υπάρχουν παιδιά: προστατέψτε τα από τις διαμάχες\n• Μικρά νέα βήματα: ένα μάθημα, μια βόλτα σε νέο μέρος',
+  note:'Αν η θλίψη κρατά πάνω από 2 εβδομάδες με αϋπνία και απώλεια ενδιαφέροντος → γιατρός. Αν σκεφτείτε να κάνετε κακό στον εαυτό σας → ψυχίατρος αμέσως, ή 112.',
+  ph:{who:'Ηράκλειτος',src:'Απόσπασμα Β 91',q:'Δεν μπορείς να μπεις δύο φορές στο ίδιο ποτάμι.',t:'Ούτε εσείς είστε πια ο ίδιος άνθρωπος που ήσασταν στην αρχή της σχέσης. Γράψτε σήμερα ένα πράγμα που μάθατε και θα πάρετε μαζί σας στο νέο κομμάτι της ζωής σας.'}},
+ en:{n:'Break-up or divorce',s:['Sadness, tears, emptiness','Thoughts going back to the past','Poor sleep, no appetite','Anger or guilt','Fear of the future and of loneliness'],
+  w:'A break-up hurts like a bereavement — because it is one. Give yourself time. The heart heals more slowly than we would like, but it does heal.',
+  aid:'• Keep a routine: sleep, meals, a walk — even if you do not feel like it\n• Limit checking your ex on social media\n• Surround yourself with friends and family\n• If there are children: protect them from the conflict\n• Small new steps: a class, a walk somewhere new',
+  note:'If sadness lasts over 2 weeks with poor sleep and loss of interest → doctor. If you think of harming yourself → psychiatrist immediately, or 112.',
+  ph:{who:'Heraclitus',src:'Fragment B 91',q:'You cannot step into the same river twice.',t:'You are not the same person you were at the start of the relationship. Write today one thing you learned that you will take into the new chapter of your life.'}}},
+
+{id:'nervstomach',areas:['psy','gastro'],sev:'norm',f:3,req:['anxiety','stress_worse','tests_normal'],
+ k:[['stomach_pain','nausea','indigestion','bloating'],['anxiety','stress_worse'],['tests_normal'],['diarrhea','bowel_change','heartburn']],ctx:[0,0,0,0],
+ el:{n:'Νευρικό στομάχι (στομάχι από άγχος)',s:['Πόνος, σφίξιμο ή «κόμπος» στο στομάχι όταν αγχώνεστε','Ναυτία, βαρυστομαχιά, καούρα','Διάρροια ή δυσκοιλιότητα σε στιγμές έντασης','Οι εξετάσεις συνήθως βγαίνουν καλές'],
+  w:'Το στομάχι έχει τόσα νεύρα που το λένε «δεύτερο εγκέφαλο» — νιώθει κάθε ανησυχία μας. Δεν το φαντάζεστε: ο πόνος είναι αληθινός, και η ηρεμία βοηθά πραγματικά.',
+  aid:'• Τρώτε αργά, καθιστοί, χωρίς οθόνη και χωρίς βιασύνη\n• Μικρά, συχνά γεύματα· λιγότερος καφές, αλκοόλ, λιπαρά\n• Κοιλιακή αναπνοή 5 λεπτά: το χέρι στην κοιλιά, φουσκώνει στην εισπνοή\n• Περπάτημα μετά το φαγητό\n• Ζεστό χαμομήλι ή μέντα',
+  note:'Πρώτα γιατρός, για να αποκλειστούν άλλες αιτίες — ειδικά αν είστε άνω των 50 με νέο σύμπτωμα, χάνετε βάρος, κάνετε εμετό, έχετε μαύρα κόπρανα ή αίμα. Αν το άγχος επιμένει → ψυχολόγος.',
+  ph:{who:'Πλάτων',src:'Χαρμίδης, 156e',q:'Όπως δεν πρέπει να θεραπεύουμε τα μάτια χωρίς το κεφάλι, ούτε το κεφάλι χωρίς το σώμα, έτσι δεν πρέπει να θεραπεύουμε το σώμα χωρίς την ψυχή.',t:'Στο επόμενο γεύμα θεραπεύστε «ψυχή και σώμα μαζί»: τρώτε αργά, σε ήρεμο χώρο, και πείτε ένα ευχαριστώ για το φαγητό.'}},
+ en:{n:'Nervous stomach (stomach upset from stress)',s:['Pain, tightness or a “knot” in the stomach when anxious','Nausea, indigestion, heartburn','Diarrhoea or constipation at tense times','Tests usually come back normal'],
+  w:'The gut has so many nerves that it is called the “second brain” — it feels every worry. You are not imagining it: the pain is real, and calm truly helps.',
+  aid:'• Eat slowly, sitting down, without screens or hurry\n• Small, frequent meals; less coffee, alcohol, fatty food\n• Belly breathing for 5 minutes: hand on the belly, it rises as you breathe in\n• A walk after meals\n• Warm chamomile or mint tea',
+  note:'See a doctor first to rule out other causes — especially if you are over 50 with a new symptom, losing weight, vomiting, or have black stools or blood. If the anxiety persists → psychologist.',
+  ph:{who:'Plato',src:'Charmides, 156e',q:'Just as we should not treat the eyes without the head, nor the head without the body, so we should not treat the body without the soul.',t:'At your next meal, treat “body and soul together”: eat slowly, in a calm place, and give thanks for the food.'}}},
+
+{id:'stressheart',areas:['psy','cardio'],sev:'caution',f:3,req:['anxiety','stress_worse','panic','tests_normal'],
+ k:[['palpitations'],['anxiety','stress_worse','panic'],['tests_normal'],['chest_pain','fast_breathing']],ctx:[0,0,0,1],
+ el:{n:'Καρδιά που χτυπά από το άγχος',s:['Ταχυπαλμία ή «χτύποι που χάνονται» σε στιγμές άγχους','Σφίξιμο στο στήθος με την ένταση','Γρήγορη ανάσα','Ο καρδιολογικός έλεγχος είναι καλός'],
+  w:'Η καρδιά αντιδρά σε κάθε συγκίνηση — γι’ αυτό λέμε «χτυποκάρδι». Όταν ο γιατρός έχει πει ότι η καρδιά σας είναι γερή, μπορείτε να της μιλήσετε ήρεμα: «Σε ακούω, είμαι καλά».',
+  aid:'• Αργή αναπνοή: εισπνοή 4 δευτερόλεπτα, εκπνοή 6 — για 3 λεπτά\n• Κρύο νερό στο πρόσωπο\n• Λιγότερος καφές, ενεργειακά ποτά, τσιγάρο, αλκοόλ\n• Τακτικός περίπατος — δυναμώνει την καρδιά και ηρεμεί τα νεύρα\n• Ημερολόγιο: πότε συμβαίνει και τι σκεφτόσασταν',
+  note:'Πόνος στο στήθος που πάει σε χέρι, σαγόνι ή πλάτη, δύσπνοια, λιποθυμία ή κρύος ιδρώτας → 112 αμέσως. Κάθε νέα ταχυπαλμία → πρώτα καρδιολόγος (καρδιογράφημα). Αν όλα είναι καλά και το άγχος επιμένει → ψυχολόγος.',
+  ph:{who:'Γοργίας',src:'Ελένης Εγκώμιον, 14',q:'Η δύναμη του λόγου πάνω στην ψυχή είναι ίδια με τη δύναμη των φαρμάκων πάνω στο σώμα. Άλλα λόγια λυπούν, άλλα ευφραίνουν, άλλα φοβίζουν και άλλα δίνουν θάρρος.',t:'Γράψτε μια ήρεμη φράση για τις δύσκολες στιγμές, π.χ. «Η καρδιά μου είναι γερή. Είναι άγχος. Θα περάσει.» Διαβάστε την αργά όταν έρθει η ταχυπαλμία.'}},
+ en:{n:'Heart racing from stress',s:['Racing heart or “skipped beats” at anxious moments','Chest tightness with tension','Fast breathing','Heart check-ups are normal'],
+  w:'The heart reacts to every emotion. Once your doctor has said your heart is healthy, you can speak to it calmly: “I hear you, I am all right.”',
+  aid:'• Slow breathing: in for 4 seconds, out for 6 — for 3 minutes\n• Cold water on the face\n• Less coffee, energy drinks, smoking, alcohol\n• Regular walking — strengthens the heart and calms the nerves\n• A diary: when it happens and what you were thinking',
+  note:'Chest pain spreading to the arm, jaw or back, breathlessness, fainting or cold sweat → call 112 now. Any new palpitations → see a cardiologist first (ECG). If all is fine and anxiety persists → psychologist.',
+  ph:{who:'Gorgias',src:'Encomium of Helen, 14',q:'The power of speech over the soul is like the power of drugs over the body. Some words bring grief, some delight, some fear, and some give courage.',t:'Write a calm sentence for hard moments, e.g. “My heart is healthy. This is anxiety. It will pass.” Read it slowly when the racing starts.'}}},
+
+{id:'whitecoat',areas:['psy','cardio'],sev:'caution',f:3,req:['anxiety','stress_worse','tests_normal'],
+ k:[['high_bp'],['anxiety','stress_worse'],['palpitations','headache'],['morning']],ctx:[0,0,0,1],
+ el:{n:'Πίεση που ανεβαίνει με το άγχος',s:['Η πίεση ανεβαίνει όταν αγχώνεστε ή στο ιατρείο','Στο σπίτι, ήρεμοι, είναι χαμηλότερη','Ταχυπαλμία, ζέστη στο πρόσωπο','Πονοκέφαλος στον αυχένα','Άγχος τη στιγμή της μέτρησης'],
+  w:'Είναι πολύ συχνό: μόνο η ιδέα της μέτρησης ανεβάζει την πίεση. Η ηρεμία βοηθά πραγματικά — αλλά τα φάρμακα που έδωσε ο γιατρός δεν τα σταματάμε ποτέ μόνοι μας.',
+  aid:'• Μετράτε σωστά: καθιστοί, 5 λεπτά ηρεμία πριν, χωρίς καφέ ή τσιγάρο 30 λεπτά πριν, το χέρι στο ύψος της καρδιάς\n• Κάντε 2 μετρήσεις με 1 λεπτό διαφορά και γράψτε τον μέσο όρο\n• Μετράτε πρωί (πριν τα φάρμακα) και βράδυ για 7 μέρες — δείξτε τα στον γιατρό\n• Αργή αναπνοή 5 λεπτά, δύο φορές τη μέρα\n• Λιγότερο αλάτι· περπάτημα 30 λεπτά τις περισσότερες μέρες',
+  note:'Πίεση πάνω από 180/120 (18/12) με πονοκέφαλο, πόνο στο στήθος, θολή όραση ή αδυναμία → 112. Αν η πρωινή πίεση μένει ψηλή παρά τα φάρμακα, ο γιατρός σας μπορεί να αλλάξει ώρα ή φάρμακο ή να προτείνει 24ωρη καταγραφή (Holter πίεσης). Μην αλλάζετε μόνοι σας δόση.',
+  ph:{who:'Ιπποκράτης',src:'Επιδημίαι, ΣΤ΄ 5.1',q:'Η φύση είναι ο γιατρός των νόσων.',t:'Βοηθήστε σήμερα τη φύση να κάνει τη δουλειά της: ήσυχος περίπατος, λιγότερο αλάτι, μία ώρα χωρίς ειδήσεις — μαζί με τα φάρμακα του γιατρού σας.'}},
+ en:{n:'Blood pressure that rises with stress',s:['Pressure rises when anxious or at the surgery','At home, when calm, it is lower','Racing heart, hot face','Headache at the back of the neck','Anxiety at the moment of measuring'],
+  w:'Very common: the very idea of measuring raises the pressure. Calm truly helps — but we never stop the medicines the doctor gave us on our own.',
+  aid:'• Measure correctly: seated, 5 minutes of rest first, no coffee or smoking for 30 minutes before, arm at heart level\n• Take 2 readings 1 minute apart and note the average\n• Measure in the morning (before tablets) and evening for 7 days — show your doctor\n• Slow breathing for 5 minutes, twice a day\n• Less salt; walk 30 minutes most days',
+  note:'Pressure above 180/120 with headache, chest pain, blurred vision or weakness → 112. If morning pressure stays high despite tablets, your doctor may change the timing or medicine, or suggest 24-hour monitoring. Do not change your dose yourself.',
+  ph:{who:'Hippocrates',src:'Epidemics, VI 5.1',q:'Nature is the physician of diseases.',t:'Help nature do its work today: a quiet walk, less salt, an hour without the news — together with your doctor’s medicines.'}}},
+
+{id:'stressskin',areas:['psy','skin'],sev:'norm',f:2,req:['anxiety','stress_worse'],
+ k:[['itch','rash','hives','skin_patches','dry_skin'],['anxiety','stress_worse'],['hair_loss']],ctx:[0,0,0],
+ el:{n:'Δέρμα που «μιλά» από το στρες',s:['Φαγούρα που χειροτερεύει με το άγχος','Έκζεμα, ψωρίαση ή κνίδωση που φουντώνουν σε δύσκολες περιόδους','Ξύσιμο ή τσίμπημα του δέρματος χωρίς να το καταλαβαίνετε','Τριχόπτωση μετά από μεγάλο στρες'],
+  w:'Δέρμα και νεύρα συνδέονται στενά — γι’ αυτό το δέρμα κοκκινίζει, φαγουρίζει και φουντώνει όταν η ψυχή βαραίνει. Δεν φταίτε εσείς· μπορούμε όμως να βοηθήσουμε και τα δύο.',
+  aid:'• Ενυδατική κρέμα χωρίς άρωμα, δύο φορές τη μέρα\n• Χλιαρό, όχι ζεστό, νερό στο μπάνιο\n• Όταν θέλετε να ξυστείτε: κρύα κομπρέσα ή απαλό πάτημα αντί για νύχια\n• Κοντά νύχια, βαμβακερά ρούχα\n• Χαλάρωση: αναπνοές, περίπατος, καλός ύπνος',
+  note:'Δερματολόγος για το δέρμα. Αν το άγχος ή το ξύσιμο δεν ελέγχονται → ψυχολόγος. Πρήξιμο χειλιών ή γλώσσας ή δύσπνοια → 112.',
+  ph:{who:'Δημόκριτος',src:'Απόσπασμα Β 31',q:'Η ιατρική θεραπεύει τις αρρώστιες του σώματος· η σοφία απαλλάσσει την ψυχή από τα πάθη.',t:'Συνδυάστε τα δύο σήμερα: την κρέμα του γιατρού για το δέρμα, και 10 λεπτά ησυχίας για την ψυχή.'}},
+ en:{n:'Skin that “speaks” under stress',s:['Itching that gets worse with stress','Eczema, psoriasis or hives flaring in hard times','Scratching or picking the skin without noticing','Hair loss after a big stress'],
+  w:'Skin and nerves are closely linked — that is why the skin reddens, itches and flares when the soul is heavy. It is not your fault; we can help both.',
+  aid:'• Unscented moisturiser twice a day\n• Lukewarm, not hot, water when bathing\n• When you want to scratch: a cold compress or gentle pressing instead of nails\n• Short nails, cotton clothes\n• Relaxation: breathing, walks, good sleep',
+  note:'Dermatologist for the skin. If stress or scratching cannot be controlled → psychologist. Swollen lips or tongue or difficulty breathing → 112.',
+  ph:{who:'Democritus',src:'Fragment B 31',q:'Medicine heals the diseases of the body; wisdom frees the soul from its passions.',t:'Combine both today: the doctor’s cream for the skin, and 10 quiet minutes for the soul.'}}},
+
+{id:'tensionpain',areas:['psy','musc'],sev:'norm',f:3,req:['anxiety','stress_worse','muscle_tension'],
+ k:[['neck_pain','back_pain','shoulder_pain','low_back_pain','muscle_tension'],['anxiety','stress_worse'],['headache','jaw_pain'],['muscle_tension','fatigue']],ctx:[0,0,0,0],
+ el:{n:'Πόνοι από σφιγμένους μυς (αυχένας, ώμοι, μέση)',s:['Σφιγμένοι ώμοι και αυχένας','Πόνος στη μέση ή στην πλάτη που χειροτερεύει με το στρες','Πονοκέφαλος που ξεκινά από τον αυχένα','Σφίξιμο στο σαγόνι, τρίξιμο δοντιών','Κούραση'],
+  w:'Όταν κουβαλάμε βάρη στην ψυχή, τα κουβαλάμε και στους ώμους. Δεν είναι φαντασία — οι μύες σφίγγονται πραγματικά. Και μπορούν να μάθουν ξανά να χαλαρώνουν.',
+  aid:'• Κάθε ώρα: σηκώστε τους ώμους ψηλά, κρατήστε 5 δευτερόλεπτα, αφήστε τους να πέσουν\n• Ζεστή κομπρέσα ή ζεστό ντους στον αυχένα\n• Ήπιες διατάσεις και περπάτημα — η κίνηση είναι φάρμακο\n• Προοδευτική χαλάρωση: σφίξτε και χαλαρώστε κάθε μυ, από τα πόδια ως το κεφάλι\n• Σωστό μαξιλάρι και καρέκλα, διαλείμματα από την οθόνη',
+  note:'Γιατρός αν: ο πόνος πηγαίνει στο χέρι ή στο πόδι με μούδιασμα ή αδυναμία, έχετε πυρετό, χάνετε βάρος, ή δεν βελτιώνεται σε 4–6 εβδομάδες. Ο φυσικοθεραπευτής βοηθά πολύ.',
+  ph:{who:'Πλάτων',src:'Τίμαιος, 88b',q:'Να μην κινούμε ούτε την ψυχή χωρίς το σώμα ούτε το σώμα χωρίς την ψυχή, ώστε, στηρίζοντας το ένα το άλλο, να γίνουν ισόρροπα και υγιή.',t:'Συνδυάστε σήμερα κίνηση και ηρεμία: 10 λεπτά περπάτημα με αργές, βαθιές ανάσες.'}},
+ en:{n:'Pain from tense muscles (neck, shoulders, back)',s:['Tight shoulders and neck','Low or upper back pain worse with stress','Headache starting from the neck','Clenched jaw, teeth grinding','Tiredness'],
+  w:'When we carry weights in the soul, we carry them in our shoulders too. It is not imagination — muscles really tighten. And they can learn to relax again.',
+  aid:'• Every hour: lift your shoulders high, hold 5 seconds, let them drop\n• Warm compress or a warm shower on the neck\n• Gentle stretches and walking — movement is medicine\n• Progressive relaxation: tense and relax each muscle, from feet to head\n• Proper pillow and chair, breaks from screens',
+  note:'See a doctor if the pain spreads to an arm or leg with numbness or weakness, you have a fever, lose weight, or it does not improve in 4–6 weeks. A physiotherapist helps a lot.',
+  ph:{who:'Plato',src:'Timaeus, 88b',q:'Do not exercise the soul without the body, nor the body without the soul, so that, each supporting the other, they become balanced and healthy.',t:'Combine movement and calm today: a 10-minute walk with slow, deep breaths.'}}},
+
+{id:'chronicpain',areas:['psy','musc'],sev:'caution',f:2,req:['sadness','irritable','apathy','anxiety','insomnia'],
+ k:[['body_aches','pain_generic','joint_pain','back_pain','low_back_pain'],['sadness','irritable','apathy','anxiety'],['insomnia','fatigue']],ctx:[0,0,0],
+ el:{n:'Χρόνιος πόνος που βαραίνει την ψυχή',s:['Πόνος που κρατά μήνες','Κακή διάθεση, νεύρα, απελπισία','Κακός ύπνος που κάνει τον πόνο χειρότερο','Φόβος να κινηθείτε','Λιγότερες έξοδοι και χαρές'],
+  w:'Ο χρόνιος πόνος κουράζει σώμα και ψυχή, και αξίζετε κατανόηση — όχι «είναι στο μυαλό σου». Ο πόνος είναι αληθινός. Η ψυχή όμως μπορεί να γίνει σύμμαχος, ώστε να πονάτε λιγότερο.',
+  aid:'• Λίγη κίνηση κάθε μέρα, που αυξάνεται σιγά σιγά — ακόμη και 5 λεπτά\n• Μοιράστε τις δουλειές σε μικρά κομμάτια με διαλείμματα\n• Ζέστη, ήπιο μασάζ, χαλάρωση\n• Σταθερή ώρα ύπνου\n• Κρατήστε μία χαρά κάθε μέρα — ο πόνος δεν πρέπει να παίρνει όλο τον χώρο',
+  note:'Ζητήστε από τον γιατρό σας παραπομπή σε ιατρείο πόνου, φυσικοθεραπεία ή ψυχολόγο (η γνωσιακή θεραπεία για τον πόνο βοηθά). Μην αυξάνετε μόνοι σας τα παυσίπονα.',
+  ph:{who:'Επίκουρος',src:'Διογένης Λαέρτιος, Ι΄ 22',q:'Σε μέρες μεγάλου πόνου από την αρρώστια του, έγραφε σε φίλο: «Σε όλους αυτούς τους πόνους αντιστεκόταν η χαρά της ψυχής μου, με την ανάμνηση των συζητήσεών μας».',t:'Τηλεφωνήστε σήμερα σε έναν φίλο και θυμηθείτε μαζί μια ωραία στιγμή. Η χαρά της ψυχής δεν σβήνει τον πόνο, αλλά τον κάνει πιο ελαφρύ.'}},
+ en:{n:'Chronic pain that weighs on the soul',s:['Pain lasting months','Low mood, irritability, hopelessness','Poor sleep that makes pain worse','Fear of moving','Fewer outings and joys'],
+  w:'Chronic pain wears out body and soul, and you deserve understanding — not “it is all in your head”. The pain is real. But the mind can become an ally so that you hurt less.',
+  aid:'• A little movement every day, increased slowly — even 5 minutes\n• Split tasks into small pieces with breaks\n• Warmth, gentle massage, relaxation\n• A regular bedtime\n• Keep one joy every day — pain should not take all the space',
+  note:'Ask your doctor for referral to a pain clinic, physiotherapy or a psychologist (cognitive therapy for pain helps). Do not increase painkillers on your own.',
+  ph:{who:'Epicurus',src:'Diogenes Laertius, X 22',q:'In days of great pain from his illness he wrote to a friend: “Against all these pains stood the joy of my soul at the memory of our conversations.”',t:'Call a friend today and remember a lovely moment together. The joy of the soul does not erase pain, but it makes it lighter.'}}},
+
+{id:'somatic',areas:['psy','gen'],sev:'caution',f:2,req:['tests_normal'],
+ k:[['tests_normal'],['pain_generic','body_aches','fatigue','dizziness','palpitations','stomach_pain','headache'],['anxiety','stress_worse','health_worry','sadness']],ctx:[0,0,0],
+ el:{n:'Συμπτώματα χωρίς εύρημα στις εξετάσεις',s:['Πόνοι, κούραση, ζάλη ή ενοχλήσεις που μετακινούνται','Πολλές εξετάσεις — όλες καλές','Ανησυχία ότι «κάτι δεν βρέθηκε»','Χειροτερεύουν με το άγχος και τη στενοχώρια'],
+  w:'Το ότι οι εξετάσεις είναι καλές δεν σημαίνει ότι «τα φαντάζεστε». Σημαίνει ότι το σώμα σας μιλά για κάτι που δεν φαίνεται στο αίμα ή στις ακτινογραφίες: κούραση, φόρτο, λύπη ή άγχος.',
+  aid:'• Ένας σταθερός οικογενειακός γιατρός που σας ξέρει\n• Ημερολόγιο: πότε έρχονται τα συμπτώματα και τι συνέβαινε τότε\n• Καθημερινή κίνηση, σταθερός ύπνος\n• Μιλήστε για ό,τι σας βαραίνει — με φίλο ή ειδικό\n• Μικρές χαρές κάθε μέρα',
+  note:'Νέο ή διαφορετικό σύμπτωμα → πάντα γιατρός. Αν τα συμπτώματα επηρεάζουν πολύ τη ζωή σας → ψυχολόγος ή ψυχίατρος· υπάρχει αποτελεσματική θεραπεία.',
+  ph:{who:'Πλάτων',src:'Χαρμίδης, 157a',q:'Η ψυχή θεραπεύεται με κάποιες «επωδές» — και οι επωδές αυτές είναι τα καλά λόγια. Από τέτοια λόγια γεννιέται στην ψυχή η σωφροσύνη· κι όταν υπάρχει αυτή, εύκολα έρχεται η υγεία και στο κεφάλι και σε όλο το σώμα.',t:'Βρείτε σήμερα τα δικά σας «καλά λόγια»: μια κουβέντα με αγαπημένο πρόσωπο, ένα βιβλίο, μια προσευχή.'}},
+ en:{n:'Symptoms with normal test results',s:['Pains, tiredness, dizziness or discomfort that move around','Many tests — all normal','Worry that “something was missed”','Worse with stress and sorrow'],
+  w:'Normal tests do not mean you are “imagining it”. They mean your body is speaking about something that does not show in blood tests or X-rays: exhaustion, overload, sorrow or anxiety.',
+  aid:'• One regular family doctor who knows you\n• A diary: when the symptoms come and what was happening then\n• Daily movement, regular sleep\n• Talk about what weighs on you — with a friend or a specialist\n• Small joys every day',
+  note:'A new or different symptom → always see a doctor. If symptoms affect your life a lot → psychologist or psychiatrist; there is effective treatment.',
+  ph:{who:'Plato',src:'Charmides, 157a',q:'The soul is healed by certain “charms” — and these charms are beautiful words. From such words, balance is born in the soul; and when it is there, health comes easily to the head and to the whole body.',t:'Find your own “beautiful words” today: a talk with a loved one, a book, a prayer.'}}},
+
+{id:'anxdizzy',areas:['psy','head'],sev:'caution',f:2,req:['anxiety','stress_worse','panic','tests_normal'],
+ k:[['dizziness','unsteady'],['anxiety','stress_worse','panic'],['tests_normal']],ctx:[0,0,0],
+ el:{n:'Ζάλη από άγχος',s:['Αίσθηση αστάθειας ή «κουνήματος» — όχι γύρισμα','Χειρότερα σε πολυκοσμία, σούπερ μάρκετ, κινούμενες εικόνες','Φόβος μήπως πέσετε','Οι εξετάσεις αυτιών και εγκεφάλου είναι καλές'],
+  w:'Αυτή η ζάλη είναι συχνή και πραγματική: μετά από άγχος ή μια παλιά ζάλη, ο εγκέφαλος μένει «σε επιφυλακή». Η καλή είδηση: μαθαίνει ξανά να νιώθει σταθερός.',
+  aid:'• Μην αποφεύγετε τις κινήσεις — η σταδιακή έκθεση βοηθά τον εγκέφαλο να προσαρμοστεί\n• Περπάτημα κάθε μέρα, με το βλέμμα μπροστά\n• Αργή αναπνοή όταν ξεκινά\n• Πίνετε νερό, τρώτε τακτικά\n• Φυσικοθεραπεία ισορροπίας (αιθουσαία αποκατάσταση)',
+  note:'Ξαφνική ζάλη με δυσκολία στην ομιλία, στραβό στόμα, αδυναμία σε χέρι ή πόδι ή διπλή όραση → 112. Νέα ζάλη → πρώτα γιατρός (πίεση, φάρμακα, αυτιά). Ζάλη που επιμένει μήνες → ΩΡΛ ή νευρολόγος, και ψυχολόγος.',
+  ph:{who:'Επίκτητος',src:'Διατριβές, Α΄ 15',q:'Τίποτα μεγάλο δεν γίνεται ξαφνικά, ούτε το σταφύλι ούτε το σύκο. Αν μου πεις «θέλω ένα σύκο», θα σου πω: «θέλει χρόνο· άφησέ το πρώτα να ανθίσει, έπειτα να δέσει καρπό, έπειτα να ωριμάσει».',t:'Κάντε σήμερα έναν περίπατο λίγο μεγαλύτερο από χθες. Η σταθερότητα ωριμάζει σιγά σιγά, όπως το σύκο.'}},
+ en:{n:'Dizziness from anxiety',s:['A sense of unsteadiness or “rocking” — not spinning','Worse in crowds, supermarkets, moving images','Fear of falling','Ear and brain tests are normal'],
+  w:'This dizziness is common and real: after anxiety or an old dizzy spell, the brain stays “on alert”. The good news: it can learn to feel steady again.',
+  aid:'• Do not avoid movement — gradual exposure helps the brain adapt\n• Walk daily, looking ahead\n• Slow breathing when it starts\n• Drink water, eat regularly\n• Balance physiotherapy (vestibular rehabilitation)',
+  note:'Sudden dizziness with trouble speaking, a drooping mouth, weakness in an arm or leg, or double vision → 112. New dizziness → see a doctor first (blood pressure, medicines, ears). Dizziness lasting months → ENT or neurologist, and a psychologist.',
+  ph:{who:'Epictetus',src:'Discourses, I 15',q:'Nothing great comes into being suddenly, not even a bunch of grapes or a fig. If you tell me “I want a fig”, I will answer: “It needs time; let it first blossom, then bear fruit, then ripen.”',t:'Take a walk today a little longer than yesterday. Steadiness ripens slowly, like the fig.'}}},
+
+{id:'overthink',areas:['psy'],sev:'norm',f:3,req:['overthinking'],
+ k:[['overthinking'],['insomnia'],['anxiety','stress_worse'],['fatigue','concentration']],ctx:[0,0,0,0],
+ el:{n:'Σκέψεις που δεν σταματούν (υπερανάλυση)',s:['Το μυαλό γυρίζει τα ίδια ξανά και ξανά','Δύσκολα αποφασίζετε','Αϋπνία από σκέψεις','Κούραση, δεν συγκεντρώνεστε','Σενάρια για το τι θα πάει στραβά'],
+  w:'Ένα μυαλό που σκέφτεται πολύ είναι συνήθως έξυπνο και ευαίσθητο. Χρειάζεται απλώς να μάθει πότε να κλείνει την πόρτα. Οι σκέψεις δεν είναι πάντα γεγονότα.',
+  aid:'• Γράψτε τις σκέψεις στο χαρτί — το χαρτί τις κρατά για εσάς\n• Ρωτήστε: «Μπορώ να κάνω κάτι γι’ αυτό σήμερα;» Αν ναι, ένα βήμα. Αν όχι, αφήστε το\n• «Ώρα σκέψης» 15 λεπτά τη μέρα — έξω από αυτήν: «θα το σκεφτώ αργότερα»\n• Βάλτε τα χέρια σε δουλειά: κήπος, μαγείρεμα, περπάτημα\n• Πριν τον ύπνο: όχι ειδήσεις, όχι οθόνες',
+  note:'Αν οι σκέψεις είναι τρομακτικές και επίμονες και σας σπρώχνουν σε επαναλαμβανόμενες πράξεις, ή φέρνουν θλίψη και αϋπνία για εβδομάδες → ψυχολόγος ή ψυχίατρος.',
+  ph:{who:'Επίκτητος',src:'Εγχειρίδιο, 5',q:'Δεν ταράζουν τους ανθρώπους τα πράγματα, αλλά οι γνώμες τους για τα πράγματα.',t:'Πάρτε μία σκέψη που σας βασανίζει σήμερα και γράψτε δίπλα: «Τι έγινε πραγματικά;» και «Τι λέω εγώ γι’ αυτό;». Συχνά το βάρος είναι στο δεύτερο.'}},
+ en:{n:'Thoughts that will not stop (overthinking)',s:['The mind goes round the same things again and again','Hard to make decisions','Sleepless from thoughts','Tired, cannot concentrate','Imagining what will go wrong'],
+  w:'A mind that thinks a lot is usually clever and sensitive. It just needs to learn when to close the door. Thoughts are not always facts.',
+  aid:'• Write your thoughts on paper — the paper holds them for you\n• Ask: “Can I do something about this today?” If yes, one step. If not, let it go\n• A 15-minute “thinking time” each day — outside it: “I will think about it later”\n• Keep your hands busy: gardening, cooking, walking\n• Before bed: no news, no screens',
+  note:'If the thoughts are frightening and persistent and push you into repeated actions, or bring sadness and sleeplessness for weeks → psychologist or psychiatrist.',
+  ph:{who:'Epictetus',src:'Enchiridion, 5',q:'People are disturbed not by things, but by their opinions about things.',t:'Take one thought that troubles you today and write next to it: “What really happened?” and “What am I telling myself about it?”. The weight is often in the second.'}}},
+
+{id:'apathy',areas:['psy'],sev:'norm',f:2,req:['apathy','anhedonia'],
+ k:[['apathy','anhedonia'],['fatigue','sleepy'],['phone_addict','loneliness']],ctx:[0,0,0],
+ el:{n:'Απάθεια και έλλειψη κινήτρου',s:['Δεν έχετε όρεξη να ξεκινήσετε τίποτα','Αναβάλλετε συνεχώς','Ώρες χωρίς σκοπό (π.χ. στην οθόνη)','Κούραση χωρίς λόγο','Λίγη χαρά από όσα παλιά σας άρεσαν'],
+  w:'Το κίνητρο σπάνια έρχεται πρώτο — συνήθως έρχεται μετά την πράξη. Δεν χρειάζεται να νιώσετε έτοιμοι. Αρκεί ένα πολύ μικρό βήμα.',
+  aid:'• Κανόνας των 5 λεπτών: ξεκινήστε κάτι μόνο για 5 λεπτά\n• Μία μικρή δουλειά το πρωί — στρώστε το κρεβάτι\n• Φως ημέρας και περπάτημα το πρωί\n• Σταθερή ώρα ύπνου και ξυπνήματος\n• Κανονίστε συναντήσεις με άλλους — η δέσμευση βοηθά',
+  note:'Αν η απάθεια κρατά πάνω από 2 εβδομάδες μαζί με θλίψη, ή χάσατε κάθε χαρά → γιατρός· μπορεί να είναι κατάθλιψη ή θυρεοειδής, που θεραπεύονται.',
+  ph:{who:'Αριστοτέλης',src:'Ηθικά Νικομάχεια, Β΄ 1',q:'Γινόμαστε δίκαιοι κάνοντας δίκαιες πράξεις, σώφρονες κάνοντας σώφρονες πράξεις, γενναίοι κάνοντας γενναίες πράξεις.',t:'Μην περιμένετε να νιώσετε δραστήριοι για να δράσετε — δράστε λίγο, και θα γίνετε δραστήριοι. Ένα μικρό βήμα σήμερα.'}},
+ en:{n:'Apathy and lack of motivation',s:['No wish to start anything','You keep putting things off','Hours without purpose (e.g. on screens)','Tiredness without reason','Little joy from what you used to like'],
+  w:'Motivation rarely comes first — it usually comes after action. You do not need to feel ready. One very small step is enough.',
+  aid:'• The 5-minute rule: start something for just 5 minutes\n• One small task in the morning — make the bed\n• Daylight and a walk in the morning\n• Regular times for sleep and waking\n• Arrange to meet others — commitment helps',
+  note:'If apathy lasts over 2 weeks with sadness, or you have lost all joy → doctor; it may be depression or the thyroid, both treatable.',
+  ph:{who:'Aristotle',src:'Nicomachean Ethics, II 1',q:'We become just by doing just acts, temperate by doing temperate acts, brave by doing brave acts.',t:'Do not wait to feel active before acting — act a little, and you will become active. One small step today.'}}},
+
+{id:'screens',areas:['psy'],sev:'norm',f:3,req:['phone_addict'],
+ k:[['phone_addict'],['insomnia','concentration'],['apathy','loneliness','anxiety']],ctx:[0,0,0],
+ el:{n:'Εξάρτηση από κινητό και οθόνες',s:['Πιάνετε το κινητό χωρίς λόγο, ξανά και ξανά','Ώρες στα κοινωνικά δίκτυα ή στα βίντεο','Κακός ύπνος, κουρασμένα μάτια','Ανησυχία όταν δεν έχετε το κινητό','Λιγότερος χρόνος με ανθρώπους'],
+  w:'Τα κινητά είναι φτιαγμένα από ειδικούς ώστε να μας κρατούν. Δεν φταίει η θέλησή σας. Μπορείτε όμως να ξαναγίνετε εσείς ο αφέντης του χρόνου σας.',
+  aid:'• Κλείστε τις ειδοποιήσεις που δεν χρειάζεστε\n• Όχι κινητό στο τραπέζι και στο υπνοδωμάτιο — ξυπνητήρι ρολόι\n• Μία ώρα πριν τον ύπνο, οθόνες κλειστές\n• Βάλτε όριο χρόνου στις εφαρμογές (ρυθμίσεις του κινητού)\n• Αντικαταστήστε: βιβλίο, βόλτα, τηλεφώνημα σε φίλο',
+  note:'Αν δεν μπορείτε να μειώσετε παρά τις προσπάθειες, ή η οθόνη έχει πάρει τη θέση της δουλειάς, του ύπνου και των σχέσεων → ψυχολόγος.',
+  ph:{who:'Επίκτητος',src:'κατά τον Αύλο Γέλλιο, Αττικαί Νύκτες 17.19',q:'Ανέχου και απέχου — υπόμενε τα δύσκολα και κράτα απόσταση από όσα σε σκλαβώνουν.',t:'Διαλέξτε σήμερα μία ώρα «αποχής»: το κινητό σε άλλο δωμάτιο. Παρατηρήστε τι κερδίζετε.'}},
+ en:{n:'Dependence on phone and screens',s:['You pick up the phone without reason, again and again','Hours on social media or videos','Poor sleep, tired eyes','Uneasy when you do not have your phone','Less time with people'],
+  w:'Phones are designed by experts to hold on to us. It is not a failure of your will. But you can become the master of your time again.',
+  aid:'• Turn off the notifications you do not need\n• No phone at the table or in the bedroom — use a clock for the alarm\n• Screens off one hour before bed\n• Set time limits for apps (phone settings)\n• Replace: a book, a walk, a call to a friend',
+  note:'If you cannot cut down despite trying, or the screen has taken the place of work, sleep and relationships → psychologist.',
+  ph:{who:'Epictetus',src:'as reported by Aulus Gellius, Attic Nights 17.19',q:'Bear and forbear — endure what is hard and keep away from what enslaves you.',t:'Choose one hour of “forbearing” today: the phone in another room. Notice what you gain.'}}},
+
+{id:'meaning',areas:['psy'],sev:'caution',f:2,req:['meaningless'],
+ k:[['meaningless'],['apathy','anhedonia','sadness'],['retired','life_change','loneliness']],ctx:[0,0,0],
+ el:{n:'Υπαρξιακό κενό — όταν χάνεται το νόημα',s:['Ερωτήματα «ποιο το νόημα;»','Αίσθηση κενού μέσα σας','Όλα μοιάζουν ίδια και άχρωμα','Συχνά μετά από αλλαγή: σύνταξη, απώλεια, ασθένεια'],
+  w:'Το ερώτημα για το νόημα δεν είναι αρρώστια — είναι η αρχή της φιλοσοφίας. Οι πιο σοφοί άνθρωποι πέρασαν από εδώ. Το νόημα συχνά δεν το βρίσκουμε έτοιμο· το χτίζουμε, με αγάπη και προσφορά.',
+  aid:'• Γράψτε: πότε στη ζωή μου ένιωσα πιο ζωντανός;\n• Προσφορά: βοηθήστε κάποιον σήμερα — το νόημα γεννιέται στη σχέση\n• Μοιραστείτε σκέψεις με ανθρώπους που σέβεστε\n• Φύση, τέχνη, μουσική, πίστη — ό,τι σας ανοίγει την καρδιά\n• Ένας μικρός στόχος για αυτή την εβδομάδα',
+  note:'Αν το κενό συνοδεύεται από βαθιά θλίψη, ή από σκέψεις ότι δεν αξίζει να ζείτε → μιλήστε σήμερα με ψυχίατρο ή τον γιατρό σας · 112 · Κύπρος: Σαμαρείτες 8000 7773 · Ελλάδα: 1018.',
+  ph:{who:'Αριστοτέλης',src:'Ηθικά Νικομάχεια, Α΄ 7',q:'Το ανθρώπινο αγαθό είναι ενέργεια της ψυχής σύμφωνα με την αρετή — και σε όλη τη ζωή· γιατί ένα χελιδόνι δεν φέρνει την άνοιξη, ούτε μία μέρα.',t:'Για τον Αριστοτέλη η ευτυχία δεν είναι συναίσθημα που περιμένουμε, αλλά κάτι που κάνουμε. Κάντε σήμερα ένα καλό που αξιοποιεί ένα δικό σας χάρισμα.'}},
+ en:{n:'Existential emptiness — when meaning is lost',s:['Questions like “what is the point?”','A sense of emptiness inside','Everything looks the same and colourless','Often after a change: retirement, loss, illness'],
+  w:'Asking about meaning is not an illness — it is the beginning of philosophy. The wisest people passed this way. Meaning is rarely found ready-made; we build it, with love and giving.',
+  aid:'• Write: when in my life did I feel most alive?\n• Giving: help someone today — meaning is born in relationship\n• Share thoughts with people you respect\n• Nature, art, music, faith — whatever opens your heart\n• One small goal for this week',
+  note:'If the emptiness comes with deep sadness, or thoughts that life is not worth living → speak today with a psychiatrist or your doctor · 112 · Cyprus: Samaritans 8000 7773 · Greece: 1018.',
+  ph:{who:'Aristotle',src:'Nicomachean Ethics, I 7',q:'The human good is activity of the soul in accordance with virtue — over a whole life; for one swallow does not make a spring, nor does one day.',t:'For Aristotle, happiness is not a feeling we wait for but something we do. Today, do one good thing that uses a gift of yours.'}}},
+
+{id:'lifechange',areas:['psy'],sev:'norm',f:2,req:['life_change'],
+ k:[['life_change'],['anxiety','sadness'],['loneliness','insomnia']],ctx:[0,0,0],
+ el:{n:'Δυσκολία προσαρμογής σε μεγάλη αλλαγή',s:['Μετά από μετακόμιση, νέα δουλειά, ξενιτιά ή αλλαγή υγείας','Άγχος, ανησυχία, κλάμα','Αίσθηση ότι «δεν ανήκετε»','Αϋπνία, κούραση','Νοσταλγία για το παλιό'],
+  w:'Κάθε μεγάλη αλλαγή, ακόμη και καλή, ταράζει. Είναι φυσιολογικό να χρειάζεστε χρόνο — συνήθως μερικούς μήνες. Δεν σημαίνει ότι κάνατε λάθος επιλογή.',
+  aid:'• Κρατήστε μερικές παλιές συνήθειες — δίνουν σταθερότητα\n• Κάθε εβδομάδα ένα νέο μικρό βήμα στο νέο περιβάλλον\n• Επαφή με αγαπημένους (βιντεοκλήση)\n• Γνωρίστε ανθρώπους: σύλλογοι, ενορία, γειτονιά\n• Υπομονή με τον εαυτό σας',
+  note:'Αν μετά από 3 μήνες η δυσφορία μένει έντονη ή σας εμποδίζει να λειτουργήσετε → ψυχολόγος.',
+  ph:{who:'Ηράκλειτος',src:'Απόσπασμα Β 84a',q:'Μεταβάλλον αναπαύεται — αυτό που αλλάζει, βρίσκει ανάπαυση.',t:'Η αλλαγή είναι ο τρόπος του κόσμου. Βρείτε σήμερα κάτι μικρό που σας αρέσει στη νέα σας ζωή και σημειώστε το.'}},
+ en:{n:'Difficulty adjusting to a big change',s:['After a move, a new job, emigration or a change in health','Anxiety, worry, crying','A feeling that you “do not belong”','Poor sleep, tiredness','Longing for the old'],
+  w:'Every big change, even a good one, unsettles us. It is normal to need time — usually a few months. It does not mean you made the wrong choice.',
+  aid:'• Keep some old habits — they give stability\n• Each week one small new step in the new place\n• Stay in touch with loved ones (video calls)\n• Meet people: clubs, parish, neighbourhood\n• Be patient with yourself',
+  note:'If after 3 months the distress is still strong or stops you functioning → psychologist.',
+  ph:{who:'Heraclitus',src:'Fragment B 84a',q:'In changing, it finds rest.',t:'Change is the way of the world. Find something small you like in your new life today and note it down.'}}},
+
+{id:'diagnosis',areas:['psy'],sev:'caution',f:2,req:['diagnosis_news'],
+ k:[['diagnosis_news'],['anxiety','sadness','anger'],['insomnia','overthinking']],ctx:[0,0,0],
+ el:{n:'Συναισθήματα μετά από σοβαρή ή χρόνια διάγνωση',s:['Σοκ, άρνηση, θυμός ή φόβος μετά τη διάγνωση','Σκέψεις που δεν σταματούν για το μέλλον','Αϋπνία, κακή διάθεση','Ανησυχία για την οικογένεια','Δυσκολία να μιλήσετε στους δικούς σας'],
+  w:'Μια διάγνωση αλλάζει τον κόσμο σας μέσα σε μια στιγμή. Όλα όσα νιώθετε είναι φυσιολογικά. Δεν χρειάζεται να είστε «δυνατοί» όλη την ώρα — χρειάζεται να μην είστε μόνοι.',
+  aid:'• Γράψτε τις ερωτήσεις σας και πάρτε μαζί σας κάποιον στο ραντεβού\n• Πληροφορίες από τον γιατρό σας, όχι από τυχαίες σελίδες\n• Σύλλογοι ασθενών — η εμπειρία άλλων βοηθά πολύ\n• Μοιραστείτε το βάρος με αγαπημένους\n• Κρατήστε μικρές χαρές και συνήθειες',
+  note:'Πολλά νοσοκομεία έχουν ψυχολόγο για ασθενείς — ζητήστε τον. Αν η θλίψη ή ο φόβος σας παραλύουν → ψυχίατρος ή ψυχολόγος.',
+  ph:{who:'Αριστοτέλης',src:'Ηθικά Νικομάχεια, Θ΄ 4 και Η΄ 1',q:'Ο φίλος είναι ένας άλλος εαυτός. Στη φτώχεια και στις άλλες δυστυχίες, οι άνθρωποι θεωρούν τους φίλους το μόνο καταφύγιο.',t:'Πείτε σήμερα σε έναν φίλο: «Θέλω απλώς να μου κάνεις παρέα». Δεν χρειάζεται να σας λύσει τίποτα.'}},
+ en:{n:'Emotions after a serious or chronic diagnosis',s:['Shock, denial, anger or fear after the diagnosis','Thoughts about the future that will not stop','Poor sleep, low mood','Worry about the family','Hard to talk to your loved ones'],
+  w:'A diagnosis changes your world in a moment. Everything you feel is normal. You do not need to be “strong” all the time — you need not to be alone.',
+  aid:'• Write down your questions and take someone with you to appointments\n• Get information from your doctor, not random websites\n• Patient associations — others’ experience helps a lot\n• Share the weight with loved ones\n• Keep small joys and routines',
+  note:'Many hospitals have a psychologist for patients — ask for one. If sadness or fear paralyses you → psychiatrist or psychologist.',
+  ph:{who:'Aristotle',src:'Nicomachean Ethics, IX 4 and VIII 1',q:'A friend is another self. In poverty and other misfortunes, people think friends their only refuge.',t:'Tell a friend today: “I just want you to keep me company.” They do not need to solve anything.'}}},
+
+{id:'nervbladder',areas:['psy','urine'],sev:'norm',f:2,req:['anxiety','stress_worse','tests_normal'],
+ k:[['frequent_urination','urgency'],['anxiety','stress_worse'],['tests_normal']],ctx:[0,0,0],
+ el:{n:'Νευρική κύστη (συχνοουρία από άγχος)',s:['Συχνή ανάγκη για ούρηση όταν αγχώνεστε','Χειρότερα πριν από έξοδο, ταξίδι ή σημαντική στιγμή','Λίγα ούρα κάθε φορά','Οι εξετάσεις ούρων είναι καλές'],
+  w:'Η κύστη αντιδρά στα νεύρα, όπως και το στομάχι. Είναι ενοχλητικό, αλλά δεν είναι επικίνδυνο — και με εξάσκηση ηρεμεί.',
+  aid:'• Μην πηγαίνετε στην τουαλέτα «για σιγουριά» — περιμένετε λίγο\n• Εκπαίδευση κύστης: μεγαλώνετε σιγά σιγά τον χρόνο ανάμεσα\n• Ασκήσεις πυελικού εδάφους (Kegel)\n• Λιγότερος καφές, τσάι, αναψυκτικά, αλκοόλ\n• Αργή αναπνοή όταν έρχεται η ανάγκη',
+  note:'Πρώτα γιατρός, για να αποκλειστούν λοίμωξη, σάκχαρο ή προστάτης — ειδικά αν τσούζει, βλέπετε αίμα, διψάτε πολύ ή ξυπνάτε πολλές φορές τη νύχτα.',
+  ph:{who:'Ζήνων ο Κιτιεύς (Κύπριος, ιδρυτής της Στοάς)',src:'Διογένης Λαέρτιος, Ζ΄ 26',q:'Το «ευ» γίνεται λίγο λίγο — αλλά δεν είναι καθόλου μικρό πράγμα.',t:'Η βελτίωση έρχεται σταδιακά. Σήμερα κερδίστε μόνο 5 λεπτά ακόμη ανάμεσα στις επισκέψεις στην τουαλέτα.'}},
+ en:{n:'Nervous bladder (frequent urination from anxiety)',s:['Frequent need to pass urine when anxious','Worse before going out, travelling or an important moment','Small amounts each time','Urine tests are normal'],
+  w:'The bladder reacts to nerves, just like the stomach. It is annoying, but not dangerous — and with practice it calms down.',
+  aid:'• Do not go to the toilet “just in case” — wait a little\n• Bladder training: slowly lengthen the time between visits\n• Pelvic floor exercises (Kegel)\n• Less coffee, tea, fizzy drinks, alcohol\n• Slow breathing when the urge comes',
+  note:'See a doctor first to rule out infection, diabetes or prostate problems — especially if it stings, you see blood, you are very thirsty or you wake many times at night.',
+  ph:{who:'Zeno of Citium (a Cypriot, founder of Stoicism)',src:'Diogenes Laertius, VII 26',q:'Well-being comes little by little — yet it is no little thing.',t:'Improvement comes gradually. Today, gain just 5 more minutes between toilet visits.'}}},
+
+{id:'perfanx',areas:['psy','male'],sev:'norm',f:2,req:['performance_anx','anxiety','stress_worse'],
+ k:[['performance_anx'],['erection','low_libido'],['anxiety','stress_worse']],ctx:[0,0,0],
+ el:{n:'Άγχος επίδοσης στην ερωτική ζωή',s:['Φόβος ότι «δεν θα τα καταφέρετε»','Δυσκολία στη στύση ή στη διέγερση όταν αγχώνεστε','Αποφυγή της επαφής','Ντροπή, ένταση στο ζευγάρι'],
+  w:'Είναι από τα πιο συχνά προβλήματα — και από τα πιο θεραπεύσιμα. Όσο πιο πολύ «προσπαθούμε», τόσο πιο πολύ ξεφεύγει. Η τρυφερότητα χωρίς πίεση είναι το κλειδί.',
+  aid:'• Μιλήστε ειλικρινά με τον/τη σύντροφό σας — η σιωπή μεγαλώνει το άγχος\n• Τρυφερότητα χωρίς στόχο: χάδια, αγκαλιά, χωρίς «πρέπει»\n• Λιγότερο αλκοόλ και τσιγάρο\n• Κίνηση, καλός ύπνος, λιγότερο στρες\n• Αναπνοή και χαλάρωση πριν',
+  note:'Γιατρός (παθολόγος, ουρολόγος ή γυναικολόγος) για έλεγχο σακχάρου, πίεσης, καρδιάς, ορμονών και φαρμάκων — η δυσκολία στη στύση μπορεί να είναι πρώιμο σημάδι για την καρδιά. Ψυχολόγος ή σεξολόγος βοηθούν πολύ.',
+  ph:{who:'Επίκτητος',src:'Εγχειρίδιο, 8',q:'Μη ζητάς να γίνονται τα πράγματα όπως θέλεις, αλλά να θέλεις να γίνονται όπως γίνονται — και η ζωή σου θα κυλά ομαλά.',t:'Αφήστε σήμερα το «αποτέλεσμα» και κρατήστε τη στιγμή: την τρυφερότητα, τη συντροφιά, το γέλιο.'}},
+ en:{n:'Performance anxiety in sex',s:['Fear that you “will not manage”','Difficulty with erection or arousal when anxious','Avoiding intimacy','Shame, tension in the couple'],
+  w:'It is one of the most common problems — and one of the most treatable. The harder we “try”, the more it slips away. Tenderness without pressure is the key.',
+  aid:'• Talk honestly with your partner — silence feeds anxiety\n• Tenderness without a goal: caresses, hugs, no “must”\n• Less alcohol and smoking\n• Exercise, good sleep, less stress\n• Breathing and relaxation beforehand',
+  note:'See a doctor (GP, urologist or gynaecologist) to check sugar, blood pressure, heart, hormones and medicines — erection problems can be an early sign of heart disease. A psychologist or sex therapist helps a lot.',
+  ph:{who:'Epictetus',src:'Enchiridion, 8',q:'Do not seek for things to happen as you wish, but wish them to happen as they do, and your life will flow well.',t:'Let go of the “result” today and keep the moment: tenderness, companionship, laughter.'}}},
+
+{id:'blushing',areas:['psy','skin'],sev:'norm',f:2,req:['shame_blush'],
+ k:[['shame_blush'],['anxiety','sweats'],['low_self','loneliness']],ctx:[0,0,0],
+ el:{n:'Κοκκίνισμα και ντροπή',s:['Κοκκινίζετε εύκολα μπροστά σε άλλους','Ιδρώνετε ή τρέμει η φωνή','Φόβος μήπως σας κρίνουν','Αποφεύγετε να μιλήσετε ή να φανείτε'],
+  w:'Το κοκκίνισμα είναι σημάδι ευαισθησίας και ειλικρίνειας. Οι άλλοι το προσέχουν πολύ λιγότερο απ’ όσο νομίζετε — και συχνά τους κάνει πιο συμπαθείς.',
+  aid:'• Μην παλεύετε το κοκκίνισμα — όσο το πολεμάτε, τόσο μεγαλώνει\n• Στρέψτε την προσοχή στον άλλον και στη συζήτηση, όχι στο πρόσωπό σας\n• Αργή αναπνοή, δροσερό νερό\n• Μικρά βήματα: πείτε μια γνώμη σε μικρή παρέα\n• Χαμογελάστε και πείτε απλά: «κοκκίνισα!»',
+  note:'Αν η ντροπή σάς κρατά μακριά από δουλειά, φίλους ή ζωή → ψυχολόγος (κοινωνικό άγχος, που θεραπεύεται).',
+  ph:{who:'Πλούταρχος',src:'Περί δυσωπίας',q:'Η υπερβολική ντροπή μοιάζει με αρετή, αλλά μας βλάπτει. Θεραπεύεται με άσκηση, ξεκινώντας από τα μικρά και τα εύκολα.',t:'Ασκηθείτε σήμερα σε κάτι μικρό: ζητήστε μια πληροφορία από έναν άγνωστο ή πείτε τη γνώμη σας σε μια κουβέντα.'}},
+ en:{n:'Blushing and shame',s:['You blush easily in front of others','Sweating or a shaky voice','Fear of being judged','You avoid speaking up or being seen'],
+  w:'Blushing is a sign of sensitivity and honesty. Others notice it much less than you think — and it often makes you more likeable.',
+  aid:'• Do not fight the blush — the more you fight it, the more it grows\n• Focus on the other person and the conversation, not on your face\n• Slow breathing, cool water\n• Small steps: give an opinion in a small group\n• Smile and simply say: “I’m blushing!”',
+  note:'If shame keeps you away from work, friends or life → psychologist (social anxiety, which is treatable).',
+  ph:{who:'Plutarch',src:'On Compliancy (De vitioso pudore)',q:'Excessive shame looks like a virtue but harms us. It is cured by practice, starting with small and easy things.',t:'Practise something small today: ask a stranger for directions, or say your opinion in a conversation.'}}},
+
+{id:'money',areas:['psy'],sev:'norm',f:3,req:['money_worry'],
+ k:[['money_worry'],['anxiety','insomnia'],['overthinking','irritable','family_conflict']],ctx:[0,0,0],
+ el:{n:'Οικονομικό άγχος',s:['Συνεχής σκέψη για λογαριασμούς, δάνεια, χρέη','Αϋπνία, ξύπνημα με αγωνία','Ένταση και καβγάδες στο σπίτι','Ντροπή, απομόνωση','Πονοκέφαλος, στομάχι, ταχυπαλμία'],
+  w:'Τα οικονομικά βάρη είναι από τα πιο βαριά — και δεν μετρούν την αξία σας ως άνθρωπος. Το να τα κοιτάξετε κατάματα, με ένα σχέδιο, φέρνει ανακούφιση πιο γρήγορα από την αποφυγή.',
+  aid:'• Γράψτε σε χαρτί όλα τα έσοδα και τα έξοδα — η ομίχλη φοβίζει περισσότερο από τα νούμερα\n• Ένα πράγμα τη φορά: ποιος λογαριασμός είναι πιο επείγων;\n• Μιλήστε με την τράπεζα πριν καθυστερήσετε — συχνά υπάρχουν ρυθμίσεις\n• Ζητήστε δωρεάν συμβουλή (υπηρεσίες κοινωνικής πρόνοιας, σύλλογοι καταναλωτών)\n• Μοιραστείτε το με την οικογένεια — όχι μόνοι',
+  note:'Αν το άγχος φέρνει αϋπνία για εβδομάδες, κατάθλιψη ή σκέψεις απελπισίας → γιατρός ή ψυχίατρος σήμερα. Οι καταστάσεις αλλάζουν· η ζωή σας είναι πολύτιμη.',
+  ph:{who:'Επίκουρος',src:'Κύριαι Δόξαι, 15',q:'Ο πλούτος που ζητά η φύση έχει όριο και αποκτάται εύκολα· ο πλούτος των κενών επιθυμιών δεν έχει τέλος.',t:'Γράψτε σήμερα τι χρειάζεστε πραγματικά για να ζείτε καλά — συχνά είναι λιγότερα από όσα φοβόμαστε. Και ένα πράγμα που σας δίνει χαρά χωρίς να κοστίζει.'}},
+ en:{n:'Money worries',s:['Constant thoughts about bills, loans, debts','Poor sleep, waking with dread','Tension and rows at home','Shame, isolation','Headache, stomach upset, racing heart'],
+  w:'Money burdens are among the heaviest — and they do not measure your worth as a person. Facing them squarely, with a plan, brings relief faster than avoiding them.',
+  aid:'• Write all income and expenses on paper — fog frightens more than numbers\n• One thing at a time: which bill is most urgent?\n• Talk to the bank before you fall behind — there are often arrangements\n• Ask for free advice (social welfare services, consumer associations)\n• Share it with the family — not alone',
+  note:'If the worry brings weeks of poor sleep, depression or thoughts of despair → doctor or psychiatrist today. Situations change; your life is precious.',
+  ph:{who:'Epicurus',src:'Principal Doctrines, 15',q:'The wealth nature asks for is limited and easily obtained; the wealth of empty desires has no end.',t:'Write today what you really need to live well — often less than we fear. And one thing that gives you joy and costs nothing.'}}},
+
+{id:'family',areas:['psy'],sev:'norm',f:3,req:['family_conflict'],
+ k:[['family_conflict'],['anger','irritable','sadness'],['anxiety','insomnia','headache']],ctx:[0,0,0],
+ el:{n:'Ένταση και συγκρούσεις στην οικογένεια',s:['Συχνοί καβγάδες ή σιωπηλή ένταση','Θυμός, πίκρα, λύπη','Πονοκέφαλος, στομάχι, κακός ύπνος','Δεν μιλάτε με κάποιον δικό σας','Τα παιδιά στη μέση'],
+  w:'Οι οικογένειες πονάνε γιατί αγαπιούνται — αλλιώς δεν θα μας ένοιαζε. Δεν χρειάζεται να κερδίσει κανείς. Χρειάζεται να ακουστούν όλοι.',
+  aid:'• Μιλήστε όταν είστε ήρεμοι, όχι πάνω στον θυμό\n• Ακούστε πρώτα — επαναλάβετε με δικά σας λόγια τι καταλάβατε ότι είπε ο άλλος\n• «Εγώ νιώθω… όταν…» αντί για «εσύ πάντα…»\n• Ένα πρώτο βήμα: ένα μήνυμα, ένα «σε σκέφτομαι»\n• Οικογενειακή θεραπεία ή διαμεσολάβηση',
+  note:'Αν υπάρχει βία, απειλή ή φόβος → ζητήστε βοήθεια αμέσως: 112 · Κύπρος: 1440 (γραμμή για βία στην οικογένεια, 24 ώρες).',
+  ph:{who:'Ζήνων ο Κιτιεύς (Κύπριος, ιδρυτής της Στοάς)',src:'Διογένης Λαέρτιος, Ζ΄ 23',q:'Γι’ αυτό έχουμε δύο αυτιά και ένα στόμα: για να ακούμε περισσότερα και να μιλάμε λιγότερα.',t:'Στην επόμενη κουβέντα με τον δικό σας άνθρωπο, ακούστε διπλάσια ώρα απ’ όση μιλάτε.'}},
+ en:{n:'Tension and conflict in the family',s:['Frequent rows or silent tension','Anger, bitterness, sadness','Headache, stomach upset, poor sleep','Not speaking with a family member','Children caught in the middle'],
+  w:'Families hurt because they love each other — otherwise we would not care. Nobody needs to win. Everyone needs to be heard.',
+  aid:'• Talk when you are calm, not in the heat of anger\n• Listen first — repeat in your own words what you understood the other said\n• “I feel… when…” instead of “you always…”\n• A first step: a message, an “I’m thinking of you”\n• Family therapy or mediation',
+  note:'If there is violence, threat or fear → seek help now: 112 · Cyprus: 1440 (domestic violence line, 24 hours).',
+  ph:{who:'Zeno of Citium (a Cypriot, founder of Stoicism)',src:'Diogenes Laertius, VII 23',q:'We have two ears and one mouth, so that we may listen more and speak less.',t:'In your next talk with your loved one, listen twice as long as you speak.'}}}
+];
+PSY_NEW.forEach(c=>{c.kid=0;c.preg=0;c.fem=0;c.male=0;if(!c.ctx)c.ctx=c.k.map(()=>0)});
+COND.push(...PSY_NEW);
 
 /* Σημεία του σώματος — για «πόνος/πρήξιμο/μούδιασμα/φαγούρα + σημείο» */
 const LOCS = {
@@ -1627,6 +2086,160 @@ const areaName = id => L(AREA[id][2],AREA[id][3]);
 const grad = id => `background:linear-gradient(135deg,${AREA[id][4]})`;
 const CBYID = Object.fromEntries(COND.map(c=>[c.id,c]));
 
+/* ===================== ΣΟΦΙΑ ΤΩΝ ΑΡΧΑΙΩΝ ΚΑΙ ΛΟΓΙΑ ΦΙΛΟΥ — για τις παθήσεις που υπήρχαν ήδη (20-10-2026) ===================== */
+const P=(who,src,q,t,whoEn,srcEn,qEn,tEn)=>({el:{who,src,q,t},en:{who:whoEn,src:srcEn,q:qEn,t:tEn}});
+const WIS = {
+ stress:{w:['Το στρες είναι το σώμα που ετοιμάζεται να σας προστατέψει. Χρειάζεται όμως και ανάπαυση. Δεν είστε μηχανή — είστε άνθρωπος.','Stress is the body getting ready to protect you. But it also needs rest. You are not a machine — you are a human being.'],
+  ph:P('Δημόκριτος','Απόσπασμα Β 3','Όποιος θέλει να έχει ευθυμία, ας μην κάνει πολλά, ούτε στα δικά του ούτε στα κοινά· και ό,τι κάνει, ας μην το επιχειρεί πέρα από τη δύναμη και τη φύση του.','Σβήστε σήμερα ένα πράγμα από τη λίστα σας. Λιγότερα, αλλά με ηρεμία.',
+   'Democritus','Fragment B 3','Whoever wants cheerfulness should not do many things, either in private or in public life; and whatever he does, let him not attempt beyond his strength and nature.','Cross one thing off your list today. Fewer things, but in peace.')},
+ depression:{w:['Η κατάθλιψη δεν είναι αδυναμία χαρακτήρα ούτε τεμπελιά. Είναι αρρώστια που θεραπεύεται. Το να ζητήσετε βοήθεια είναι πράξη δύναμης.','Depression is not weakness of character or laziness. It is an illness that can be treated. Asking for help is an act of strength.'],
+  ph:P('Αριστοτέλης','Ηθικά Νικομάχεια, Α΄ 7','Ένα χελιδόνι δεν φέρνει την άνοιξη, ούτε μία μέρα.','Μην περιμένετε μεγάλα βήματα. Ένα μικρό σήμερα: ένα ντους, μια βόλτα 5 λεπτών, ένα τηλεφώνημα. Η άνοιξη έρχεται με πολλά μικρά χελιδόνια — και με τη βοήθεια του γιατρού σας.',
+   'Aristotle','Nicomachean Ethics, I 7','One swallow does not make a spring, nor does one day.','Do not wait for big steps. One small one today: a shower, a 5-minute walk, a phone call. Spring comes with many small swallows — and with your doctor’s help.')},
+ panic:{w:['Η κρίση πανικού είναι τρομακτική, αλλά, αφού ο γιατρός έχει αποκλείσει άλλη αιτία, δεν είναι επικίνδυνη. Περνά πάντα — συνήθως μέσα σε 10–20 λεπτά.','A panic attack is frightening but, once a doctor has ruled out other causes, it is not dangerous. It always passes — usually within 10–20 minutes.'],
+  ph:P('Επίκουρος','Τετραφάρμακος (κατά τον Φιλόδημο)','Το καλό αποκτιέται εύκολα, και το φοβερό υπομένεται εύκολα.','Στην επόμενη κρίση πείτε: «Το φοβερό υπομένεται. Θα περάσει.» και αναπνεύστε αργά, μετρώντας τις εκπνοές ως το 10.',
+   'Epicurus','The “Fourfold Remedy” (as recorded by Philodemus)','The good is easy to obtain, and the terrible is easy to endure.','At the next attack, say: “The terrible can be endured. It will pass.” and breathe slowly, counting your out-breaths to 10.')},
+ gad:{w:['Η ανησυχία σας δείχνει πόσο νοιάζεστε. Μπορεί όμως να μάθει να ξεκουράζεται.','Your worry shows how much you care. But it can learn to rest.'],
+  ph:P('Επίκτητος','Εγχειρίδιο, 1','Από τα πράγματα, άλλα εξαρτώνται από εμάς και άλλα όχι.','Γράψτε τις ανησυχίες σας σε δύο στήλες: «εξαρτάται από μένα» και «δεν εξαρτάται». Για την πρώτη, ένα βήμα. Τη δεύτερη, αφήστε την να φύγει.',
+   'Epictetus','Enchiridion, 1','Some things are up to us and some are not.','Write your worries in two columns: “up to me” and “not up to me”. For the first, take one step. Let the second go.')},
+ insomnia:{w:['Μια κακή νύχτα δεν καταστρέφει την επόμενη μέρα όσο φοβάστε. Όσο λιγότερο «κυνηγάτε» τον ύπνο, τόσο πιο εύκολα έρχεται.','One bad night does not ruin the next day as much as you fear. The less you “chase” sleep, the more easily it comes.'],
+  ph:P('Ιπποκράτης','Αφορισμοί, Β΄ 3','Ύπνος και αγρύπνια, όταν ξεπερνούν το μέτρο, και τα δύο κάνουν κακό.','Μη μένετε πολλή ώρα ξύπνιοι στο κρεβάτι: αν δεν κοιμηθείτε σε 20 λεπτά, σηκωθείτε, κάντε κάτι ήρεμο, και ξαναπέστε όταν νυστάξετε.',
+   'Hippocrates','Aphorisms, II 3','Sleep and wakefulness, when they exceed due measure, both do harm.','Do not lie awake in bed for long: if you are not asleep in 20 minutes, get up, do something calm, and go back when sleepy.')},
+ burnout:{w:['Η εξουθένωση δεν σημαίνει ότι είστε αδύναμοι — σημαίνει ότι δώσατε πολλά για πολύ καιρό χωρίς να ξαναγεμίσετε.','Burnout does not mean you are weak — it means you gave a lot for a long time without refilling.'],
+  ph:P('Αριστοτέλης','Πολιτικά, Θ΄ 3','Η ίδια η φύση ζητά όχι μόνο να εργαζόμαστε σωστά, αλλά και να μπορούμε να ξεκουραζόμαστε ωραία.','Κλείστε σήμερα μια ώρα «σχόλης»: όχι για δουλειά ούτε για υποχρεώσεις — μόνο για ό,τι σας ξεκουράζει.',
+   'Aristotle','Politics, VIII 3','Nature itself asks not only that we work well, but that we are able to use leisure well.','Book one hour of “leisure” today: not for work or duties — only for what refreshes you.')},
+ ptsd:{w:['Αυτό που ζήσατε ήταν πραγματικά βαρύ. Οι αντιδράσεις σας είναι φυσιολογικές αντιδράσεις σε κάτι μη φυσιολογικό. Υπάρχει θεραπεία που βοηθά πολύ.','What you went through was truly heavy. Your reactions are normal reactions to something abnormal. There is treatment that helps a lot.'],
+  ph:P('Επίκουρος','Κύριαι Δόξαι, 27','Από όσα προσφέρει η σοφία για μια ευτυχισμένη ζωή, το μεγαλύτερο απ’ όλα είναι η φιλία.','Μην κουβαλάτε το βάρος μόνοι. Ένας άνθρωπος εμπιστοσύνης και ένας ειδικός θεραπευτής τραύματος μπορούν να το μοιραστούν μαζί σας.',
+   'Epicurus','Principal Doctrines, 27','Of all that wisdom provides for a happy life, by far the greatest is friendship.','Do not carry the weight alone. A trusted person and a trauma therapist can share it with you.')},
+ ocd:{w:['Οι ενοχλητικές σκέψεις δεν λένε τίποτα για τον χαρακτήρα σας — συχνά έρχονται ακριβώς για όσα σας είναι πιο ιερά. Η διαταραχή αυτή θεραπεύεται.','Intrusive thoughts say nothing about your character — they often come about exactly what is most sacred to you. This condition is treatable.'],
+  ph:P('Δελφικό παράγγελμα','Επιγραφή στο μαντείο των Δελφών','Μηδέν άγαν — τίποτα υπερβολικό.','Ο έλεγχος που επαναλαμβάνεται δεν φέρνει σιγουριά· φέρνει κι άλλη αμφιβολία. Με τη βοήθεια ειδικού, αφήστε σιγά σιγά έναν έλεγχο ανεκτέλεστο.',
+   'Delphic maxim','Inscription at the oracle of Delphi','Nothing in excess.','Repeated checking does not bring certainty; it brings more doubt. With a specialist’s help, slowly leave one check undone.')},
+ grief:{w:['Το πένθος είναι η αγάπη που δεν έχει πια πού να πάει. Δεν υπάρχει σωστός χρόνος ούτε σωστός τρόπος. Κλάψτε, θυμηθείτε, μιλήστε για τον άνθρωπό σας.','Grief is love with nowhere left to go. There is no right time and no right way. Cry, remember, talk about your loved one.'],
+  ph:P('Πλούταρχος','Παραμυθητικός προς τη γυναίκα του','Ας μη σβήσει η λύπη τη χαρά που μας χάρισε όσο ήταν μαζί μας· όπως μας ευφραινόταν τότε, έτσι ας κρατήσουμε τη θύμησή του με ευγνωμοσύνη.','Πείτε σήμερα σε κάποιον μια ωραία ιστορία με τον άνθρωπο που χάσατε.',
+   'Plutarch','Consolation to his Wife','Let sorrow not erase the joy they gave us while they were with us; as they delighted us then, let us keep their memory with gratitude.','Tell someone today a lovely story about the person you lost.')},
+ loneliness:{w:['Η μοναξιά δεν είναι ελάττωμα — είναι πείνα για σύνδεση, τόσο φυσική όσο η πείνα για φαγητό. Κάθε μικρό βήμα προς τους άλλους μετράει.','Loneliness is not a flaw — it is a hunger for connection, as natural as hunger for food. Every small step towards others counts.'],
+  ph:P('Επίκουρος','Βατικανές Γνώμες, 52','Η φιλία χορεύει γύρω από τη γη και καλεί όλους μας να ξυπνήσουμε για την ευτυχία.','Στείλτε σήμερα ένα μήνυμα σε κάποιον που έχετε καιρό να του μιλήσετε: «Σε σκέφτηκα».',
+   'Epicurus','Vatican Sayings, 52','Friendship dances around the world, calling us all to wake up to happiness.','Send a message today to someone you have not spoken to for a while: “I thought of you.”')},
+ alcohol:{w:['Δεν είστε το ποτό σας. Πολλοί άνθρωποι έχουν βγει από αυτό τον δρόμο — με βοήθεια είναι πολύ πιο εύκολο.','You are not your drinking. Many people have left this road — with help it is much easier.'],
+  ph:P('Σωκράτης','Ξενοφών, Απομνημονεύματα Α΄ 5','Η εγκράτεια είναι το θεμέλιο της αρετής.','Ένα βήμα σήμερα: μία μέρα χωρίς ποτό, ή ένα τηλεφώνημα στη γραμμή εξαρτήσεων 1402 (Κύπρος). Μην κόψετε απότομα πολύ αλκοόλ χωρίς γιατρό.',
+   'Socrates','Xenophon, Memorabilia I 5','Self-control is the foundation of virtue.','One step today: one day without a drink, or a call to the addictions line 1402 (Cyprus). Do not stop heavy drinking suddenly without a doctor.')},
+ smoking:{w:['Το να κόψετε το τσιγάρο είναι από τα μεγαλύτερα δώρα στον εαυτό σας — σε οποιαδήποτε ηλικία.','Quitting smoking is one of the greatest gifts to yourself — at any age.'],
+  ph:P('Επίκτητος','Διατριβές, Β΄ 18','Κάθε συνήθεια δυναμώνει με τις ανάλογες πράξεις. Αν θέλεις να κόψεις μια συνήθεια, μην τη θρέφεις· και μέτρα τις μέρες που την άντεξες.','Σημειώστε στο ημερολόγιο κάθε μέρα χωρίς τσιγάρο. Κάθε σημάδι είναι μια νίκη.',
+   'Epictetus','Discourses, II 18','Every habit is strengthened by corresponding actions. If you want to break a habit, do not feed it; and count the days you held out.','Mark on the calendar every day without a cigarette. Each mark is a victory.')},
+ sad:{w:['Η χειμωνιάτικη θλίψη έχει να κάνει με το λιγότερο φως — δεν φταίτε εσείς.','Winter sadness has to do with less light — it is not your fault.'],
+  ph:P('Ηράκλειτος','Απόσπασμα Β 6','Ο ήλιος είναι νέος κάθε μέρα.','Βγείτε στο πρωινό φως για 20–30 λεπτά σήμερα.',
+   'Heraclitus','Fragment B 6','The sun is new each day.','Go out into the morning light for 20–30 minutes today.')},
+ socialanx:{w:['Οι περισσότεροι άνθρωποι είναι τόσο απασχολημένοι με τον εαυτό τους, που σας κρίνουν πολύ λιγότερο απ’ όσο φοβάστε.','Most people are so busy with themselves that they judge you far less than you fear.'],
+  ph:P('Επίκτητος','Εγχειρίδιο, 13','Αν θέλεις να προκόψεις, δέξου να φανείς και λίγο ανόητος στα μάτια των άλλων.','Κάντε σήμερα κάτι μικρό που σας φοβίζει λίγο — και δεχτείτε ότι μπορεί να μη βγει τέλειο.',
+   'Epictetus','Enchiridion, 13','If you want to make progress, be content to seem a little foolish to others.','Do something small today that scares you a little — and accept that it may not go perfectly.')},
+ caregiver:{w:['Φροντίζοντας άλλον, μην ξεχνάτε ότι κι εσείς χρειάζεστε φροντίδα. Δεν είναι εγωισμός — είναι προϋπόθεση για να αντέξετε.','While caring for someone, remember that you need care too. It is not selfishness — it is what lets you keep going.'],
+  ph:P('Αριστοτέλης','Ηθικά Νικομάχεια, Θ΄ 8','Ο καλός άνθρωπος πρέπει να αγαπά και τον εαυτό του — με τον σωστό τρόπο.','Ζητήστε σήμερα από κάποιον να σας αντικαταστήσει για δύο ώρες και κάντε κάτι μόνο για εσάς.',
+   'Aristotle','Nicomachean Ethics, IX 8','The good person should love himself too — in the right way.','Ask someone today to take over for two hours, and do something just for you.')},
+ postpartumdep:{w:['Δεν είστε κακή μητέρα. Η επιλόχεια κατάθλιψη είναι συχνή και θεραπεύεται — και το να ζητήσετε βοήθεια είναι το καλύτερο για εσάς και για το μωρό.','You are not a bad mother. Postnatal depression is common and treatable — and asking for help is the best thing for you and your baby.']},
+ phobia:{w:['Ο φόβος σας είναι αληθινός, ακόμη κι αν το μυαλό ξέρει ότι ο κίνδυνος είναι μικρός. Οι φοβίες θεραπεύονται πολύ καλά, βήμα βήμα.','Your fear is real, even if your mind knows the danger is small. Phobias respond very well to treatment, step by step.']},
+ fibromyalgia:{w:['Ο πόνος σας είναι αληθινός, ακόμη κι αν δεν φαίνεται στις εξετάσεις. Αξίζετε κατανόηση και μια θεραπεία που κοιτάζει σώμα και ψυχή μαζί.','Your pain is real, even if it does not show in tests. You deserve understanding and care that looks at body and soul together.']},
+ tension:{w:['Ο πονοκέφαλος τάσης είναι συχνά το «καμπανάκι» ότι κουβαλάτε πολλά. Λίγη ξεκούραση και χαλάρωση στον αυχένα κάνουν θαύματα.','A tension headache is often the “alarm bell” that you are carrying too much. A little rest and a relaxed neck work wonders.']},
+ IBS:{w:['Το έντερο και ο εγκέφαλος μιλούν συνεχώς μεταξύ τους. Το ευερέθιστο έντερο δεν είναι «στο μυαλό σας» — είναι αληθινό, και η ηρεμία βοηθά πολύ.','The gut and the brain talk all the time. IBS is not “in your head” — it is real, and calm helps a lot.']},
+ fatigue:{w:['Η κούραση που δεν φεύγει είναι μήνυμα του σώματος. Αξίζει να την ακούσετε — και να ελέγξει ο γιατρός και το σώμα και την ψυχή.','Tiredness that will not go is a message from the body. It is worth listening to — and having your doctor check both body and soul.']}
+};
+/* Σοφία ανά κατηγορία — για όλες τις υπόλοιπες παθήσεις */
+const WISA = {
+ head:P('Πλάτων','Χαρμίδης, 156e','Όπως δεν πρέπει να θεραπεύουμε τα μάτια χωρίς το κεφάλι, ούτε το κεφάλι χωρίς το σώμα, έτσι δεν πρέπει να θεραπεύουμε το σώμα χωρίς την ψυχή.','Δώστε σήμερα στο κεφάλι σας ξεκούραση: νερό, ύπνο, λιγότερη οθόνη — και ησυχία στην ψυχή.',
+  'Plato','Charmides, 156e','Just as we should not treat the eyes without the head, nor the head without the body, so we should not treat the body without the soul.','Give your head rest today: water, sleep, less screen time — and quiet for the soul.'),
+ eye:P('Αριστοτέλης','Μετά τα Φυσικά, Α΄ 1','Όλοι οι άνθρωποι από τη φύση τους ποθούν να γνωρίζουν· σημάδι η αγάπη μας για τις αισθήσεις, και πάνω απ’ όλες για την όραση.','Φροντίστε σήμερα τα μάτια σας: διαλείμματα από την οθόνη, βλέμμα μακριά, λίγη φύση.',
+  'Aristotle','Metaphysics, I 1','All people by nature desire to know; a sign is our love of the senses, and above all of sight.','Look after your eyes today: breaks from screens, look into the distance, a little nature.'),
+ ent:P('Ζήνων ο Κιτιεύς (Κύπριος, ιδρυτής της Στοάς)','Διογένης Λαέρτιος, Ζ΄ 23','Γι’ αυτό έχουμε δύο αυτιά και ένα στόμα: για να ακούμε περισσότερα και να μιλάμε λιγότερα.','Χαρίστε σήμερα στα αυτιά σας κάτι όμορφο: μουσική, πουλιά, τη φωνή ενός φίλου.',
+  'Zeno of Citium (a Cypriot, founder of Stoicism)','Diogenes Laertius, VII 23','We have two ears and one mouth, so that we may listen more and speak less.','Give your ears something beautiful today: music, birdsong, a friend’s voice.'),
+ cardio:P('Δημόκριτος','Απόσπασμα Β 191','Η ευθυμία έρχεται στους ανθρώπους με το μέτρο στη χαρά και την αρμονία στη ζωή.','Η καρδιά αγαπά το μέτρο: περπάτημα, λιγότερο αλάτι, λιγότερος θυμός, περισσότερο γέλιο.',
+  'Democritus','Fragment B 191','Cheerfulness comes to people through moderation in pleasure and harmony in life.','The heart loves measure: walking, less salt, less anger, more laughter.'),
+ resp:P('Αναξιμένης','Απόσπασμα Β 2','Όπως η ψυχή μας, που είναι αέρας, μας κρατά ενωμένους, έτσι και όλο τον κόσμο τον περιβάλλει πνοή και αέρας.','Κάντε σήμερα 5 αργές, βαθιές ανάσες στον καθαρό αέρα — και κρατηθείτε μακριά από τον καπνό.',
+  'Anaximenes','Fragment B 2','Just as our soul, being air, holds us together, so breath and air surround the whole world.','Take 5 slow, deep breaths in fresh air today — and keep away from smoke.'),
+ gastro:P('Επίκουρος','Επιστολή προς Μενοικέα, 130','Τα απλά φαγητά δίνουν την ίδια ευχαρίστηση με τα πολυτελή, όταν φύγει ο πόνος της ανάγκης.','Τρώτε απλά, αργά και με ηρεμία — το στομάχι αγαπά τη γαλήνη.',
+  'Epicurus','Letter to Menoeceus, 130','Simple food gives as much pleasure as a lavish table, once the pain of want is removed.','Eat simply, slowly and calmly — the stomach loves peace.'),
+ hepat:P('Δελφικό παράγγελμα','Επιγραφή στο μαντείο των Δελφών','Μηδέν άγαν — τίποτα υπερβολικό.','Ξεκουράστε το ήπαρ: λιγότερο αλκοόλ και προσοχή στα φάρμακα χωρίς συνταγή.',
+  'Delphic maxim','Inscription at the oracle of Delphi','Nothing in excess.','Rest your liver: less alcohol, and care with medicines bought without prescription.'),
+ urine:P('Ηράκλειτος','κατά τον Πλάτωνα, Κρατύλος 402a','Όλα κυλούν και τίποτα δεν μένει ίδιο.','Βοηθήστε τη ροή: πίνετε αρκετό νερό μέσα στη μέρα (εκτός αν ο γιατρός σας έχει πει αλλιώς).',
+  'Heraclitus','as quoted in Plato, Cratylus 402a','Everything flows and nothing stays the same.','Help the flow: drink enough water during the day (unless your doctor has told you otherwise).'),
+ endo:P('Κλεόβουλος ο Λίνδιος (ένας από τους Επτά Σοφούς)','Διογένης Λαέρτιος, Α΄ 93','Μέτρον άριστον — το μέτρο είναι το καλύτερο.','Ισορροπία σε φαγητό, ύπνο και κίνηση — ο οργανισμός αγαπά τη σταθερότητα.',
+  'Cleobulus of Lindos (one of the Seven Sages)','Diogenes Laertius, I 93','Measure is best.','Balance in food, sleep and movement — the body loves steadiness.'),
+ gyn:P('Ιπποκράτης','Επιδημίαι, Α΄ 11','Να ωφελείς, ή τουλάχιστον να μη βλάπτεις.','Μην αναβάλλετε τους τακτικούς ελέγχους (τεστ Παπανικολάου, μαστογραφία) — η πρόληψη είναι φροντίδα.',
+  'Hippocrates','Epidemics, I 11','To help, or at least to do no harm.','Do not put off regular checks (smear test, mammogram) — prevention is care.'),
+ male:P('Δελφικό παράγγελμα','Επιγραφή στο μαντείο των Δελφών','Γνώθι σαυτόν — γνώρισε τον εαυτό σου.','Οι άντρες συχνά αργούμε να πάμε στον γιατρό. Γνωρίστε το σώμα σας και κάντε τους ελέγχους σας στην ώρα τους.',
+  'Delphic maxim','Inscription at the oracle of Delphi','Know thyself.','Men are often slow to see a doctor. Get to know your body and have your checks on time.'),
+ musc:P('Ζήνων ο Κιτιεύς (Κύπριος, ιδρυτής της Στοάς)','Διογένης Λαέρτιος, Ζ΄ 26','Το «ευ» γίνεται λίγο λίγο — αλλά δεν είναι καθόλου μικρό πράγμα.','Λίγη ήπια κίνηση κάθε μέρα, που αυξάνεται σιγά σιγά, είναι από τα καλύτερα φάρμακα για οστά και μυς.',
+  'Zeno of Citium (a Cypriot, founder of Stoicism)','Diogenes Laertius, VII 26','Well-being comes little by little — yet it is no little thing.','A little gentle movement every day, increased slowly, is one of the best medicines for bones and muscles.'),
+ skin:P('Δημόκριτος','Απόσπασμα Β 31','Η ιατρική θεραπεύει τις αρρώστιες του σώματος· η σοφία απαλλάσσει την ψυχή από τα πάθη.','Φροντίστε σήμερα και το δέρμα και την ψυχή: την κρέμα του γιατρού, και λίγη ηρεμία.',
+  'Democritus','Fragment B 31','Medicine heals the diseases of the body; wisdom frees the soul from its passions.','Care for both skin and soul today: the doctor’s cream, and a little calm.'),
+ psy:P('Αντιφών','κατά τον Ψευδο-Πλούταρχο, Βίοι των δέκα ρητόρων 833c','Ο Αντιφών άνοιξε στην Κόρινθο, δίπλα στην αγορά, έναν χώρο και έγραψε ότι μπορεί να θεραπεύει με λόγια όσους λυπούνται.','Τα καλά λόγια γιατρεύουν. Μιλήστε σήμερα με έναν άνθρωπο που σας καταλαβαίνει — και, αν χρειάζεται, με έναν ειδικό.',
+  'Antiphon','Pseudo-Plutarch, Lives of the Ten Orators 833c','Antiphon set up a room near the market place in Corinth and announced that he could cure the sorrowful with words.','Good words heal. Talk today with someone who understands you — and, if needed, with a specialist.'),
+ child:P('Πλάτων','Πολιτεία, Β΄ 377b','Η αρχή είναι το σπουδαιότερο μέρος κάθε έργου, και ιδιαίτερα για κάθε τι νέο και τρυφερό.','Η τρυφερότητα, η ηρεμία και η αγκαλιά σας είναι κι αυτά φάρμακο για το παιδί.',
+  'Plato','Republic, II 377b','The beginning is the most important part of any work, especially for anything young and tender.','Your tenderness, calm and hugs are also medicine for the child.'),
+ senior:P('Πλάτων','Πολιτεία, Α΄ 329d','Η αιτία για τη δυστυχία στα γηρατειά δεν είναι η ηλικία, αλλά ο χαρακτήρας· όσοι είναι ήρεμοι και ευχαριστημένοι, βρίσκουν και τα γηρατειά υποφερτά.','Κάντε σήμερα κάτι που σας κρατά ζωντανούς: μια βόλτα, ένα τηλεφώνημα, κάτι καινούργιο να μάθετε.',
+  'Plato','Republic, I 329d','The cause of unhappiness in old age is not age but character; for the calm and contented, old age too is bearable.','Do something today that keeps you alive: a walk, a phone call, something new to learn.'),
+ gen:P('Ιπποκράτης','Επιδημίαι, ΣΤ΄ 5.1','Η φύση είναι ο γιατρός των νόσων.','Βοηθήστε σήμερα τη φύση: ξεκούραση, νερό, καλό φαγητό — και τη συμβουλή του γιατρού σας.',
+  'Hippocrates','Epidemics, VI 5.1','Nature is the physician of diseases.','Help nature today: rest, water, good food — and your doctor’s advice.')
+};
+/* Εδώ δεν βάζουμε φιλοσοφία — χρειάζεται πρώτα γιατρός */
+const NOWIS = new Set(['bipolar','psychosis','eatingdis','delirium']);
+let CRISIS_NOW = false;
+function wisdomOf(c){
+  if(CRISIS_NOW||c.sev==='emer'||NOWIS.has(c.id))return null;
+  const d=D(c);const x=WIS[c.id];
+  const w=d.w||(x&&x.w?L(x.w[0],x.w[1]):'');
+  const ph=d.ph||(x&&x.ph?x.ph[LANG]:null)||(WISA[c.areas[0]]?WISA[c.areas[0]][LANG]:null);
+  return {w,ph};
+}
+function wisdomHtml(c){
+  const x=wisdomOf(c);if(!x)return '';
+  return `${x.w?`<div class="sec friend"><b>💛 ${L('Λόγια φίλου','A friend’s words')}</b>${esc(x.w)}</div>`:''}`;
+}
+function sageHtml(c){
+  const x=wisdomOf(c);if(!x||!x.ph)return '';const p=x.ph;
+  return `<div class="sec sage"><b>🏛️ ${L('Η σοφία των αρχαίων Ελλήνων','Ancient Greek wisdom')}</b>
+   <blockquote>«${esc(p.q)}»</blockquote><div class="sagewho">— ${esc(p.who)} · <i>${esc(p.src)}</i></div>
+   <p class="today">🌿 <b class="in">${L('Σήμερα:','Today:')}</b> ${esc(p.t)}</p></div>`;
+}
+function psyHelpLine(c){
+  if(CRISIS_NOW||!c.areas.includes('psy'))return '';
+  return `<div class="sec helpline">💜 ${L('Αν ποτέ σκεφτείτε να κάνετε κακό στον εαυτό σας, μιλήστε <b>αμέσως</b> με ψυχίατρο ή τον γιατρό σας.','If you ever think of harming yourself, speak <b>immediately</b> with a psychiatrist or your doctor.')}
+   <a href="tel:112">📞 112</a> · 🇨🇾 <a href="tel:80007773">8000 7773</a> · 🇬🇷 <a href="tel:1018">1018</a></div>`;
+}
+
+/* ===================== ΣΕΛΙΔΑ «ΨΥΧΗ & ΣΩΜΑ» ===================== */
+const SOUL_GROUPS = [
+ ['🫀','Το σώμα που μιλά για την ψυχή','The body speaking for the soul','nervstomach stressheart whitecoat tensionpain stressskin anxdizzy nervbladder chronicpain somatic perfanx'],
+ ['💗','Συναισθήματα που βαραίνουν','Feelings that weigh on us','anger overthink guilt healthanx selfesteem perfection envy resentment blushing apathy'],
+ ['🌱','Αλλαγές και φάσεις της ζωής','Changes and stages of life','retirement emptynest breakup lifechange diagnosis deathfear meaning'],
+ ['🏡','Καθημερινά βάρη','Everyday burdens','money family screens']
+];
+const NEWIDS = new Set(SOUL_GROUPS.flatMap(g=>g[3].split(' ')));
+function allSages(){
+  const out=[];
+  PSY_NEW.forEach(c=>out.push(D(c).ph));
+  Object.values(WIS).forEach(x=>{if(x.ph)out.push(x.ph[LANG])});
+  return out;
+}
+function vSoul(){
+  const day=Math.floor(Date.now()/864e5);const S=allSages();const s=S[day%S.length];
+  const item=id=>{const c=CBYID[id];if(!c)return '';return `<a class="aitem" href="#c/${id}"><span class="dot ${({emer:'r',risk:'o',caution:'y',norm:'g'})[c.sev]}"></span>${esc(D(c).n)}</a>`};
+  const others=COND.filter(c=>c.areas.includes('psy')&&!NEWIDS.has(c.id)).sort((a,b)=>D(a).n.localeCompare(D(b).n,LANG));
+  return header(L('Ψυχή & Σώμα','Soul & Body'))+`
+  <div class="card soulhero">
+   <h2>🏛️ ${L('Ψυχή & Σώμα','Soul & Body')}</h2>
+   <p class="lead">${L('Το σώμα και η ψυχή είναι ένα. Πολλές ενοχλήσεις του σώματος γεννιούνται ή μεγαλώνουν από ό,τι βαραίνει την ψυχή — και τα σωστά λόγια, μαζί με μικρές αλλαγές στη ζωή, βοηθούν πολύ. Εδώ θα βρείτε απλές συμβουλές, ζεστά λόγια και τη σοφία των αρχαίων Ελλήνων φιλοσόφων.','Body and soul are one. Many bodily complaints are born or grow from what weighs on the soul — and the right words, together with small changes in life, help a great deal. Here you will find simple advice, warm words and the wisdom of the ancient Greek philosophers.')}</p>
+   <blockquote>«${L('Η δύναμη του λόγου πάνω στην ψυχή είναι ίδια με τη δύναμη των φαρμάκων πάνω στο σώμα.','The power of speech over the soul is like the power of drugs over the body.')}»</blockquote>
+   <div class="sagewho">— ${L('Γοργίας, Ελένης Εγκώμιον 14','Gorgias, Encomium of Helen 14')}</div>
+  </div>
+  <a class="ep7link" href="epiktitos.html"><span class="e">🏛️</span><span class="wt"><b>${L('7 ημέρες με τον Επίκτητο','7 days with Epictetus')}</b><small>${L('Ένα λόγιο, μια σκέψη και μία άσκηση την ημέρα, για μια πιο ήρεμη ζωή','One saying, one reflection and one exercise a day, for a calmer life')}</small></span><span class="go">›</span></a>
+  <div class="card sage daily"><b>☀️ ${L('Η σκέψη της ημέρας','Thought for today')}</b><blockquote>«${esc(s.q)}»</blockquote><div class="sagewho">— ${esc(s.who)} · <i>${esc(s.src)}</i></div><p class="today">🌿 ${esc(s.t)}</p></div>
+  <div class="card soulsafe">💜 ${L('Αν σκέφτεστε να κάνετε κακό στον εαυτό σας, τα λόγια δεν αρκούν — χρειάζεστε άνθρωπο ειδικό, <b>τώρα</b>.','If you are thinking of harming yourself, words are not enough — you need a specialist, <b>now</b>.')} <button class="btn small" style="margin-top:8px" onclick="showCrisis()">💜 ${L('Βοήθεια τώρα','Help now')}</button></div>
+  ${SOUL_GROUPS.map(g=>`<h3 class="grp">${g[0]} ${L(g[1],g[2])}</h3><div class="alist">${g[3].split(' ').map(item).join('')}</div>`).join('')}
+  <h3 class="grp">💭 ${L('Επίσης για τον νου και τον ύπνο','Also for mind and sleep')}</h3><div class="alist">${others.map(c=>item(c.id)).join('')}</div>
+  <p class="muted" style="margin:14px 4px">📜 ${L('Τα λόγια των φιλοσόφων δίνονται σε ελεύθερη απόδοση στα νέα ελληνικά, με την πηγή τους.','The philosophers’ words are given in free modern translation, with their source.')} · ${L('Έκδοση','Version')} 20-10-2026</p>
+  <p class="disc">${t('disc')}</p>
+  <div class="dock"><button class="btn ghost small" onclick="go('')">↩ ${t('back')}</button><button class="btn violet" onclick="go('describe')">💬 ${t('t1')}</button></div>`;
+}
+function showCrisis(){sheet(crisisBox()+`<button class="btn ghost" onclick="closeSheet()">✖ ${L('Κλείσιμο','Close')}</button>`)}
+
 /* ---------------- ΚΑΤΑΣΤΑΣΗ ---------------- */
 let LAST = store.get('last',null); // {mode,input,list,words,date}
 let TST = null; // {id,ans:[]}
@@ -1647,8 +2260,8 @@ window.addEventListener('hashchange',render);
 function render(){
   const h=decodeURIComponent(location.hash.slice(1));const [r,arg]=h.split('/');
   document.documentElement.lang=LANG;
-  const V={'':vHome,describe:vDescribe,body:vBody,region:vRegion,area:vRegion,results:vResults,signs:vSigns,tests:vTests,test:vTest,tool:vTool,checkups:vCheckups,diary:vDiary,doctor:vDoctor,photos:vPhotos,all:vAll,c:vCond,meds:vMeds,med:vMed,sources:vSources,help:vHelp};
-  const f=V[r]||vHome;closeSheet();
+  const V={'':vHome,soul:vSoul,describe:vDescribe,body:vBody,region:vRegion,area:vRegion,results:vResults,signs:vSigns,tests:vTests,test:vTest,tool:vTool,checkups:vCheckups,diary:vDiary,doctor:vDoctor,photos:vPhotos,all:vAll,c:vCond,meds:vMeds,med:vMed,sources:vSources,help:vHelp};
+  const f=V[r]||vHome;closeSheet();CRISIS_NOW=false;
   $('#app').innerHTML=f(arg);
   window.scrollTo(0,0);
   if(f.after)f.after(arg);
@@ -1765,7 +2378,7 @@ function vHome(){
   const tiles=[['describe','💬',1],['body','🧍',2],['meds','💊',10],['signs','🔔',3],['tests','📋',4],['checkups','🩺',5],['diary','📈',6],['doctor','🗒️',7],['all','📚',9]];
   return header()+`
   <a class="sosbig" href="tel:112"><span class="n">112</span><div><b>${t('call')}</b><span>${t('callsub')}</span></div></a>
-  <nav class="tiles">${tiles.map(([r,e,n],i)=>`<a class="tile t${i+1}" href="#${r}"><span class="e">${e}</span><b>${t('t'+n)}</b><small>${t('t'+n+'s')}</small></a>`).join('')}</nav>
+  <nav class="tiles"><a class="tile wide t11" href="#soul"><span class="e">🏛️</span><span class="wt"><b>${L('Ψυχή & Σώμα','Soul & Body')}</b><small>${L('Ζεστά λόγια και η σοφία των αρχαίων Ελλήνων για ό,τι βαραίνει την ψυχή','Warm words and ancient Greek wisdom for what weighs on the soul')}</small></span></a>${tiles.map(([r,e,n],i)=>`<a class="tile t${i+1}" href="#${r}"><span class="e">${e}</span><b>${t('t'+n)}</b><small>${t('t'+n+'s')}</small></a>`).join('')}</nav>
   <div class="minilinks"><button onclick="go('help')">❓ ${t('help')}</button><button onclick="go('sources')">📚 ${t('sources')}</button></div>
   <p class="disc">${t('disc')}</p>`;
 }
@@ -1798,7 +2411,7 @@ function livePreview(){
   const el=$('#live');if(!el)return;const txt=$('#nl').value.trim();
   if(!txt){el.innerHTML='';return}
   const U=[...detect(txt)].filter(x=>x!=='child_hint'&&x!=='senior_hint');
-  el.innerHTML=U.length?`✔️ ${L('Καταλάβαμε:','We understood:')} ${U.map(x=>`<mark>${esc(cLabel(x))}</mark>`).join(' ')}`:`<span class="muted">${L('Γράψτε λίγο ακόμη…','Keep typing…')}</span>`;
+  el.innerHTML=(U.includes('suicidal')?crisisBox():'')+(U.length?`✔️ ${L('Καταλάβαμε:','We understood:')} ${U.map(x=>`<mark>${esc(cLabel(x))}</mark>`).join(' ')}`:`<span class="muted">${L('Γράψτε λίγο ακόμη…','Keep typing…')}</span>`);
 }
 function addChip(b){const ta=$('#nl');ta.value=(ta.value.trim()?ta.value.trim()+', ':'')+b.textContent;b.classList.add('on');livePreview()}
 function listen(id,cb){
@@ -1886,15 +2499,18 @@ function condBody(c){
   const d=D(c);const en=c.en.n.split(/\s[—(]/)[0];
   return `${c.sev==='emer'?`<a class="alert112" href="tel:112"><span class="n">112</span>${L('Πατήστε για κλήση τώρα','Tap to call now')}</a>`:''}
    <div class="sec"><b>📋 ${t('syms')}</b>${d.s.map(gx).join(' · ')}</div>
+   ${wisdomHtml(c)}
    <div class="sec"><b>🆘 ${t('aid')}</b>${gx(d.aid).replace(/\n/g,'<br>')}</div>
+   ${sageHtml(c)}
    ${d.med?`<div class="sec warn"><b>💊 ${t('meds')}</b>${d.med.map(m=>`<button class="medlink" onclick="medSearch('${esc(m.split(/[\s(—/,]/)[0]).replace(/'/g,'')}')">${esc(m)}</button>`).join(' · ')}<br><small>⚠️ ${t('medwarn')}</small></div>`:''}
    <div class="sec"><b>👩‍⚕️ ${t('note')}</b>${gx(d.note)}</div>
+   ${psyHelpLine(c)}
    <div class="sec srcs"><b>📚 ${t('more')}</b><a href="https://www.nhs.uk/search/?q=${encodeURIComponent(en)}" target="_blank" rel="noopener">NHS 🔗</a><a href="https://medlineplus.gov/search/?query=${encodeURIComponent(en)}" target="_blank" rel="noopener">MedlinePlus 🔗</a><a href="https://www.mayoclinic.org/search/search-results?q=${encodeURIComponent(en)}" target="_blank" rel="noopener">Mayo Clinic 🔗</a></div>`;
 }
 function vResults(){
   if(!LAST||!LAST.U)return vDescribe();
   const R=compute();const backTo=LAST.mode==='region'?`region/${LAST.region}`:'describe';
-  const rf=R.main.some(x=>CN[x]&&CN[x].f.includes('r'));const crisis=R.U.has('suicidal');
+  const rf=R.main.some(x=>CN[x]&&CN[x].f.includes('r'));const crisis=R.U.has('suicidal');CRISIS_NOW=crisis;
   const urgent=R.top.filter(r=>r.urgent),rest=R.top.filter(r=>!r.urgent);
   return header(t('results'))+`
    ${crisis?crisisBox():''}
@@ -1913,7 +2529,12 @@ function vResults(){
 }
 function addExtra(x){LAST.extra=[...(LAST.extra||[]),x];store.set('last',LAST);render()}
 function remExtra(x){LAST.extra=(LAST.extra||[]).filter(y=>y!==x);store.set('last',LAST);render()}
-function crisisBox(){return `<div class="crisis"><b>💜 ${t('crisis')}</b><p style="margin-top:8px">📞 <a href="tel:112">112</a> · 🇬🇷 ${L('Γραμμή Παρέμβασης για την Αυτοκτονία','Suicide Prevention Line')} <a href="tel:1018">1018</a> · 🇨🇾 Cyprus Samaritans <a href="tel:80007773">8000 7773</a></p></div>`}
+function crisisBox(){return `<div class="crisis" role="alert"><b class="ct">💜 ${t('crisis')}</b>
+ <p style="margin-top:8px">${L('Δεν είστε μόνοι, και αξίζετε βοήθεια <b>τώρα</b>. Παρακαλούμε μιλήστε <b>σήμερα</b> με <b>ψυχίατρο</b> ή με τον γιατρό σας. Αν νιώθετε ότι κινδυνεύετε αυτή τη στιγμή, καλέστε το 112 ή πηγαίνετε στα Επείγοντα του πλησιέστερου νοσοκομείου.','You are not alone, and you deserve help <b>now</b>. Please speak <b>today</b> with a <b>psychiatrist</b> or your doctor. If you feel in danger right now, call 112 or go to the nearest hospital emergency department.')}</p>
+ <a class="alert112" href="tel:112" style="margin:12px 0"><span class="n">112</span>${L('Πατήστε για κλήση τώρα','Tap to call now')}</a>
+ <p>🇨🇾 ${L('Κύπρος','Cyprus')}: ${L('Σαμαρείτες','Cyprus Samaritans')} <a href="tel:80007773">8000 7773</a> <small>(${L('δωρεάν, κάθε μέρα 16:00–24:00','free, daily 16:00–24:00')})</small> · ${L('Επείγοντα','Emergency')} <a href="tel:112">112</a> / <a href="tel:199">199</a></p>
+ <p style="margin-top:6px">🇬🇷 ${L('Ελλάδα','Greece')}: ${L('Γραμμή Παρέμβασης για την Αυτοκτονία','Suicide Prevention Line')} <a href="tel:1018">1018</a> · <a href="tel:112">112</a></p>
+ <p style="margin-top:8px">🤝 ${L('Πείτε το και σε έναν άνθρωπο που εμπιστεύεστε, και μη μείνετε μόνοι απόψε.','Tell someone you trust too, and do not stay alone tonight.')}</p></div>`}
 function saveForDoc(b){
   if(!LAST)return;const R=compute();const arr=store.get('checks',[]);
   arr.unshift({date:LAST.date,input:LAST.input+((LAST.extra||[]).length?', '+LAST.extra.map(cLabel).join(', '):''),top:R.top.slice(0,3).map(r=>r.id)});store.set('checks',arr.slice(0,8));
